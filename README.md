@@ -24,6 +24,15 @@ An stand alone, light-weight web server for building, sharing graphs in created 
 ![architecture](docs/architecture.jpg)
 
 
+# Change Log
+
+- V 0.1
+    + Add dashboard client template
+    + Template consists of box, each box is an independent front-side object
+    + Add and delete boxes
+    + Boxes support render raw html visulization
+
+
 # Related Projects
 
 - [mpld3](https://github.com/jakevdp/mpld3)
@@ -34,6 +43,5 @@ An stand alone, light-weight web server for building, sharing graphs in created 
 - [yhat](https://github.com/yhat/rodeo)
 - [hue](https://github.com/cloudera/hue)
 - [plotly](https://github.com/plotly/dashboards)
-
 
 
