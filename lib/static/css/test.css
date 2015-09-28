@@ -72,3 +72,56 @@ body {
 .parent-box {
     margin: 10px;
 }
+
+.navbar-vertical-left {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 160px;
+  overflow: hidden;
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  z-index: 999;
+}    
+
+@media(max-width: 768px) {
+  .navbar-vertical-left {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    height: auto;
+    width: 100%;
+  }
+ 
+  .navbar-vertical-left,
+  .navbar-vertical-left ul.navbar-nav {
+    -webkit-transition: none;
+       -moz-transition: none;
+            transition: none;
+    -webkit-transform: none;
+       -moz-transform: none;
+            transform: none;
+  }
+ 
+  .navbar-vertical-left ul.navbar-nav > li {
+    display: table-cell;
+  }
+ 
+  .navbar-vertical-left ul.navbar-nav > li > a {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    height: 50px;
+    line-height: 30px;
+  }
+ 
+  .navbar-vertical-left ul.navbar-nav > li > a > i.fa {
+    margin: 0;
+  }
+ 
+  .navbar-vertical-left ul.navbar-nav > li > a > span {
+    display: none;
+  }
+}

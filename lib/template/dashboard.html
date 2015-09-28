@@ -2,43 +2,96 @@
 
 <html lang="en">
 <head>
-    <title>Ipython Dashboard</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../static/js/jquery-2.1.4.js"></script>
-    <script src="../static/js/jquery.gridster.js"></script>
-    <link rel="stylesheet" href="../static/css/jquery.gridster.css">
-    <link rel="stylesheet" href="../static/css/test.css">
+  <title>Ipython Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../static/js/jquery-2.1.4.js"></script>
+  <script src="../static/js/jquery.gridster.js"></script>
+  <script src="../static/js/bootstrap.js"></script>
+
+  <link rel="stylesheet" href="../static/css/bootstrap.css">
+  <link rel="stylesheet" href="../static/css/jquery.gridster.css">
+  <link rel="stylesheet" href="../static/css/bootstrap-vertical-menu.css">
+  <link rel="stylesheet" href="../static/css/font-awesome.css">
+  <link rel="stylesheet" href="../static/css/default.css">
+  <link rel="stylesheet" href="../static/css/normalize.css">
+  <link rel="stylesheet" href="../static/css/test.css">
+
 </head>
 
 <body>
 
-<div>
-  <div class="gridster parent-box">
-    <ul>
-      <li data-row="1" data-col="1" data-sizex="2" data-sizey="2">1
-      </li>
-      <li data-row="1" data-col="3" data-sizex="1" data-sizey="2">2
-      </li>
-      <li data-row="1" data-col="4" data-sizex="1" data-sizey="1">3</li>
-      <li data-row="3" data-col="2" data-sizex="3" data-sizey="1">4</li>
-    </ul>
-  </div>
+  <div class="container">
+
+    <div class="main clearfix">
+
+      <nav class="navbar navbar-vertical-left">
+        <ul class="nav navbar-nav" style="height: 250px;">
+          <li><a href=""></a></li>
+          <li>
+            <a href>
+              <i class="fa fa-fw fa-lg fa-television"></i> 
+              <span>Home</span>
+            </a>
+          </li>
+          <li>
+            <a href>
+              <i class="fa fa-fw fa-lg fa-tachometer"></i> 
+              <span>Boards</span>
+            </a>
+          </li>
+          <li>
+            <a href>
+              <i class="fa fa-fw fa-lg fa-question-circle"></i> 
+              <span>Help</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="htmleaf-container">
+        <header class="htmleaf-header">
+          <h1>Building and sharing IPython Dashboard<span>Based on Bootstrap &</span></h1>
+          <div class="htmleaf-links">
+
+          </div>
+        </header>
+
+        <div class="htmleaf-content bgcolor-8" style="padding-left: 10px; padding-right: 10px">
+            <div class="gridster parent-box">
+              <ul style="margin-left: 10px; margin-right: 10px; padding-left: 0px;">
+                <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">1
+                </li>
+                <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">2
+                </li>
+                <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">3</li>
+                <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">4</li>
+                </li>
+              </ul>
+            </div>
+        </div>
+
+      </div>
+
+    </div> 
 </div>
 
-    <script type="text/javascript">
-      var gridster;
+  <script type="text/javascript">
+    var gridster;
 
-      $(function(){   //DOM Ready
-        gridster = $(".gridster ul").gridster({
-          widget_base_dimensions: [300, 300],
-          widget_margins: [5, 5],
-          helper: 'clone',
-          resize: {
-            enabled: true
-          }
-        }).data('gridster');
-      });
-    </script>
+  $(function(){   //DOM Ready
+    gridster = $(".gridster ul").gridster({
+      widget_base_dimensions: [530, 300],
+      widget_margins: [5, 5],
+      min_cols: 1,
+      max_cols: 2,
+      helper: 'clone',
+      resize: {
+        enabled: true
+      }
+    }).data('gridster');
+  });
+</script>
+
 </body>
 </html>
