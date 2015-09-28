@@ -4,8 +4,7 @@
 }
 
 .gridster * {
-  margin:0;
-  padding:0;
+
 }
 
 ul {
@@ -46,8 +45,6 @@ body {
 
 
 .gridster {
-    margin: 0 auto;
-
     opacity: .8;
 
     -webkit-transition: opacity .6s;
@@ -72,3 +69,6 @@ body {
     background: red!important;
 }
 
+.parent-box {
+    margin: 10px;
+}

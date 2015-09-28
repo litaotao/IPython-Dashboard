@@ -37,8 +37,8 @@ An stand alone, light-weight web server for building, sharing graphs in created 
 
 - [mpld3](https://github.com/jakevdp/mpld3)
 - [lighting](http://lightning-viz.org/)
-- [bokeh](bokeh.pydata.org/en/latest/)
-- [matplotlib](matplotlib.org)
+- [bokeh](http://bokeh.pydata.org/en/latest/)
+- [matplotlib](http://matplotlib.org)
 - [zeppelin](https://github.com/apache/incubator-zeppelin)
 - [yhat](https://github.com/yhat/rodeo)
 - [hue](https://github.com/cloudera/hue)
