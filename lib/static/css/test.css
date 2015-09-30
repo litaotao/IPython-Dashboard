@@ -125,3 +125,11 @@ body {
     display: none;
   }
 }
+
+.input-title {
+    background-color: inherit; 
+    text-align: center; 
+    font-size: xx-large; 
+    height: 60px; 
+    border: none
+}
