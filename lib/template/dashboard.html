@@ -52,23 +52,23 @@
 
       <div class="htmleaf-container">
         <header class="htmleaf-header">
-          <input id="dashboard_name" class="form-control input-lg input-title" 
-          style="background-color: inherit; text-align:center; font-size:xx-large; height:60px; border:none" 
-          value="Building and sharing IPython Dashboard">
+          <textarea id="dashboard_name" class="form-control input-lg input-title" maxlength="64">Building and sharing IPython Dashboard</textarea>
           <div class="htmleaf-links">
 
           </div>
         </header>
 
         <div class="htmleaf-content bgcolor-8" style="padding-left: 10px; padding-right: 10px">
+        <div><button type="button" class="btn btn-primary" onclick="add_box()">Add Box</button></div>
             <div class="gridster parent-box">
-              <ul style="margin-left: 10px; margin-right: 10px; padding-left: 0px;">
-                <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">1
-                </li>
-                <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">2
-                </li>
+              <ul id="a" style="margin-left: 10px; margin-right: 10px; padding-left: 0px;">
+                <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">1</li>
+                <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">2</li>
                 <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">3</li>
                 <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">4</li>
+                <!-- <li id="add_box" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+                    <span class="fa fa-fw fa-3x fa-plus" style="padding-top: 100px;" onclick="add_box()"></span>
+                </li> -->
                 </li>
               </ul>
             </div>
@@ -79,8 +79,8 @@
     </div> 
 </div>
 
-  <script type="text/javascript">
-    var gridster;
+<script type="text/javascript">
+  var gridster;
 
   $(function(){   //DOM Ready
     gridster = $(".gridster ul").gridster({
@@ -94,6 +94,11 @@
       }
     }).data('gridster');
   });
+
+  // $(function(){
+  //   add_bkg = document.getElementById("add_box");
+  //   add_bkg.children[1].className = "";
+  // });
 </script>
 
 </body>
