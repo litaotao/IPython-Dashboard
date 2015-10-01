@@ -29,8 +29,12 @@ An stand alone, light-weight web server for building, sharing graphs in created 
 - V 0.1
     + Add dashboard client template
     + Template consists of box, each box is an independent front-side object
-    + Add and delete boxes
-    + Boxes support render raw html visulization
+    + Template hierarchy:
+        + box page [add, delete, share one or all]
+        + box graph [add, delete, share one or all]
+        + rename
+    + box graph visualization
+        + raw html
 
 
 # Related Projects
