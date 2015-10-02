@@ -35,6 +35,14 @@ An stand alone, light-weight web server for building, sharing graphs in created 
         + rename
     + box graph visualization
         + raw html
+        + image
+
+
+# To do
+
+- make box a template
+- edit box in a mask
+- unified add box in the initialing html
 
 
 # Related Projects
