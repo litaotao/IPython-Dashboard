@@ -36,6 +36,7 @@ An stand alone, light-weight web server for building, sharing graphs in created 
     + box graph visualization
         + raw html
         + image
+        + support markdown
 
 
 # To do
@@ -43,6 +44,8 @@ An stand alone, light-weight web server for building, sharing graphs in created 
 - make box a template
 - edit box in a mask
 - unified add box in the initialing html
+- hover tips
+- clean up code before merging to master
 
 
 # Related Projects

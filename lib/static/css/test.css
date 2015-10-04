@@ -11,12 +11,6 @@ ul {
   list-style-type: none;
 }
 
-
-/*/
-/* demo
-/*/
-
-
 body {
     font-size: 16px;
     font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -138,11 +132,28 @@ body {
 .input-title-level-2 {
     background-color: inherit; 
     text-align: center; 
-    font-size: x-large; 
+    font-size: large; 
     height: 30px; 
     border: none;
     resize: none;
     padding: 0px 0px;
+    margin-bottom: 0px;
+    /*width: 90%;*/
+}
+
+.edit-button {
+    text-align: center; 
+    font-size: large; 
+    height: 30px; 
+    border: none;
+    resize: none;
+    padding: 0px 0px;
+    width: 40px;
+    background-color: inherit;
+}
+
+.edit-button:hover {
+    background-color: inherit;
 }
 
 .chart-wrapper {
@@ -158,10 +169,9 @@ body {
   color: #666;
   font-size: 14px;
   font-weight: 200;
-  padding: 7px 10px 4px;
-  height: 45px;
+  border-bottom-color: greenyellow;
 }
 
 .chart-graph {
-  height: 85%;
+  height: 90%;
 }

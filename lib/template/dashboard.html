@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -23,106 +24,128 @@
 <body>
 
   <div class="container">
-
     <div class="main clearfix">
 
+    <!-- navigate side bar -->
       <nav class="navbar navbar-vertical-left">
         <ul class="nav navbar-nav" style="height: 250px;">
           <li><a href=""></a></li>
           <li>
-            <a href>
+            <a href="">
               <i class="fa fa-fw fa-lg fa-television"></i> 
               <span>Home</span>
             </a>
           </li>
           <li>
-            <a href>
+            <a href="">
               <i class="fa fa-fw fa-lg fa-tachometer"></i> 
               <span>Boards</span>
             </a>
           </li>
           <li>
-            <li>
-              <a href>
-                <i class="fa fa-fw fa-lg fa-cog"></i> 
-                <span>SQL</span>
-              </a>
-            </li>
-            <li>
-              <a href>
-                <i class="fa fa-fw fa-lg fa-question-circle"></i> 
-                <span>Help</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+            <a href="">
+              <i class="fa fa-fw fa-lg fa-cog"></i> 
+              <span>SQL</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fa fa-fw fa-lg fa-question-circle"></i> 
+              <span>Help</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-        <div class="htmleaf-container">
-          <header class="htmleaf-header">
-            <textarea id="dashboard_name" class="form-control input-lg input-title-level-1" maxlength="64" placeholder="Building and sharing IPython Dashboard"></textarea>
-            <div class="htmleaf-links">
+        <!-- main content container -->
+      <div class="htmleaf-container">
 
-            </div>
-          </header>
+        <!-- dashboard name -->
+        <header class="htmleaf-header">
+          <textarea id="dashboard_name" class="form-control input-lg input-title-level-1" maxlength="64" placeholder="Building and Sharing IPython Dashboard"></textarea>
+        </header>
 
-          <div class="htmleaf-content bgcolor-8" style="padding-left: 10px; padding-right: 10px">
-            <div>
-              <button type="button" class="btn btn-primary" onclick="add_box()"><i class="fa fa-fw fa-lg fa-plus"></i>Add</button>
-              <button type="button" class="btn btn-primary" onclick="edit_box()"><i class="fa fa-fw fa-lg fa-edit"></i>Edit</button>
-            </div>
-            <div class="gridster parent-box">
-              <ul id="a" style="margin-left: 10px; margin-right: 10px; padding-left: 0px;">
-                <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-                  <div class="chart-wrapper">
-                    <div class="chart-title bold">
-                      <input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph">
-                    </div>
-                    <div class="chart-graph">
-                      <iframe src="" style="width: 100%; height: 100%;"></iframe>
-                    </div>
-                  </div>
-                </li>
-                <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-                  <div class="chart-wrapper">
-                    <div class="chart-title bold">
-                      <input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph">
-                    </div>
-                    <div class="chart-graph">
-                      <iframe src="" style="width: 100%; height: 100%;"></iframe>
-                    </div>
-                  </div>
-                </li>
-                <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-                  <div class="chart-wrapper">
-                    <div class="chart-title bold">
-                      <input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph">
-                    </div>
-                    <div class="chart-graph">
-                      <iframe src="" style="width: 100%; height: 100%;"></iframe>
-                    </div>
-                  </div>
-                </li>
-                <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-                  <div class="chart-wrapper">
-                    <div class="chart-title bold">
-                      <input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph">
-                    </div>
-                    <div class="chart-graph">
-                      <iframe src="" style="width: 100%; height: 100%;"></iframe>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
+        <!-- dashboard content -->
+        <div class="htmleaf-content bgcolor-8" style="padding-left: 10px; padding-right: 10px">
+          <div>
+            <button type="button" class="btn btn-primary" onclick="add_box()"><i class="fa fa-fw fa-lg fa-plus"></i>Add</button>
+            <!-- <button type="button" class="btn btn-primary" onclick="edit_box()"><i class="fa fa-fw fa-lg fa-edit"></i>Edit</button> -->
           </div>
 
+          <div class="gridster parent-box">
+            <ul style="margin-left: 10px; margin-right: 10px; padding-left: 0px;">
+              <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+                <div class="chart-wrapper">
+                  <div class="chart-title bold">
+                    <table class="table input-title-level-2">
+                      <tr class="active">
+                          <td style="padding: 0px; width: 90%"><input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph"></td>
+                          <td style="padding: 0px; width: 10%"><button class="btn btn-primary edit-button"><i class="fa fa-fw fa-lg fa-edit" style="color: black;"></i></button></td>
+                      </tr>
+                    </table>    
+                  </div>
+                  <div class="chart-graph">
+                    <iframe src="" style="width: 100%; height: 100%; border: initial;"></iframe>
+                  </div>
+                </div>
+              </li>
+              <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+                <div class="chart-wrapper">
+                  <div class="chart-title bold">
+                    <table class="table input-title-level-2">
+                      <tr class="active">
+                          <td style="padding: 0px; width: 90%"><input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph"></td>
+                          <td style="padding: 0px; width: 10%"><button class="btn btn-primary edit-button"><i class="fa fa-fw fa-lg fa-edit" style="color: black;"></i></button></td>
+                      </tr>
+                    </table>  
+                  </div>
+                  <div class="chart-graph">
+                    <iframe src="" style="width: 100%; height: 100%; border: initial;"></iframe>
+                  </div>
+                </div>
+              </li>
+              <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+                <div class="chart-wrapper">
+                  <div class="chart-title bold">
+                    <table class="table input-title-level-2">
+                      <tr class="active">
+                          <td style="padding: 0px; width: 90%"><input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph"></td>
+                          <td style="padding: 0px; width: 10%"><button class="btn btn-primary edit-button"><i class="fa fa-fw fa-lg fa-edit" style="color: black;"></i></button></td>
+                      </tr>
+                    </table>  
+                  </div>
+                  <div class="chart-graph">
+                    <iframe src="" style="width: 100%; height: 100%; border: initial;"></iframe>
+                  </div>
+                </div>
+              </li>
+              <li id="b" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+                <div class="chart-wrapper">
+                  <div class="chart-title bold">
+                    <table class="table input-title-level-2">
+                      <tr class="active">
+                          <td style="padding: 0px; width: 90%"><input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph"></td>
+                          <td style="padding: 0px; width: 10%"><button class="btn btn-primary edit-button"><i class="fa fa-fw fa-lg fa-edit" style="color: black;"></i></button></td>
+                      </tr>
+                    </table>  
+                  </div>
+                  <div class="chart-graph">
+                    <iframe src="" style="width: 100%; height: 100%; border: initial;"></iframe>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
-
-      </div> 
+      </div>
     </div>
+  </div>
 
-    <script type="text/javascript">
-      var gridster;
+
+<!-- Do some initializing work -->
+<!-- Initialize gridster -->
+<script type="text/javascript">
+  var gridster;
 
   $(function(){   //DOM Ready
     gridster = $(".gridster ul").gridster({
@@ -136,11 +159,6 @@
       }
     }).data('gridster');
   });
-
-  // $(function(){
-  //   add_bkg = document.getElementById("add_box");
-  //   add_bkg.children[1].className = "";
-  // });
 </script>
 
 </body>
