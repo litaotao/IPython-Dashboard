@@ -64,7 +64,7 @@ body {
 }
 
 .parent-box {
-    margin: 10px;
+    /*margin: 10px;*/
 }
 
 .navbar-vertical-left {
@@ -174,4 +174,14 @@ body {
 
 .chart-graph {
   height: 90%;
+}
+
+.container-box {
+    width: inherit;
+    padding-right: 0px;
+    padding-left: 60px;
+}
+
+.box-ul {
+    width: inherit;
 }

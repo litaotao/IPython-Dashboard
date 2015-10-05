@@ -23,11 +23,11 @@
 
 <body>
 
-  <div class="container">
+  <div class="container container-box">
     <div class="main clearfix">
 
     <!-- navigate side bar -->
-      <nav class="navbar navbar-vertical-left">
+      <nav id="nav" class="navbar navbar-vertical-left" onmousemove="resize_content(1)" onmouseout="resize_content(2)">
         <ul class="nav navbar-nav" style="height: 250px;">
           <li><a href=""></a></li>
           <li>
@@ -58,7 +58,7 @@
       </nav>
 
         <!-- main content container -->
-      <div class="htmleaf-container">
+      <div id="main-content" class="htmleaf-container">
 
         <!-- dashboard name -->
         <header class="htmleaf-header">
@@ -66,15 +66,15 @@
         </header>
 
         <!-- dashboard content -->
-        <div class="htmleaf-content bgcolor-8" style="padding-left: 10px; padding-right: 10px">
-          <div>
+        <div class="htmleaf-content bgcolor-8" style="padding-left: 0px; padding-right: 0px; padding: 0px">
+          <div style="padding-bottom: 10px">
             <button type="button" class="btn btn-primary" onclick="add_box()"><i class="fa fa-fw fa-lg fa-plus"></i>Add</button>
           </div>
 
           <div class="gridster parent-box">
-            <ul style="margin-left: 10px; margin-right: 10px; padding-left: 0px;">
+            <ul id="box-ul" class="box-ul">
               <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-                <div class="chart-wrapper">
+                 <div class="chart-wrapper">
                   <div class="chart-title bold">
                     <table class="table input-title-level-2">
                       <tr class="active" style="padding-left: 10%;">
@@ -86,10 +86,10 @@
                   <div class="chart-graph">
                     <iframe src="" style="width: 100%; height: 100%; border: initial;"></iframe>
                   </div>
-                </div>
+                </div> 
               </li>
               <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-                <div class="chart-wrapper">
+                 <div class="chart-wrapper">
                   <div class="chart-title bold">
                     <table class="table input-title-level-2">
                       <tr class="active" style="padding-left: 10%;">
@@ -101,7 +101,7 @@
                   <div class="chart-graph">
                     <iframe src="" style="width: 100%; height: 100%; border: initial;"></iframe>
                   </div>
-                </div>
+                </div> 
               </li>
               <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
                 <div class="chart-wrapper">
@@ -145,10 +145,12 @@
 <!-- Initialize gridster -->
 <script type="text/javascript">
   var gridster;
+  var box_width = Math.ceil(document.getElementById("box-ul").offsetWidth / 2)
+  var box_height = Math.ceil(box_width * 9 / 16)
 
   $(function(){   //DOM Ready
     gridster = $(".gridster ul").gridster({
-      widget_base_dimensions: [530, 300],
+      widget_base_dimensions: [box_width - 10, box_height],
       widget_margins: [5, 5],
       min_cols: 1,
       max_cols: 2,
