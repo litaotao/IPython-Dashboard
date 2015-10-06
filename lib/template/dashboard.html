@@ -68,12 +68,14 @@
         <!-- dashboard content -->
         <div class="htmleaf-content bgcolor-8" style="padding-left: 0px; padding-right: 0px; padding: 0px">
           <div style="padding-bottom: 10px">
-            <button type="button" class="btn btn-primary" onclick="add_box()"><i class="fa fa-fw fa-lg fa-plus"></i>Add</button>
+            <button type="button" class="btn btn-primary" onclick="add_box()"><i class="fa fa-fw fa-
+            lg fa-plus"></i>Add</button>
+            <button type="button" class="btn btn-success" onclick="add_box()"><i class="fa fa-fw fa-lg fa-share-alt"></i>Share</button>
           </div>
 
-          <div class="gridster parent-box">
+          <div id="box-container" class="gridster parent-box">
             <ul id="box-ul" class="box-ul">
-              <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+              <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" class="box-li">
                  <div class="chart-wrapper">
                   <div class="chart-title bold">
                     <table class="table input-title-level-2">
@@ -88,7 +90,7 @@
                   </div>
                 </div> 
               </li>
-              <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+              <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" class="box-li">
                  <div class="chart-wrapper">
                   <div class="chart-title bold">
                     <table class="table input-title-level-2">
@@ -103,7 +105,7 @@
                   </div>
                 </div> 
               </li>
-              <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+              <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" class="box-li">
                 <div class="chart-wrapper">
                   <div class="chart-title bold">
                     <table class="table input-title-level-2">
@@ -118,7 +120,7 @@
                   </div>
                 </div>
               </li>
-              <li id="test" data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+              <li id="test" data-row="1" data-col="1" data-sizex="1" data-sizey="1" class="box-li">
                 <div class="chart-wrapper">
                   <div class="chart-title bold">
                     <table class="table input-title-level-2">
@@ -144,14 +146,18 @@
 <!-- Do some initializing work -->
 <!-- Initialize gridster -->
 <script type="text/javascript">
-  var gridster;
-  var box_width = Math.ceil(document.getElementById("box-ul").offsetWidth / 2)
-  var box_height = Math.ceil(box_width * 9 / 16)
-
-  $(function(){   //DOM Ready
+  // var gridster;
+  // var box_width = Math.floor(document.getElementById("box-ul").offsetWidth / 2);
+  // var box_height = Math.floor(box_width * 9 / 16);
+ 
+  $(function init_grid(){   //DOM Ready
+    var gridster;
+    var box_width = Math.floor(document.getElementById("box-ul").offsetWidth / 2)
+    var box_height = Math.floor(box_width * 9 / 16)
+    
     gridster = $(".gridster ul").gridster({
-      widget_base_dimensions: [box_width - 10, box_height],
-      widget_margins: [5, 5],
+      widget_base_dimensions: [box_width, box_height],
+      widget_margins: [0, 0],
       min_cols: 1,
       max_cols: 2,
       helper: 'clone',

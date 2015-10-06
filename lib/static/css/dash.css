@@ -184,4 +184,10 @@ body {
 
 .box-ul {
     width: inherit;
+    padding-left: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.box-li {
 }
