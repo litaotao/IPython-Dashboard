@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*- 
 
-from dashboard import app
+from dashboard import app, config
 
-app.run(debug=True, port=9090)
+app.run(debug=config.app_debug, host=config.app_host, port=config.app_port)

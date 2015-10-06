@@ -5,6 +5,7 @@
 # third-parth package
 import redis
 from flask import Flask
+from flask.ext.restful import Api
 
 # user-defined package
 import config
@@ -13,7 +14,7 @@ import config
 dashboard server setup
 '''
 app = Flask(__name__)
-
+api = Api(app)
 
 
 
