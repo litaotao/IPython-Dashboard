@@ -39,9 +39,19 @@ An stand alone, light-weight web server for building, sharing graphs in created 
 
 # To do
 
-- edit box in a mask
-- hover tips
-- clean up code before merging to master
+- template
+    - edit box in a mask
+    - hover tips
+    - clean up code before merging to master
+
+- server
+    - docstring
+    - unittest
+    - travis ci
+    - pep 8
+
+- issues
+    - import dashboard ... 
 
 
 # Related Projects

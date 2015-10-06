@@ -1,0 +1,5 @@
+recursive-include dashboard/template *
+recursive-include dashboard/static *
+include *.in
+include *.md
+include *.txt
