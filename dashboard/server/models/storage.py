@@ -8,6 +8,7 @@ from flask.ext.restful import Resource
 
 # user-defined package
 from dashboard import r
+from ..utils import build_response
 
 
 class KeyList(Resource):
@@ -16,7 +17,8 @@ class KeyList(Resource):
     def get(self):
         '''Get key list in storage.
         '''
-        return r.keys()
+        return build_response(dict(data=r.keys(), code=200))
+        # return r.keys()
 
 
 class Key(Resource):
