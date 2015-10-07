@@ -57,7 +57,7 @@
         </ul>
       </nav>
 
-        <!-- main content container -->
+    <!-- main content container -->
       <div id="main-content" class="htmleaf-container">
 
         <!-- dashboard name -->
@@ -81,7 +81,7 @@
                     <table class="table input-title-level-2">
                       <tr class="active" style="padding-left: 10%;">
                           <td style="padding: 0px; width: 90%; padding-left: inherit"><input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph"></td>
-                          <td style="padding: 0px; width: 10%"><button class="btn btn-primary edit-button"><i class="fa fa-fw fa-lg fa-edit" style="color: black;"></i></button></td>
+                          <td style="padding: 0px; width: 10%"><button class="btn btn-primary edit-button" data-toggle="modal" data-target="#myModal"><i class="fa fa-fw fa-lg fa-edit" style="color: black;"></i></button></td>
                       </tr>
                     </table>    
                   </div>
@@ -141,6 +141,30 @@
       </div>
     </div>
   </div>
+
+<!-- Editor Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+            </button>
+            <h5 class="modal-title" id="myModalLabel">Edit your dash graph</h5>
+         </div>
+         <div class="modal-body">
+            在这里添加一些文本
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">cancel</button>
+            <button type="button" class="btn btn-primary">save</button>
+         </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 
 
 <!-- Do some initializing work -->
