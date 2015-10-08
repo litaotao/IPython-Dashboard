@@ -18,8 +18,6 @@ class KeyList(Resource):
         '''Get key list in storage.
         '''
         return build_response(dict(data=r.keys(), code=200))
-        # return r.keys()
-
 
 class Key(Resource):
     """Storage CURD operations
@@ -28,9 +26,10 @@ class Key(Resource):
         '''Get a key-value from storage according to the key name.
         '''
         data = r.get(key)
+        data = json.dumps(data) if isinstance(data, str) else data
         data = json.loads(data) if data else {}
 
-        return data
+        return build_response(dict(data=data, code=200))
 
 
 

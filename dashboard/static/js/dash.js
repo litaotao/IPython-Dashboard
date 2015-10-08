@@ -1,3 +1,4 @@
+
 function onmouseoverChange(obj)
     {
         obj.style.borderColor="#FF6600";
@@ -26,24 +27,6 @@ function add_box() {
     gridster.add_widget(box);
 }
 
-// $(document).ready(
-//     $("#nav").hover(
-//         resize_content(1),
-//         resize_content(2)
-//     )
-// );
-
-// $(window).on("resize", function(){
-//     var boxes = $(".box-li");
-//     var box_width = Math.floor(document.getElementById("box-container").offsetWidth / 2);
-//     $("#box-ul")[0].style.width = document.getElementById("box-container").offsetWidth.toString() + "px";
-//     var box_height = Math.floor(box_width * 9 / 16);
-//     for (var i = 0; i < boxes.length; i++) {
-//         boxes[i].style.width = box_width.toString() + "px";
-//         boxes[i].style.height = box_height.toString() + "px";
-//         // boxes[i].style.width = "400px";
-//     };
-// });
 
 function init_grid(){   //DOM Ready
     var gridster;
@@ -56,12 +39,52 @@ function init_grid(){   //DOM Ready
     }).data('gridster');
 }
 
-// $(("#nav").hover(
-//     resize_content(1),
-//     resize_content(2)
-// ));
 
 function resize_content(direction) {
     var padding = (direction==1) ? "100px" : "0px";
     document.getElementById("main-content").style.paddingLeft = padding;
 }
+
+
+
+/*
+Interact with server
+*/
+
+function getKeys(){
+    $("[data-target]").on("click", function(){
+    var keys_select = $("#keys");
+    keys_select.empty();
+
+    // console.log("get_keys");
+    var url = "http://127.0.0.1:9090/keys";
+    $.getJSON(url, function(data){
+      $.each(data.data, function(index, value){
+        keys_select.append("<option>" + value + "</option>")
+      })
+    });
+  })
+}
+
+
+function getValue(){
+    // var selectDOM = $("#keys")[0];
+    // var key = selectDOM.options[selectDOM.selectedIndex].text;
+    $("#keys").on("change", function(){
+        var selectDOM = $("#keys")[0];
+        var key = selectDOM.options[selectDOM.selectedIndex].text;
+
+        var url = "http://127.0.0.1:9090/key/" + key;
+        console.log(url);
+
+        $.getJSON(url, {type: "json"}, function(data){
+            console.log(data);
+        })
+    });
+}
+
+$(document).ready(function() {
+    getKeys();
+    getValue();
+});
+

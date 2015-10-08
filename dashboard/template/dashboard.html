@@ -209,21 +209,6 @@ aria-labelledby="myModalLabel" aria-hidden="true">
       }
     }).data('gridster');
   });
-
-  $(function get_keys_v2(){
-    var keys_select = $("#keys");
-    keys_select.empty();
-
-    console.log("get_keys");
-    var url = "http://127.0.0.1:9090/keys";
-    $.getJSON(url, function(data){
-      $.each(data.data, function(index, value){
-        keys_select.append("<option>" + value + "</option>")
-        console.log(index);
-        console.log(value);
-      })
-    });
-  });
 </script>
 
 </body>
