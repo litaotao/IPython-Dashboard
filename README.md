@@ -40,9 +40,7 @@ An stand alone, light-weight web server for building, sharing graphs in created 
 # To do
 
 - template
-    - edit box in a mask
     - hover tips
-    - clean up code before merging to master
 
 - server
     - docstring
@@ -51,10 +49,13 @@ An stand alone, light-weight web server for building, sharing graphs in created 
     - pep 8
 
 - issues
-    - import dashboard ... 
+    - nices interact with the server app in the module level
+    - front end, databricks style
+    - build readdocs page after mvp
+    - slogan
 
 
-# Related Projects
+# Related Projects & Products 
 
 - [mpld3](https://github.com/jakevdp/mpld3)
 - [lighting](http://lightning-viz.org/)
@@ -64,5 +65,8 @@ An stand alone, light-weight web server for building, sharing graphs in created 
 - [yhat](https://github.com/yhat/rodeo)
 - [hue](https://github.com/cloudera/hue)
 - [plotly](https://github.com/plotly/dashboards)
+- [datadog](https://www.datadoghq.com)
+
+
 
 

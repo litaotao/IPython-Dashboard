@@ -124,9 +124,10 @@ body {
     background-color: inherit; 
     text-align: center; 
     font-size: xx-large; 
-    height: 60px; 
+    height: 30px; 
     border: none;
     resize: none;
+    padding: 0px 0px;
 }
 
 .input-title-level-2 {
