@@ -77,11 +77,44 @@ function getValue(){
         var url = "http://127.0.0.1:9090/key/" + key;
         console.log(url);
 
-        $.getJSON(url, {type: "json"}, function(data){
+        $.getJSON(url, function(data){
             console.log(data);
+            parseTable($.parseJSON(data.data));
         })
     });
 }
+
+
+function parseTable(data){
+    function genElement(type){
+        return document.createElement(type);
+    }
+    var table = genElement("table");
+    var thead = genElement("thead");
+    var tbody = genElement("tbody");
+    var tr = genElement("tr");
+    var th = genElement("th");
+    var td = genElement("td");
+
+    tr.appendChild(th);
+    
+    var keys = []
+    $.each(data, function(key, value){
+        var th = genElement("th");
+        th.innerText = key;
+        tr.appendChild(th);
+        keys.push(key);        
+    })
+    
+
+    thead.appendChild(tr);
+    table.setAttribute("id", "table_value");
+    table.className = "table-condensed";
+    table.appendChild(thead);
+    $("#value")[0].appendChild(table);
+    console.log($("#value")[0].innerHTML);
+}
+
 
 $(document).ready(function() {
     getKeys();

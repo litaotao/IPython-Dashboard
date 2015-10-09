@@ -17,7 +17,9 @@ class KeyList(Resource):
     def get(self):
         '''Get key list in storage.
         '''
-        return build_response(dict(data=r.keys(), code=200))
+        keys = r.keys()
+        keys.sort()
+        return build_response(dict(data=keys, code=200))
 
 class Key(Resource):
     """Storage CURD operations
