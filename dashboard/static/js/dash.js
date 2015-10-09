@@ -87,7 +87,11 @@ function getValue(){
 
 function parseTable(data){
     function genElement(type){
-        return document.createElement(type);
+        var element = document.createElement(type);
+        if (type == "td"){
+            element.setAttribute("nowrap", "nowrap");
+        }
+        return element;
     }
     var table = genElement("table");
     var thead = genElement("thead");
@@ -98,21 +102,52 @@ function parseTable(data){
 
     tr.appendChild(th);
     
-    var keys = []
+    var columns = [];
     $.each(data, function(key, value){
         var th = genElement("th");
         th.innerText = key;
         tr.appendChild(th);
-        keys.push(key);        
+        columns.push(key);        
     })
-    
-
     thead.appendChild(tr);
+
+    var indexes = [];
+
+    $.each(data[columns[0]], function(index, value){
+        indexes.push(index);
+    })
+
+    for (var row = 0; row < 20; row++) {
+        var tr = genElement("tr");
+        var th = genElement("th");
+        th.innerText = indexes[row];
+        tr.appendChild(th);
+        $.each(columns, function(no_user, col){
+            var td = genElement("td");
+            td.innerText = data[col][indexes[row]];
+            tr.appendChild(td);
+        })
+        tbody.appendChild(tr);
+    };
+    
     table.setAttribute("id", "table_value");
-    table.className = "table-condensed";
+    table.setAttribute("border", "1px");
+    table.className = "table-condensed table-hover";
+    table.style.fontSize = "small";
+    table.style.fontWeight = "400";
+
+    // remove table
+    var tableDOM = $("#value")[0]
+    currentTable = tableDOM.children
+    for (var i = currentTable.length - 1; i >= 0; i--) {
+        tableDOM.removeChild(currentTable[0]);
+    };
+
+    // add table
     table.appendChild(thead);
-    $("#value")[0].appendChild(table);
-    console.log($("#value")[0].innerHTML);
+    table.appendChild(tbody);
+    tableDOM.appendChild(table);
+    console.log(tableDOM.innerHTML);
 }
 
 
