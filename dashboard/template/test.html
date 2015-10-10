@@ -1,0 +1,146 @@
+<head>
+  <title>Ipython Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../static/js/jquery-2.1.4.js"></script>
+  <script src="http://kendo.cdn.telerik.com/2014.1.318/js/kendo.all.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://kendo.cdn.telerik.com/2014.1.318/styles/kendo.common.min.css
+
+">
+</head>
+
+
+<body>
+    <div>
+        <button id="groupByTest">Group by Test</button>
+        <button id="groupByStudent">Group by Student</button>
+        <button id="sortByCategory">Sort by Category</button>
+        <button id="sortByScore">Sort by Score</button>
+    </div>
+    <div id="chart"/>
+    <div id="chartTable"/>
+
+
+<script type="text/javascript">
+    var jsonData = [
+    {"Student":"student 1","Test":"test A","Value":29,"CustomOrder":3},
+    {"Student":"student 1","Test":"test B","Value":58,"CustomOrder":3},
+    {"Student":"student 2","Test":"test A","Value":33,"CustomOrder":4},
+    {"Student":"student 2","Test":"test B","Value":41,"CustomOrder":4},
+    {"Student":"student 3","Test":"test A","Value":29,"CustomOrder":2},
+    {"Student":"student 3","Test":"test B","Value":62,"CustomOrder":2},
+    {"Student":"student 4","Test":"test A","Value":62,"CustomOrder":1},
+    {"Student":"student 4","Test":"test B","Value":72,"CustomOrder":1},
+    {"Student":"student 5","Test":"test A","Value":33,"CustomOrder":5},
+    {"Student":"student 5","Test":"test B","Value":25,"CustomOrder":5}
+];
+
+var myDataSource = new kendo.data.DataSource({
+    data: jsonData,
+    group: [{ "field": "Student"}],
+    sort: [
+        { "field": "Test", "dir": "asc" },
+        { "field": "CustomOrder", "dir": "asc" }
+    ],
+    schema: {
+        model: {
+            fields: {
+                Student: {
+                    "type": "string"
+                },
+                Test: {
+                    "type": "string"
+                },
+                Value: {
+                    "type": "number"
+                },
+                CustomOrder: {
+                    "type": "number"
+                }
+            }
+        }
+    }
+});
+var group = "Student";
+var category = "Test";
+var sort = "Student";
+
+function updateChart(){
+    var chart = $("#chart").data("kendoChart");
+    chart.options.title = "group by " + group + ", sort by " + sort;    
+    chart.options.categoryAxis.field = category;    
+}
+
+function groupByTest_click() {    
+    group = "Test";
+    category = "Student";
+    updateChart();
+    $('#chart').data('kendoChart').dataSource.group([{ field: group }]);
+    $('#chart').data('kendoChart').dataSource.sort([{ field: sort, dir: "desc" }]);    
+}
+
+function groupByStudent_click() {
+    group = "Student";
+    category = "Test";
+    updateChart();
+    $('#chart').data('kendoChart').dataSource.group([{ field: group }]);
+    $('#chart').data('kendoChart').dataSource.sort([{ field: sort, dir: "desc" }]);    
+}
+
+function sortByCategory_click() {
+    sort = group;
+    updateChart();
+    $('#chart').data('kendoChart').dataSource.group([{ field: group }]);
+    $('#chart').data('kendoChart').dataSource.sort([{ field: sort, dir: "desc" }]);    
+}
+
+function sortByScore_click() {
+    sort = "CustomOrder";
+    updateChart();
+    $('#chart').data('kendoChart').dataSource.group([{ field: group }]);
+    $('#chart').data('kendoChart').dataSource.sort([{ field: sort, dir: "desc" }]);     
+}
+
+function setupChart() {
+    $("#chart").kendoChart({
+        dataSource: myDataSource,
+        series: [{ 
+            type: "column",                         
+            field: "Value"
+        }],
+        "categoryAxis": [{
+            "labels": {
+                "template": "#: value #",
+                "rotation": 0
+            },
+            "majorGridLines": {
+                "visible": false
+            },
+            name: "myCat",
+            field: "Test"
+        }],
+        "valueAxis": [{
+            "labels": {
+                "format": "{0:N0}"
+            },
+            "line": {
+                "visible": false
+            },
+            "max": 100,
+            "majorUnit": 10
+        }],                
+        "autoBind": true
+    });
+};
+
+$(document).ready(function() {    
+    $("#groupByTest").on("click", groupByTest_click);
+    $("#groupByStudent").on("click", groupByStudent_click);
+    $("#sortByCategory").on("click", sortByCategory_click);
+    $("#sortByScore").on("click", sortByScore_click);
+    
+    setupChart();    
+});
+
+</script>
+</body>
