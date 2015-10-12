@@ -81,12 +81,12 @@
                     <table class="table input-title-level-2">
                       <tr class="active" style="padding-left: 10%;">
                         <td style="padding: 0px; width: 90%; padding-left: inherit"><input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph"></td>
-                        <td style="padding: 0px; width: 10%"><button class="btn btn-primary edit-button" data-toggle="modal" data-target="#myModal"><i class="fa fa-fw fa-lg fa-edit" style="color: black;"></i></button></td>
+                        <td style="padding: 0px; width: 10%"><button class="btn btn-primary edit-button" data-toggle="modal" data-target="#myModal"><i class="fa fa-fw fa-lg fa-edit" style="color: black;" onclick="addClassMark(this)"></i></button></td>
                       </tr>
                     </table>    
                   </div>
-                  <div class="chart-graph">
-                    <iframe src="" style="width: 100%; height: 100%; border: initial;"></iframe>
+                  <div class="chart-graph" style="width: 100%; overflow: auto; color: #444;">
+                    <!-- <iframe src="" style="width: 100%; height: 100%; border: initial;"></iframe> -->
                   </div>
                 </div> 
               </li>
@@ -177,9 +177,8 @@ aria-labelledby="myModalLabel" aria-hidden="true">
     </div>
   </div>
   <div class="modal-footer" style="padding: 5px;">
-    <button type="button" class="btn btn-default btn-sm" 
-    data-dismiss="modal">cancel</button>
-    <button type="button" class="btn btn-primary btn-sm">save</button>
+    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">cancel</button>
+    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="saveGraph()">save</button>
   </div>
 </div><!-- /.modal-content -->
 </div><!-- /.modal -->
@@ -198,8 +197,8 @@ aria-labelledby="myModalLabel" aria-hidden="true">
     var box_height = Math.floor(box_width * 9 / 16)
     
     gridster = $(".gridster ul").gridster({
-      widget_base_dimensions: [box_width, box_height],
-      widget_margins: [0, 0],
+      widget_base_dimensions: [box_width-4, box_height-10],
+      widget_margins: [2, 2],
       min_cols: 1,
       max_cols: 2,
       helper: 'clone',

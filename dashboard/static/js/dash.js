@@ -34,8 +34,8 @@ function init_grid(){   //DOM Ready
     var box_height = Math.floor(box_width * 9 / 16)
     
     gridster = $(".gridster ul").gridster({
-      widget_base_dimensions: [box_width, box_height],
-      widget_margins: [0, 0],
+      widget_base_dimensions: [box_width - 5, box_height - 5],
+      widget_margins: [10, 10],
     }).data('gridster');
 }
 
@@ -75,10 +75,10 @@ function getValue(){
         var key = selectDOM.options[selectDOM.selectedIndex].text;
 
         var url = "http://127.0.0.1:9090/key/" + key;
-        console.log(url);
+        // console.log(url);
 
         $.getJSON(url, function(data){
-            console.log(data);
+            // console.log(data);
             parseTable($.parseJSON(data.data));
         })
     });
@@ -147,12 +147,33 @@ function parseTable(data){
     table.appendChild(thead);
     table.appendChild(tbody);
     tableDOM.appendChild(table);
-    console.log(tableDOM.innerHTML);
+    // console.log(tableDOM.innerHTML);
 }
+
 
 
 $(document).ready(function() {
     getKeys();
     getValue();
 });
+
+
+function addClassMark(obj){
+    obj.classList.add("edit-graph");
+}
+
+
+function saveGraph(){
+    // var data = $("#value")[0].cloneNode(true);
+    var data = $("#value")[0].children[0].cloneNode(true);
+    data.removeAttribute("id");
+    data.style.height = "100%";
+    data.style.width = "100%";
+    var obj = $("td > button > i.edit-graph")[0];
+    var res = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1]
+    res.innerHTML = "";
+    res.appendChild(data);
+    a1 = data;
+    a2 = res;
+}
 
