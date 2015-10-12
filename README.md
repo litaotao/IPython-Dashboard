@@ -28,18 +28,8 @@ An stand alone, light-weight web server for building, sharing graphs in created 
 ![architecture](docs/architecture.jpg)
 
 
-# Change Log
 
-- V 0.1
-    + Add dashboard client template
-    + Template consists of box, each box is an independent front-side object
-    + Template hierarchy:
-        + box page [add, delete, share one or all]
-        + box graph [add, delete, share one or all]
-        + rename
-
-
-# Screenshot * [Demo](https://www.youtube.com/watch?v=KJeMtQhDjDg)
+# Screenshot & [Demo](https://www.youtube.com/watch?v=KJeMtQhDjDg)
 
 ![demo](docs/template-screenshot.jpg)
 
@@ -80,7 +70,31 @@ An stand alone, light-weight web server for building, sharing graphs in created 
 - [plotly](https://github.com/plotly/dashboards)
 - [datadog](https://www.datadoghq.com)
 - [databricks](https://databricks.com/)
+- [nvd3](http://nvd3.org/)
+- [c3js.org](http://c3js.org/)
 
 
+
+# Change Log
+
+- V 0.2.1
+    + Share one graph
+    + Share one dashboard
+    + Presentation mode
+
+
+- V 0.2
+    + Interact with server [ CURD ]
+    + Simple visualization
+    + Rearrange buttons [ add, share ]
+
+
+- V 0.1
+    + Add dashboard client template
+    + Template consists of box, each box is an independent front-side object
+    + Template hierarchy:
+        + box page [add, delete, share one or all]
+        + box graph [add, delete, share one or all]
+        + rename
 
 
