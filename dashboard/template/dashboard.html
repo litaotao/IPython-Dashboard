@@ -74,7 +74,8 @@
           <div style="padding-bottom: 0px">
             <button type="button" class="btn btn-primary" onclick="add_box()"><i class="fa fa-fw fa-
               lg fa-plus"></i>Add</button>
-              <button type="button" class="btn btn-success" onclick="add_box()"><i class="fa fa-fw fa-lg fa-share-alt"></i>Share</button>
+              <button type="button" class="btn btn-success" onclick="build_graph()"><i class="fa fa-fw fa-lg fa-share-alt"></i>Share</button>
+              <button type="button" class="btn btn-success" onclick="update_graph()"><i class="fa fa-spin fa-circle-o-notch"></i> Update</button>
             </div>
 
             <div id="box-container" class="gridster parent-box">
@@ -89,7 +90,7 @@
                       </tr>
                     </table>    
                   </div>
-                  <div class="chart-graph" style="width: 100%; overflow: auto; color: #444;">
+                  <div id="test_graph" class="chart-graph" style="width: 100%; overflow: auto; color: #444;">
                     <!-- <iframe src="" style="width: 100%; height: 100%; border: initial;"></iframe> -->
                   </div>
                 </div> 
@@ -211,6 +212,19 @@ aria-labelledby="myModalLabel" aria-hidden="true">
       }
     }).data('gridster');
   });
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $(document).on("onmouseup", "span.gs-resize-handle", 
+        function(){alert("onmouseup");});
+    $(document).on("click", "span.gs-resize-handle", 
+        function(){alert("click");});
+    $(document).on("onblur", "span.gs-resize-handle", 
+        function(){alert("onblur");});
+    $(document).on("ondrag", "span.gs-resize-handle", 
+        function(){alert("ondrag");});
+});
 </script>
 
 </body>
