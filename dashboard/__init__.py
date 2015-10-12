@@ -8,7 +8,7 @@ from flask import Flask
 from flask.ext.restful import Api
 
 # user-defined package
-import config
+import config as cfg
 
 '''
 dashboard server setup
@@ -21,7 +21,8 @@ api = Api(app)
 '''
 dashboard common services setup
 '''
-r = redis.Redis(host=config.redis_host, port=config.redis_port, db=config.redis_db)
+r_kv = redis.Redis(host=cfg.redis_kv_host, port=cfg.redis_kv_port, db=cfg.redis_kv_db)
+r_db = redis.Redis(host=cfg.redis_db_host, port=cfg.redis_db_port, db=cfg.redis_db_db)
 
 
 # import modules

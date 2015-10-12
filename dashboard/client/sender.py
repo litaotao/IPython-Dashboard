@@ -5,7 +5,7 @@
 # third-parth package
 
 # user-defined package
-from dashboard import r
+from dashboard import r_kv
 
 
 def sender(obj, key, value="", meta={}):
@@ -21,15 +21,15 @@ def sender(obj, key, value="", meta={}):
     """
     suffix = '-meta'
     # persistent key and value
-    if key in r or key + suffix in r:
+    if key in r_kv or key + suffix in r_kv:
         print 'Collision: key: {}, or {} exists in storage'.format(key, key + suffix)
         return None
 
     value = value if value else obj.to_json()
-    res = r.set(key, value)
+    res = r_kv.set(key, value)
     
     if meta:
-        res = r.set(key + suffix, meta)
+        res = r_kv.set(key + suffix, meta)
 
     return res
 

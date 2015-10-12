@@ -157,6 +157,10 @@ body {
     background-color: inherit;
 }
 
+.edit-button:focus {
+    background-color: inherit;
+}
+
 .chart-wrapper {
   background: #fff;
   border: 1px solid #e2e2e2;

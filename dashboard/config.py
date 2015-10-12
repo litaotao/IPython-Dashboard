@@ -1,10 +1,13 @@
 
 
 # redis 
-redis_host = 'localhost'
-redis_port = 6379
-redis_db   = 0
+redis_kv_host = 'localhost'
+redis_kv_port = 6379
+redis_kv_db   = 0
 
+redis_db_host = 'localhost'
+redis_db_port = 6379
+redis_db_db   = 1
 
 # web server
 app_host  = 'localhost'

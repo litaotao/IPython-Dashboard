@@ -8,4 +8,7 @@ IPython_Dashboard.egg-info
 *.pyc
 *.pyo
 
+# tmp files
+*.rdb
+
 

@@ -33,31 +33,23 @@ An stand alone, light-weight web server for building, sharing graphs in created 
 
 # Screenshot & [Demo](https://www.youtube.com/watch?v=KJeMtQhDjDg)
 
-![demo](docs/template-screenshot.jpg)
+[![demo](docs/template-screenshot.jpg)](https://www.youtube.com/watch?v=KJeMtQhDjDg)
 
 
 
 # Run tests
 
+just run `nosetests` under this repo
 
+```
+aaron@aarons-MacBook-Pro:~/Desktop/github/IPython-Dashboard$nosetests
+.
+----------------------------------------------------------------------
+Ran 1 test in 7.798s
 
+OK
+```
 
-# To do
-
-- template
-    - hover tips
-
-- server
-    - docstring
-    - unittest
-    - travis ci
-    - pep 8
-
-- issues
-    - nices interact with the server app in the module level
-    - front end, databricks style
-    - build readdocs page after mvp
-    - slogan
 
 
 # Related Projects & Products 
@@ -73,22 +65,37 @@ An stand alone, light-weight web server for building, sharing graphs in created 
 - [datadog](https://www.datadoghq.com)
 - [databricks](https://databricks.com/)
 - [nvd3](http://nvd3.org/)
-- [c3js.org](http://c3js.org/)
+- [c3js](http://c3js.org/)
 
 
 
 # Change Log
 
+
+- V 0.2.2
+    + front side, databricks style
+    + pep 8, code clean up & restructure
+    + hover tips
+
+
 - V 0.2.1
     + Share one graph
     + Share one dashboard
     + Presentation mode
+    + slogan
+    + footer
+    + readthedoc
 
 
 - V 0.2
     + Interact with server [ CURD ]
     + Simple visualization
     + Rearrange buttons [ add, share ]
+    + Dash json format
+        - dash number [list]
+        - content name
+        - content type
+    + docstring
 
 
 - V 0.1
