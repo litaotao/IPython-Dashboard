@@ -7,15 +7,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="../static/js/jquery-2.1.4.js"></script>
-  <script src="../static/js/jquery.gridster.js"></script>
+  // <script src="../static/js/jquery.gridster.js"></script>
+  <!-- // <script src="../static/js/gridstack.js"></script> -->
   <script src="../static/js/bootstrap.js"></script>
   <script src="../static/js/dash.js"></script>
   <script src="../static/js/d3.js"></script>
   <script src="../static/js/nv.d3.js"></script>
   <script src="../static/js/dash.vis.js"></script>
+  <script src="../static/js/jquery-watch.js"></script>
 
   <link rel="stylesheet" href="../static/css/bootstrap.css">
   <link rel="stylesheet" href="../static/css/jquery.gridster.css">
+  <!-- <link rel="stylesheet" href="../static/css/gridstack.css"> -->
   <link rel="stylesheet" href="../static/css/bootstrap-vertical-menu.css">
   <link rel="stylesheet" href="../static/css/font-awesome.css">
   <link rel="stylesheet" href="../static/css/default.css">
@@ -80,7 +83,7 @@
 
             <div id="box-container" class="gridster parent-box">
               <ul id="box-ul" class="box-ul">
-                <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" class="box-li">
+                <li ondrag="test()" data-row="1" data-col="1" data-sizex="1" data-sizey="1" class="box-li">
                  <div class="chart-wrapper">
                   <div class="chart-title bold">
                     <table class="table input-title-level-2">
@@ -215,16 +218,27 @@ aria-labelledby="myModalLabel" aria-hidden="true">
 </script>
 
 <script type="text/javascript">
+
+console.log("started...");
+
 $(document).ready(function(){
-    $(document).on("onmouseup", "span.gs-resize-handle", 
-        function(){alert("onmouseup");});
-    $(document).on("click", "span.gs-resize-handle", 
-        function(){alert("click");});
-    $(document).on("onblur", "span.gs-resize-handle", 
-        function(){alert("onblur");});
-    $(document).on("ondrag", "span.gs-resize-handle", 
-        function(){alert("ondrag");});
+// some element to monitor
+var el = $("li.box-li");
+
+// hook up the watcher
+el.watch({
+    // specify CSS styles or attribute names to monitor
+    properties: "height, weight",
+
+    // callback function when a change is detected
+    callback: function(data, i) {
+        console.log("hahaaha");
+        window.dispatchEvent(new Event('resize'));
+        // do what you need based on changes
+        // or do your own checks
+    }
 });
+})
 </script>
 
 </body>

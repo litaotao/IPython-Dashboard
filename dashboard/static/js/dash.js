@@ -177,3 +177,7 @@ function saveGraph(){
     a2 = res;
 }
 
+
+function test(){
+    console.log("test");
+}
