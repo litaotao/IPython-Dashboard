@@ -29,12 +29,13 @@
 
   <style type="text/css">
     .grid-stack {
-      background: lightgoldenrodyellow;
+      background: #f9f7ee;
     }
     .grid-stack-item-content {
-      color: #2c3e50;
+      color: white;
       text-align: center;
-      background-color: #18bc9c;
+      background-color: white;
+      top: 10px;
     }
   </style>
 
@@ -86,17 +87,17 @@
 
         <!-- dashboard content -->
         <div class="htmleaf-content bgcolor-8" style="padding-left: 0px; padding-right: 0px; padding: 0px; background-color: white;">
-          <div style="padding-bottom: 0px">
+          <div style="padding-bottom: 5px; background-color: gray">
             <button type="button" class="btn btn-primary" onclick="add_box()"><i class="fa fa-fw fa-
               lg fa-plus"></i>Add</button>
               <button type="button" class="btn btn-success" onclick="build_graph()"><i class="fa fa-fw fa-lg fa-share-alt"></i>Share</button>
               <button type="button" class="btn btn-success" onclick="update_graph()"><i class="fa fa-spin fa-circle-o-notch"></i> Update</button>
             </div>
 
-            <div id="box-container" class="gridster parent-box">
+            <div id="box-container" class="parent-box">
               <div class="grid-stack">
-                  <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="6">
-                  <div class="grid-stack-item-content">
+              <!--    <div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="6" data-gs-min-height="4">
+                  <div class="grid-stack-item-content" style="left: 0px; right: 0px">
                     <div class="chart-wrapper">
                       <div class="chart-title bold">
                         <table class="table input-title-level-2">
@@ -112,7 +113,7 @@
                   </div>
                 </div> 
                 <div class="grid-stack-item" data-gs-x="1" data-gs-y="0" data-gs-width="4" data-gs-height="6">
-                  <div class="grid-stack-item-content">
+                  <div class="grid-stack-item-content" style="left: 0px; right: 0px">
                     <div class="chart-wrapper">
                       <div class="chart-title bold">
                         <table class="table input-title-level-2">
@@ -126,7 +127,7 @@
                       </div>
                     </div> 
                   </div>
-                </div>  
+                </div>  --> 
               </div>
             </div>
           </div>
@@ -135,22 +136,29 @@
     </div>
 
 
-    <script type="text/javascript">
-      $(function () {
-        var options = {
-          cell_height: 50,
-          width: 12,
-          min_width: 4,
-          float: true,
-          animate: true, 
-          vertical_margin: 0,
-          resizable: {handles: "e, se, s, sw, w"}
-      };
-      a = $('.grid-stack').gridstack(options);
-    });
-    </script>
+<script type="text/javascript">
+  $(function () {
+    var options = {
+      cell_height: 50,
+      width: 12,
+      min_width: 4,
+      float: true,
+      animate: true, 
+      vertical_margin: 5,
+      resizable: {handles: "e, se, s, sw, w"}
+    };
+    $('.grid-stack').gridstack(options);
+  });
+// set min width and min height of each grid cell
+// $(".grid-stack-item").attr("data-gs-min-width", 4).attr("data-gs-min-height", 6);
 
-  </script>
+$(document).ready(function(){
+     grid = $('.grid-stack').data('gridstack');
+     box = '<div><div class="grid-stack-item-content" data-gs-min-height="4" data-gs-min-width="4"></div>';
+})
+
+
+</script>
 
 </body>
 </html>
