@@ -31,37 +31,22 @@
 
 <body>
 
+<!-- Main Content Area -->
 <div class="container container-box">
   <div class="main clearfix">
 
-    <!-- navigate side bar -->
+    <!-- navigate left side bar -->
     <nav id="nav" class="navbar navbar-vertical-left" onmousemove="resize_content(1)" onmouseout="resize_content(2)">
       <ul class="nav navbar-nav" style="height: 250px;">
         <li><a href=""></a></li>
-        <li>
-          <a href="">
-            <i class="fa fa-fw fa-lg fa-television"></i> 
-            <span>Home</span>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="fa fa-fw fa-lg fa-tachometer"></i> 
-            <span>Boards</span>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="fa fa-fw fa-lg fa-cog"></i> 
-            <span>SQL</span>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="fa fa-fw fa-lg fa-question-circle"></i> 
-            <span>Help</span>
-          </a>
-        </li>
+        <li><a href="">
+            <i class="fa fa-fw fa-lg fa-television"></i><span>Home</span></a></li>
+        <li><a href="">
+            <i class="fa fa-fw fa-lg fa-tachometer"></i><span>Boards</span></a></li>
+        <li><a href="">
+            <i class="fa fa-fw fa-lg fa-cog"></i><span>SQL</span></a></li>
+        <li><a href="">
+            <i class="fa fa-fw fa-lg fa-question-circle"></i><span>Help</span></a></li>
       </ul>
     </nav>
 
@@ -69,8 +54,8 @@
     <div id="main-content" class="htmleaf-container">
 
       <!-- dashboard name -->
-      <header class="htmleaf-header">
-        <textarea id="dashboard_name" class="form-control input-lg input-title-level-1" maxlength="64" placeholder="Building and Sharing IPython Dashboard"></textarea>
+      <header class="htmleaf-header" style="padding: 10px 20px;">
+        <input id="dashboard_name" class="form-control input-lg input-title-level-1" maxlength="64" placeholder="Building and Sharing IPython Dashboard">
       </header>
 
       <!-- dashboard content -->
@@ -78,13 +63,11 @@
         <div style="padding-bottom: 5px; background-color: gray">
           <button type="button" class="btn btn-primary" onclick="add_box()"><i class="fa fa-fw fa-
             lg fa-plus"></i>Add</button>
-            <button type="button" class="btn btn-success" onclick="build_graph()"><i class="fa fa-fw fa-lg fa-share-alt"></i>Share</button>
-            <button type="button" class="btn btn-success" onclick="update_graph()"><i class="fa fa-spin fa-circle-o-notch"></i> Update</button>
+          <button type="button" class="btn btn-success" onclick="build_graph()"><i class="fa fa-fw fa-lg fa-share-alt"></i>Share</button>
+          <button type="button" class="btn btn-success" onclick="update_graph()"><i class="fa fa-spin fa-circle-o-notch"></i> Update</button>
         </div>
-
         <div id="box-container" class="parent-box">
-          <div class="grid-stack">
-          </div>
+          <div class="grid-stack"></div>
         </div>
       </div>
     </div>
@@ -92,88 +75,43 @@
 </div>
 
 <!-- Editor Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
-aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog" style="width: 80%; height: 40%;">
-  <div class="modal-content">
-   <div class="modal-header" style="padding: 5px;">
-    <button type="button" class="close btn-sm" data-dismiss="modal" aria-hidden="true">
-      <i class="fa fa-fw fa-lg fa-close"></i>
-    </button>
-    <h5 class="modal-title" id="myModalLabel">Edit your dash graph</h5>
-  </div>
-  <div class="modal-body">
-    <div>
-      <table class="table input-title-level-2">
-        <tr class="active">
-          <td style="padding: 0px; width: 20%; border: none">
-            <select id="keys" class="form-control" style="border: none">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </td>
-          <td style="padding: 0px; width: 75%; background-color: white;border: none;"><input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Define your graph" style="padding-left: 0px"></td>
-          <td style="padding: 0px; width: 5%; background-color: inherit; border: none;"><button class="btn btn-primary edit-button"><i class="fa fa-fw fa-lg fa-refresh" style="color: black;"></i></button></td>
-        </tr>
-      </table> 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="width: 80%; height: 40%;">
+    <div class="modal-content">
+      <!-- Editor Modal Header -->
+      <div class="modal-header" style="padding: 5px;">
+        <button type="button" class="close btn-sm" data-dismiss="modal" aria-hidden="true">
+          <i class="fa fa-fw fa-lg fa-close"></i>
+        </button>
+        <h5 class="modal-title" id="myModalLabel">Edit your dash graph</h5>
+      </div>
+      <!-- Editor Modal Content -->
+      <div class="modal-body">
+        <div>
+          <table class="table input-title-level-2">
+            <tr class="active">
+              <td style="padding: 0px; width: 20%; border: none">
+                <select id="keys" class="form-control" style="border: none">
+                  <option>1</option>
+                </select>
+              </td>
+              <td style="padding: 0px; width: 75%; background-color: white;border: none;"><input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Define your graph" style="padding-left: 0px"></td>
+              <td style="padding: 0px; width: 5%; background-color: inherit; border: none;"><button class="btn btn-primary edit-button"><i class="fa fa-fw fa-lg fa-refresh" style="color: black;"></i></button></td>
+            </tr>
+          </table> 
+        </div>
+        <hr style="margin: 5px 0px; color: green;">
+        <div id="value" style="width: 100%; height: 500px; overflow-x:auto; overflow-y:auto;">
+        </div>
+      </div>
+    <!-- Editor Modal Footer -->
+      <div class="modal-footer" style="padding: 5px;">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">cancel</button>
+        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="saveGraph()">save</button>
+      </div>
     </div>
-    <hr style="margin: 5px 0px; color: green;">
-    <div id="value" style="width: 100%; height: 500px; overflow-x:auto; overflow-y:auto;">
-
-    </div>
   </div>
-  <div class="modal-footer" style="padding: 5px;">
-    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">cancel</button>
-    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="saveGraph()">save</button>
-  </div>
-</div><!-- /.modal-content -->
-</div><!-- /.modal -->
 </div>
-
-<script type="text/javascript">
-  $(function () {
-    var options = {
-      width: 12,
-      animate: true, 
-      vertical_margin: 5,
-      resizable: {handles: "e, se, s, sw, w"}
-    };
-    $('.grid-stack').gridstack(options);
-  });
-
-$(document).ready(function(){
-     grid = $('.grid-stack').data('gridstack');
-     box = '<div data-gs-min-height="4" data-gs-min-width="6">   \
-              <div class="grid-stack-item-content">              \
-                <div class="chart-wrapper">                      \
-                  <div class="chart-title bold">                 \
-                    <table class="table input-title-level-2">    \
-                      <tr class="active" style="padding-left: 10%;">   \
-                        <td style="padding: 0px; width: 90%; padding-left: inherit">   \
-                          <input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph">  \
-                        </td>                                                                                                       \
-                        <td style="padding: 0px; width: 10%">                                                                       \
-                          <button class="btn btn-primary edit-button" data-toggle="modal" data-target="#myModal">                   \
-                            <i class="fa fa-fw fa-lg fa-edit" style="color: black;" onclick="addClassMark(this)"></i></button>      \
-                        </td>   \
-                      </tr>     \
-                    </table>    \
-                  </div>        \
-                  <div id="test_graph" class="chart-graph" style="width: 100%; overflow: auto; color: #444;">   \
-                  </div>        \
-                </div>          \
-              </div>   \
-            </div>';
-    // initialized four boxes
-    grid.add_widget(box, 0, 0, 6, 4)
-    grid.add_widget(box, 6, 0, 6, 4);
-    grid.add_widget(box, 0, 1, 6, 4)
-    grid.add_widget(box, 6, 1, 6, 4);
-})
-</script>
 
 </body>
 </html>
