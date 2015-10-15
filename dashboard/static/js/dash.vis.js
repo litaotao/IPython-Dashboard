@@ -46,16 +46,3 @@ function build_graph(){
     add_graph("#test_graph", data);
 }
 
-function update_graph(){
-    window.dispatchEvent(new Event('resize'));
-}
-
-function repain(){
-
-}
-
-$(document).ready(function(){
-    repain();
-});
-
-

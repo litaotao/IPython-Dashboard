@@ -1,5 +1,23 @@
+/************************************
+Initialzing work
+*************************************/
+
+$(document).ready(function() {
+  setTimeout(function(){}, 3000);
+  initGridstack();
+  setTimeout(function(){console.log("hello")}, 3000);
+  createGrids();
+  getKeys();
+  getValue();
+  $('.grid-stack').on('resizestop', function(){
+    setTimeout(function(){window.dispatchEvent(new Event('resize'));}, 500);
+  });
+});
+
+
+
 // re-arrange when mouse hover on the side bar
-function resize_content(direction) {
+function resizeContent(direction) {
   var padding = (direction==1) ? "100px" : "0px";
   document.getElementById("main-content").style.paddingLeft = padding;
 }
@@ -150,19 +168,6 @@ function parseTable(data){
 
 
 
-$(document).ready(function() {
-  setTimeout(function(){}, 3000);
-  initGridstack();
-  setTimeout(function(){console.log("hello")}, 3000);
-  createGrids();
-  getKeys();
-  getValue();
-  $('.grid-stack').on('resizestop', function(){
-    setTimeout(function(){window.dispatchEvent(new Event('resize'));}, 500);
-  });
-});
-
-
 function addClassMark(obj){
   obj.classList.add("edit-graph");
 }
@@ -180,6 +185,27 @@ function saveGraph(){
   a1 = data;
   a2 = res;
 }
+
+
+function saveDash(){
+  var res = _.map($('.grid-stack .grid-stack-item:visible'), function (el) {
+    el = $(el);
+    var node = el.data('_gridstack_node');
+    return {
+        id: el.attr('data-custom-id'),
+        x: node.x,
+        y: node.y,
+        width: node.width,
+        height: node.height
+    };
+  });
+  var resJson = JSON.stringify(res);
+  var dashName = $("#dashboard_name")[0].value;
+  var url = "http://127.0.0.1:9090/dash/";
+  $.post();
+}
+
+
 
 
 function test(){

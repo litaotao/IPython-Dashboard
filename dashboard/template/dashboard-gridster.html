@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <title>Ipython Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../static/js/jquery-2.1.4.js"></script>
+  // <script src="../static/js/jquery.gridster.js"></script>
+  <!-- // <script src="../static/js/gridstack.js"></script> -->
+  <script src="../static/js/bootstrap.js"></script>
+  <script src="../static/js/dash.js"></script>
+  <script src="../static/js/d3.js"></script>
+  <script src="../static/js/nv.d3.js"></script>
+  <script src="../static/js/dash.vis.js"></script>
+  <script src="../static/js/jquery-watch.js"></script>
+
+  <link rel="stylesheet" href="../static/css/bootstrap.css">
+  <link rel="stylesheet" href="../static/css/jquery.gridster.css">
+  <link rel="shortcut icon" href="../static/img/favicon.ico" type="image/x-icon">
+  <!-- <link rel="stylesheet" href="../static/css/gridstack.css"> -->
+  <link rel="stylesheet" href="../static/css/bootstrap-vertical-menu.css">
+  <link rel="stylesheet" href="../static/css/font-awesome.css">
+  <link rel="stylesheet" href="../static/css/default.css">
+  <link rel="stylesheet" href="../static/css/normalize.css">
+  <link rel="stylesheet" href="../static/css/nv.d3.css">
+  <link rel="stylesheet" href="../static/css/dash.css">
+
+</head>
+
+<body>
+
+  <div class="container container-box">
+    <div class="main clearfix">
+
+      <!-- navigate side bar -->
+      <nav id="nav" class="navbar navbar-vertical-left" onmousemove="resize_content(1)" onmouseout="resize_content(2)">
+        <ul class="nav navbar-nav" style="height: 250px;">
+          <li><a href=""></a></li>
+          <li>
+            <a href="">
+              <i class="fa fa-fw fa-lg fa-television"></i> 
+              <span>Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fa fa-fw fa-lg fa-tachometer"></i> 
+              <span>Boards</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fa fa-fw fa-lg fa-cog"></i> 
+              <span>SQL</span>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fa fa-fw fa-lg fa-question-circle"></i> 
+              <span>Help</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- main content container -->
+      <div id="main-content" class="htmleaf-container">
+
+        <!-- dashboard name -->
+        <header class="htmleaf-header">
+          <textarea id="dashboard_name" class="form-control input-lg input-title-level-1" maxlength="64" placeholder="Building and Sharing IPython Dashboard"></textarea>
+        </header>
+
+        <!-- dashboard content -->
+        <div class="htmleaf-content bgcolor-8" style="padding-left: 0px; padding-right: 0px; padding: 0px; background-color: white;">
+          <div style="padding-bottom: 0px">
+            <button type="button" class="btn btn-primary" onclick="add_box()"><i class="fa fa-fw fa-
+              lg fa-plus"></i>Add</button>
+              <button type="button" class="btn btn-success" onclick="build_graph()"><i class="fa fa-fw fa-lg fa-share-alt"></i>Share</button>
+              <button type="button" class="btn btn-success" onclick="update_graph()"><i class="fa fa-spin fa-circle-o-notch"></i> Update</button>
+            </div>
+
+            <div id="box-container" class="gridster parent-box">
+              <ul id="box-ul" class="box-ul">
+                <li ondrag="test()" data-row="1" data-col="1" data-sizex="1" data-sizey="1" class="box-li">
+                 <div class="chart-wrapper">
+                  <div class="chart-title bold">
+                    <table class="table input-title-level-2">
+                      <tr class="active" style="padding-left: 10%;">
+                        <td style="padding: 0px; width: 90%; padding-left: inherit"><input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph"></td>
+                        <td style="padding: 0px; width: 10%"><button class="btn btn-primary edit-button" data-toggle="modal" data-target="#myModal"><i class="fa fa-fw fa-lg fa-edit" style="color: black;" onclick="addClassMark(this)"></i></button></td>
+                      </tr>
+                    </table>    
+                  </div>
+                  <div id="test_graph" class="chart-graph" style="width: 100%; overflow: auto; color: #444;">
+                  </div>
+                </div> 
+              </li>
+              <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" class="box-li">
+               <div class="chart-wrapper">
+                <div class="chart-title bold">
+                  <table class="table input-title-level-2">
+                    <tr class="active" style="padding-left: 10%;">
+                      <td style="padding: 0px; width: 90%; padding-left: inherit"><input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph"></td>
+                      <td style="padding: 0px; width: 10%"><button class="btn btn-primary edit-button" data-toggle="modal" data-target="#myModal"><i class="fa fa-fw fa-lg fa-edit" style="color: black;"></i></button></td>
+                    </tr>
+                  </table>  
+                </div>
+                <div class="chart-graph">
+                </div>
+              </div> 
+            </li>
+            <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" class="box-li">
+              <div class="chart-wrapper">
+                <div class="chart-title bold">
+                  <table class="table input-title-level-2">
+                    <tr class="active" style="padding-left: 10%;">
+                      <td style="padding: 0px; width: 90%; padding-left: inherit"><input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph"></td>
+                      <td style="padding: 0px; width: 10%"><button class="btn btn-primary edit-button" data-toggle="modal" data-target="#myModal"><i class="fa fa-fw fa-lg fa-edit" style="color: black;"></i></button></td>
+                    </tr>
+                  </table>  
+                </div>
+                <div class="chart-graph">
+                </div>
+              </div>
+            </li>
+            <li id="test" data-row="1" data-col="1" data-sizex="1" data-sizey="1" class="box-li">
+              <div class="chart-wrapper">
+                <div class="chart-title bold">
+                  <table class="table input-title-level-2">
+                    <tr class="active" style="padding-left: 10%;">
+                      <td style="padding: 0px; width: 90%; padding-left: inherit"><input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph"></td>
+                      <td style="padding: 0px; width: 10%"><button class="btn btn-primary edit-button" data-toggle="modal" data-target="#myModal"><i class="fa fa-fw fa-lg fa-edit" style="color: black;"></i></button></td>
+                    </tr>
+                  </table>  
+                </div>
+                <div class="chart-graph">
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Editor Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog" style="width: 80%; height: 40%;">
+  <div class="modal-content">
+   <div class="modal-header" style="padding: 5px;">
+    <button type="button" class="close btn-sm" data-dismiss="modal" aria-hidden="true">
+      <i class="fa fa-fw fa-lg fa-close"></i>
+    </button>
+    <h5 class="modal-title" id="myModalLabel">Edit your dash graph</h5>
+  </div>
+  <div class="modal-body">
+    <div>
+      <table class="table input-title-level-2">
+        <tr class="active">
+          <td style="padding: 0px; width: 20%; border: none">
+            <select id="keys" class="form-control" style="border: none">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </td>
+          <td style="padding: 0px; width: 75%; background-color: white;border: none;"><input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Define your graph" style="padding-left: 0px"></td>
+          <td style="padding: 0px; width: 5%; background-color: inherit; border: none;"><button class="btn btn-primary edit-button"><i class="fa fa-fw fa-lg fa-refresh" style="color: black;"></i></button></td>
+        </tr>
+      </table> 
+    </div>
+    <hr style="margin: 5px 0px; color: green;">
+    <div id="value" style="width: 100%; height: 500px; overflow-x:auto; overflow-y:auto;">
+
+    </div>
+  </div>
+  <div class="modal-footer" style="padding: 5px;">
+    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">cancel</button>
+    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="saveGraph()">save</button>
+  </div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+
+<!-- Do some initializing work -->
+<!-- Initialize gridster -->
+<script type="text/javascript">
+  $(function init_grid(){   //DOM Ready
+    var gridster;
+    var box_width = Math.floor(document.getElementById("box-ul").offsetWidth / 2)
+    var box_height = Math.floor(box_width * 9 / 16)
+    
+    gridster = $(".gridster ul").gridster({
+      widget_base_dimensions: [box_width-4, box_height-10],
+      widget_margins: [2, 2],
+      min_cols: 1,
+      max_cols: 2,
+      // helper: 'clone',
+      resize: {
+        enabled: true
+      }
+    }).data('gridster');
+  });
+</script>
+
+<script type="text/javascript">
+
+console.log("started...");
+
+$(document).ready(function(){
+// some element to monitor
+var el = $("li.box-li");
+
+// hook up the watcher
+el.watch({
+    // specify CSS styles or attribute names to monitor
+    properties: "height, weight",
+
+    // callback function when a change is detected
+    callback: function(data, i) {
+        console.log("hahaaha");
+        window.dispatchEvent(new Event('resize'));
+        // do what you need based on changes
+        // or do your own checks
+    }
+});
+})
+</script>
+
+</body>
+</html>
