@@ -41,9 +41,9 @@ function createGrids(){
           </div>   \
         </div>';
   // initialized four boxes
-  grid.add_widget(box, 0, 0, 6, 5)
+  grid.add_widget(box, 0, 0, 6, 5);
   grid.add_widget(box, 6, 0, 6, 5);
-  grid.add_widget(box, 0, 1, 6, 5)
+  grid.add_widget(box, 0, 1, 6, 5);
   grid.add_widget(box, 6, 1, 6, 5);
 }
 
@@ -151,10 +151,15 @@ function parseTable(data){
 
 
 $(document).ready(function() {
+  setTimeout(function(){}, 3000);
   initGridstack();
+  setTimeout(function(){console.log("hello")}, 3000);
   createGrids();
   getKeys();
   getValue();
+  $('.grid-stack').on('resizestop', function(){
+    setTimeout(function(){window.dispatchEvent(new Event('resize'));}, 500);
+  });
 });
 
 

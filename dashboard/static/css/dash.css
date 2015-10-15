@@ -165,8 +165,9 @@ body {
   background: #fff;
   border: 1px solid #e2e2e2;
   border-radius: 3px;
-  margin-bottom: 10px;
-  height: inherit;
+  /*margin-bottom: 10px;*/
+  /*height: inherit;*/
+  height: 100%;
 }
 
 .chart-title {
