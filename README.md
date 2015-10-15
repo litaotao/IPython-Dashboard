@@ -31,9 +31,10 @@ An stand alone, light-weight web server for building, sharing graphs in created 
 
 
 
-# Screenshot & [Demo](https://www.youtube.com/watch?v=KJeMtQhDjDg)
+# Screenshot & [Demo](https://youtu.be/jFQdHdzDoF4)
 
-[![demo](docs/template-screenshot.jpg)](https://www.youtube.com/watch?v=KJeMtQhDjDg)
+[![demo](docs/template-screenshot-1.jpg)](https://youtu.be/jFQdHdzDoF4)
+[![demo](docs/template-screenshot-2.jpg)](https://youtu.be/jFQdHdzDoF4)
 
 
 
@@ -76,6 +77,7 @@ OK
     + front side, databricks style
     + pep 8, code clean up & restructure
     + hover tips
+    + edit modal can be resized
 
 
 - V 0.2.1
