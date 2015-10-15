@@ -200,9 +200,11 @@ function saveDash(){
     };
   });
   var resJson = JSON.stringify(res);
-  var dashName = $("#dashboard_name")[0].value;
-  var url = "http://127.0.0.1:9090/dash/";
-  $.post();
+  console.log(resJson);
+  
+  // var dashName = $("#dashboard_name")[0].value;
+  // var url = "http://127.0.0.1:9090/dash/";
+  // $.post();
 }
 
 

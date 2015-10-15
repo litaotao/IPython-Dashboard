@@ -17,7 +17,6 @@ app = Flask(__name__)
 api = Api(app)
 
 
-
 '''
 dashboard common services setup
 '''
