@@ -10,7 +10,7 @@ $(document).ready(function() {
   getKeys();
   getValue();
   $('.grid-stack').on('resizestop', function(){
-    setTimeout(function(){window.dispatchEvent(new Event('resize'));}, 500);
+    setTimeout(function(){window.dispatchEvent(new Event('resize'));}, 200);
   });
 });
 
@@ -188,6 +188,13 @@ function saveGraph(){
 
 
 function saveDash(){
+  // dash name 
+  var dashName = $("#dashboard_name")[0].value; // must need
+  if (100 < dashName.length || dashName.length < 0) {
+    alert("dashboard name note valid, digits should between 6 and 100, thanks.")
+    return null;
+  }
+
   var res = _.map($('.grid-stack .grid-stack-item:visible'), function (el) {
     el = $(el);
     var node = el.data('_gridstack_node');
@@ -199,12 +206,21 @@ function saveDash(){
         height: node.height
     };
   });
-  var resJson = JSON.stringify(res);
+  
+  var resJson = {"grid": JSON.stringify(res), "name": dashName};
   console.log(resJson);
   
-  // var dashName = $("#dashboard_name")[0].value;
-  // var url = "http://127.0.0.1:9090/dash/";
-  // $.post();
+  
+  var url = "http://127.0.0.1:9090/dash/0";
+  $.ajax({
+    url: url,
+    data: resJson,
+    method: 'POST',
+  })
+  .done(function(){console.log("ajax done")})
+  .fail(function(){console.log("ajax fail")})
+  .success(function(){console.log("ajax success")})
+  .always(function(){console.log("ajax complete")});
 }
 
 

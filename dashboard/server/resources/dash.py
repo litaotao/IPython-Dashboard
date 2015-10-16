@@ -39,5 +39,15 @@ class Dash(Resource):
 
         return build_response(dict(data=data, code=200))
 
+    def post(self, dash_id):
+        '''Update a dash configure, return updated dash configure
+        '''
+        return build_response(dict(data='post', code=200))
+
+    def put(self, dash_id=0):
+        '''Create a new dash, return dash id
+        '''
+        pass
+
 
 
