@@ -11,8 +11,10 @@ import pandas as pd
 
 # user-defined package
 from dashboard import r_kv, r_db, config
+from dashboard.server import utils
 
 
+@utils.print_func_name
 def test_create_dataframe():
     url = 'https://github.com/litaotao/data-science/raw/master/examples/happy-healthy-hungry/data/SFBusinesses/businesses.csv'
     if 'businesses.csv' in os.listdir('/mnt/tmp'):
@@ -24,13 +26,14 @@ def test_create_dataframe():
         value = data[piece * piece_lenth : piece * piece_lenth + piece_lenth]
         r_kv.set(key, value.to_json())
 
+@utils.print_func_name
 def test_create_dash():
     test_id = range(1, 10)
-    test_meta = {'author': 'author-', 'name': 'name-', 'time_modified': '', 'desc': ''}
-    test_content = [{"x":0,"y":5,"width":6,"height":5},
-                    {"x":6,"y":5,"width":6,"height":5},
-                    {"x":0,"y":0,"width":6,"height":5},
-                    {"x":6,"y":0,"width":6,"height":5}]
+    test_meta = {'author': 'author-', 'name': 'name-', 'time_modified': ''}
+    test_content = [{"x": 0,"y": 5,"width": 6,"height": 5},
+                    {"x": 6,"y": 5,"width": 6,"height": 5},
+                    {"x": 0,"y": 0,"width": 6,"height": 5},
+                    {"x": 6,"y": 0,"width": 6,"height": 5}]
     for i in test_id:
         tmp_time = int(time.time()) - random.randint(1, 100) * random.randint(1, 100)
         tmp_meta = {i: test_meta[i] + str(i) for i in test_meta}

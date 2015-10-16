@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
 
 # built-in package
+import time
 import json
+import random
+import hashlib
 
 # third-party package
+from flask import request
 from flask.ext.restful import Resource
 
 # user-defined package
 from dashboard import r_db, config
-from ..utils import build_response
+from ..utils import build_response, print_info
 
 
 class DashList(Resource):
@@ -23,7 +27,6 @@ class DashList(Resource):
         dash_meta = r_db.hmget(config.DASH_META_KEY, [i[0] for i in id_list])
         # data = [json.loads(i) for i in dash_meta]
         data = [eval(i) for i in dash_meta]
-
 
         return build_response(dict(data=data, code=200))
 
@@ -42,7 +45,24 @@ class Dash(Resource):
     def post(self, dash_id):
         '''Update a dash configure, return updated dash configure
         '''
-        return build_response(dict(data='post', code=200))
+        # import ipdb; ipdb.set_trace()
+        data = request.get_json()
+        current_time = time.time()
+        _hash = hashlib.sha256()
+        _hash.update(current_time.__repr__())
+        data['id'] = _hash.hexdigest()
+
+        # store meta and content info
+        test_data = str(random.randint(1, 100))
+        meta = {'author': 'author-' + test_data, 
+                'name': 'name-' + test_data, 
+                'time_modified': int(current_time)}
+        content = data
+
+        r_db.hset(config.DASH_META_KEY, data['id'], json.dumps(meta))
+        r_db.hset(config.DASH_CONTENT_KEY, data['id'], json.dumps(content))
+
+        return build_response(dict(data=data['id'], code=200))
 
     def put(self, dash_id=0):
         '''Create a new dash, return dash id

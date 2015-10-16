@@ -207,15 +207,15 @@ function saveDash(){
     };
   });
   
-  var resJson = {"grid": JSON.stringify(res), "name": dashName};
+  var resJson = JSON.stringify({"grid": res, "name": dashName});
   console.log(resJson);
-  
   
   var url = "http://127.0.0.1:9090/dash/0";
   $.ajax({
     url: url,
     data: resJson,
-    method: 'POST',
+    method: "POST",
+    contentType: "application/json"
   })
   .done(function(){console.log("ajax done")})
   .fail(function(){console.log("ajax fail")})
