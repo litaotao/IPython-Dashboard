@@ -6,7 +6,8 @@ $(document).ready(function() {
   setTimeout(function(){}, 3000);
   initGridstack();
   setTimeout(function(){console.log("hello")}, 3000);
-  createGrids();
+  // createGrids();
+  createGrids_v2();
   getKeys();
   getValue();
   $('.grid-stack').on('resizestop', function(){
@@ -34,36 +35,51 @@ function initGridstack(){
   $('.grid-stack').gridstack(options);
 }
 
+var box_template = '                                 \
+  <div data-gs-min-height="4" data-gs-min-width="6">   \
+    <div class="grid-stack-item-content">              \
+      <div class="chart-wrapper">                      \
+        <div class="chart-title bold">                 \
+          <table class="table input-title-level-2">    \
+            <tr class="active" style="padding-left: 10%;">   \
+              <td style="padding: 0px; width: 90%; padding-left: inherit">   \
+                <input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph">  \
+              </td>                                                                                                       \
+              <td style="padding: 0px; width: 10%">                                                                       \
+                <button class="btn btn-primary edit-button" data-toggle="modal" data-target="#myModal">                   \
+                  <i class="fa fa-fw fa-lg fa-edit" style="color: black;" onclick="addClassMark_v2(this)"></i></button>      \
+              </td>   \
+            </tr>     \
+          </table>    \
+        </div>        \
+        <div id="test_graph" class="chart-graph" style="width: 100%; overflow-x:auto; overflow-y:auto; color: #444;">   \
+        </div>        \
+      </div>          \
+    </div>            \
+  </div>';
+
 // initialze 4 grids
 function createGrids(){
   grid = $('.grid-stack').data('gridstack');
-  box = '<div data-gs-min-height="4" data-gs-min-width="6">   \
-          <div class="grid-stack-item-content">              \
-            <div class="chart-wrapper">                      \
-              <div class="chart-title bold">                 \
-                <table class="table input-title-level-2">    \
-                  <tr class="active" style="padding-left: 10%;">   \
-                    <td style="padding: 0px; width: 90%; padding-left: inherit">   \
-                      <input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph">  \
-                    </td>                                                                                                       \
-                    <td style="padding: 0px; width: 10%">                                                                       \
-                      <button class="btn btn-primary edit-button" data-toggle="modal" data-target="#myModal">                   \
-                        <i class="fa fa-fw fa-lg fa-edit" style="color: black;" onclick="addClassMark(this)"></i></button>      \
-                    </td>   \
-                  </tr>     \
-                </table>    \
-              </div>        \
-              <div id="test_graph" class="chart-graph" style="width: 100%; overflow: auto; color: #444;">   \
-              </div>        \
-            </div>          \
-          </div>   \
-        </div>';
   // initialized four boxes
-  grid.add_widget(box, 0, 0, 6, 5);
-  grid.add_widget(box, 6, 0, 6, 5);
-  grid.add_widget(box, 0, 1, 6, 5);
-  grid.add_widget(box, 6, 1, 6, 5);
+  grid.add_widget(box_template, 0, 0, 6, 5);
+  grid.add_widget(box_template, 6, 0, 6, 5);
+  grid.add_widget(box_template, 0, 1, 6, 5);
+  grid.add_widget(box_template, 6, 1, 6, 5);
 }
+
+
+function createGrids_v2(){
+  grid = $('.grid-stack').data('gridstack');
+  // 
+  var dash_id = $("meta[name=dash_id]")[0].attributes.value.value;
+  var dash_content = getDash(dash_id);
+  // initialized boxes using data from server
+  $.each(dash_content.grid, function(index, obj){
+    grid.add_widget(box_template, obj.x, obj.y, obj.width, obj.height);  
+  })
+}
+
 
 /************************************
 Interact with server
@@ -167,7 +183,6 @@ function parseTable(data){
 }
 
 
-
 function addClassMark(obj){
   obj.classList.add("edit-graph");
 }
@@ -187,6 +202,22 @@ function saveGraph(){
 }
 
 
+var graph_obj = null;
+function addClassMark_v2(obj){
+  graph_obj = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1]
+}
+
+
+function saveGraph_v2(){
+  var data = $("#value")[0].children[0].cloneNode(true);
+  graph_obj.innerHTML = "";
+  graph_obj.appendChild(data);
+  graph_obj.setAttribute("key_name", $("#keys")[0].options[$("#keys")[0].selectedIndex].text);
+  a1 = data;
+  a2 = graph_obj;
+}
+
+
 function saveDash(){
   // dash name 
   var dashName = $("#dashboard_name")[0].value; // must need
@@ -198,32 +229,71 @@ function saveDash(){
   var res = _.map($('.grid-stack .grid-stack-item:visible'), function (el) {
     el = $(el);
     var node = el.data('_gridstack_node');
+    var key = el.find("div.chart-graph")[0].getAttribute("key_name");
+    var type = el.find("div.chart-graph")[0].getAttribute("type_name");
     return {
         id: el.attr('data-custom-id'),
         x: node.x,
         y: node.y,
         width: node.width,
-        height: node.height
+        height: node.height,
+        key: (key) ? key : "none",
+        type: (type) ? type : "none",
     };
   });
+
+  var dash_id = $("meta[name=dash_id]")[0].attributes.value.value;
+  if (dash_id.length < 1){
+    var url = "http://127.0.0.1:9090/dash/0";
+    var method = "POST";
+    var resJson = JSON.stringify({"grid": res, "name": dashName});
+  }else{
+    var url = "http://127.0.0.1:9090/data/dash/" + dash_id;
+    var method = "PUT";
+    var resJson = JSON.stringify({"grid": res, "name": dashName, "id": dash_id});
+  }
   
-  var resJson = JSON.stringify({"grid": res, "name": dashName});
-  console.log(resJson);
-  
-  var url = "http://127.0.0.1:9090/dash/0";
   $.ajax({
     url: url,
     data: resJson,
-    method: "POST",
+    method: method,
     contentType: "application/json"
   })
   .done(function(){console.log("ajax done")})
   .fail(function(){console.log("ajax fail")})
-  .success(function(){console.log("ajax success")})
-  .always(function(){console.log("ajax complete")});
+  .success(function(data){
+    console.log("ajax success");
+    console.log(data);})
+  .complete(function(){console.log("ajax complete")})
+  .always(function(){console.log("ajax always")});
 }
 
 
+function getDash(dash_id){
+  var url = "http://127.0.0.1:9090/data/dash/" + dash_id;
+  var resJson = $.ajax({
+    url: url,
+    method: "GET",
+    contentType: "application/json",
+    async: false,
+  })
+  .done(function(data){console.log("ajax done");})
+  .fail(function(){console.log("ajax fail")})
+  .success(function(data){
+    console.log("ajax success");
+    console.log(data);
+    return data;})
+  .complete(function(){console.log("ajax complete")})
+  .always(function(){console.log("ajax always")});
+
+  return resJson.responseJSON.data;
+}
+
+
+function addBox(){
+  var grid = $('.grid-stack').data('gridstack');
+  grid.add_widget(box_template, 200, 200, 6, 5, true);
+}
 
 
 function test(){

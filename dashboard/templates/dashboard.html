@@ -5,6 +5,7 @@
   <title>Ipython Dashboard</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="dash_id" value={{dash_id}}>
   <script src="../static/js/jquery-2.1.4.js"></script>
   <script src="../static/js/bootstrap.js"></script>
   <script src="../static/js/dash.js"></script>
@@ -39,9 +40,7 @@
     <nav id="nav" class="navbar navbar-vertical-left" onmousemove="resizeContent(1)" onmouseout="resizeContent(2)">
       <ul class="nav navbar-nav" style="height: 250px;">
         <li><a href=""></a></li>
-        <li><a href="/home">
-            <i class="fa fa-fw fa-lg fa-television"></i><span>Home</span></a></li>
-        <li><a href="">
+        <li><a href="/dashes/">
             <i class="fa fa-fw fa-lg fa-tachometer"></i><span>Boards</span></a></li>
         <li><a href="">
             <i class="fa fa-fw fa-lg fa-database"></i><span>SQL</span></a></li>
@@ -61,7 +60,7 @@
       <!-- dashboard content -->
       <div class="htmleaf-content bgcolor-8" style="padding-left: 0px; padding-right: 0px; padding: 0px; background-color: white;">
         <div style="padding-bottom: 5px; background-color: gray">
-          <button type="button" class="btn btn-primary" onclick="add_box()"><i class="fa fa-fw fa-
+          <button type="button" class="btn btn-primary" onclick="addBox()"><i class="fa fa-fw fa-
             lg fa-plus"></i>Add</button>
           <button type="button" class="btn btn-success" onclick="build_graph()"><i class="fa fa-fw fa-lg fa-share-alt"></i> DemoGraph</button>
           <button type="button" class="btn btn-error" onclick="update_graph()"><i class="fa fa-spin fa-circle-o-notch"></i> update</button>
@@ -90,8 +89,9 @@
       <div class="modal-body">
         <div>
           <table class="table input-title-level-2">
+            <tbody>
             <tr class="active">
-              <td style="padding: 0px; width: 20%; border: none">
+              <td style="padding: 0px 0px; border: none">
                 <select id="keys" class="form-control" style="border: none">
                   <option>1</option>
                 </select>
@@ -99,6 +99,7 @@
               <td style="padding: 0px; width: 75%; background-color: white;border: none;"><input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Define your graph" style="padding-left: 0px"></td>
               <td style="padding: 0px; width: 5%; background-color: inherit; border: none;"><button class="btn btn-primary edit-button"><i class="fa fa-fw fa-lg fa-refresh" style="color: black;"></i></button></td>
             </tr>
+            </tbody>
           </table> 
         </div>
         <hr style="margin: 5px 0px; color: green;">
@@ -108,7 +109,7 @@
     <!-- Editor Modal Footer -->
       <div class="modal-footer" style="padding: 5px;">
         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">cancel</button>
-        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="saveGraph()">save</button>
+        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="saveGraph_v2()">save</button>
       </div>
     </div>
   </div>
