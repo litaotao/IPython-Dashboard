@@ -8,6 +8,8 @@ install:
   - pip install -e . --use-mirrors
   - pip install coveralls --use-mirrors
   - pip install flake8 coverage --use-mirrors
+services:
+  - redis-server
 script:
   - nosetests --with-coverage --cover-package=dashboard
   - flake8 --exit-zero dashboard

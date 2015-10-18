@@ -14,11 +14,14 @@ from dashboard import r_kv, r_db, config
 from dashboard.server import utils
 
 
+TMP_DIR = '/mnt/tmp'
+
+
 @utils.print_func_name
 def test_create_dataframe():
     url = 'https://github.com/litaotao/data-science/raw/master/examples/happy-healthy-hungry/data/SFBusinesses/businesses.csv'
-    if 'businesses.csv' in os.listdir('/mnt/tmp'):
-        url = '/mnt/tmp/businesses.csv'
+    if os.path.isdir(TMP_DIR) and 'businesses.csv' in os.listdir(TMP_DIR):
+        url = TMP_DIR + '/businesses.csv'
     data = pd.read_csv(url)
     piece_lenth = 1000
     for piece in range(len(data) / piece_lenth):
@@ -27,8 +30,8 @@ def test_create_dataframe():
         r_kv.set(key, value.to_json())
 
     url_2 = 'https://github.com/litaotao/data-science/raw/master/examples/happy-healthy-hungry/data/SFBusinesses/inspections.csv'
-    if 'inspections.csv' in os.listdir('/mnt/tmp'):
-        url = '/mnt/tmp/inspections.csv'
+    if os.path.isdir(TMP_DIR) and  'inspections.csv' in os.listdir(TMP_DIR):
+        url = TMP_DIR + '/inspections.csv'
     data = pd.read_csv(url)
     piece_lenth = 1000
     for piece in range(len(data) / piece_lenth):
