@@ -46,8 +46,9 @@ def test_create_dash():
                     {"x": 0,"y": 0,"width": 6,"height": 5},
                     {"x": 6,"y": 0,"width": 6,"height": 5}]
     for _id in test_id:
+        _id = str(_id)
         tmp_time = int(time.time()) - random.randint(1, 100) * random.randint(1, 100)
-        meta = {i: test_meta[i] + str(_id) for i in test_meta}
+        meta = {i: test_meta[i] + _id for i in test_meta}
         meta['time_modified'] = tmp_time
         meta['id'] = _id
 

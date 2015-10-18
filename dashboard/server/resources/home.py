@@ -17,7 +17,7 @@ class Home(Resource):
     """
     def get(self):
         # headers = {'Content-Type': 'text/html'}
-        return make_response(render_template('dashboard.html'))
+        return make_response(render_template('dashboard_list.html'))
 
 
 

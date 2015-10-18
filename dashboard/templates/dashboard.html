@@ -40,7 +40,7 @@
     <nav id="nav" class="navbar navbar-vertical-left" onmousemove="resizeContent(1)" onmouseout="resizeContent(2)">
       <ul class="nav navbar-nav" style="height: 250px;">
         <li><a href=""></a></li>
-        <li><a href="/dashes/">
+        <li><a href="/">
             <i class="fa fa-fw fa-lg fa-tachometer"></i><span>Boards</span></a></li>
         <li><a href="">
             <i class="fa fa-fw fa-lg fa-database"></i><span>SQL</span></a></li>
@@ -115,5 +115,19 @@
   </div>
 </div>
 
+
+<script type="text/javascript">
+$(document).ready(function() {
+  setTimeout(function(){}, 3000);
+  initGridstack();
+  setTimeout(function(){console.log("hello")}, 3000);
+  createGrids_v2();
+  getKeys();
+  getValue();
+  $('.grid-stack').on('resizestop', function(){
+    setTimeout(function(){window.dispatchEvent(new Event('resize'));}, 200);
+  });
+});
+</script>
 </body>
 </html>

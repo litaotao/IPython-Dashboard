@@ -1,22 +1,3 @@
-/************************************
-Initialzing work
-*************************************/
-
-$(document).ready(function() {
-  setTimeout(function(){}, 3000);
-  initGridstack();
-  setTimeout(function(){console.log("hello")}, 3000);
-  // createGrids();
-  createGrids_v2();
-  getKeys();
-  getValue();
-  $('.grid-stack').on('resizestop', function(){
-    setTimeout(function(){window.dispatchEvent(new Event('resize'));}, 200);
-  });
-});
-
-
-
 // re-arrange when mouse hover on the side bar
 function resizeContent(direction) {
   var padding = (direction==1) ? "100px" : "0px";
@@ -117,14 +98,23 @@ function getValue(){
 }
 
 
-function parseTable(data){
-  function genElement(type){
-    var element = document.createElement(type);
-    if (type == "td"){
-      element.setAttribute("nowrap", "nowrap");
-    }
-    return element;
+function genElement(type){
+  var element = document.createElement(type);
+  if (type == "td"){
+    element.setAttribute("nowrap", "nowrap");
   }
+  return element;
+}
+
+
+function parseTable(data){
+  // function genElement(type){
+  //   var element = document.createElement(type);
+  //   if (type == "td"){
+  //     element.setAttribute("nowrap", "nowrap");
+  //   }
+  //   return element;
+  // }
   var table = genElement("table");
   var thead = genElement("thead");
   var tbody = genElement("tbody");
@@ -250,7 +240,7 @@ function saveDash(){
   }else{
     var url = "http://127.0.0.1:9090/data/dash/" + dash_id;
     var method = "PUT";
-    var resJson = JSON.stringify({"grid": res, "name": dashName, "id": dash_id});
+    var resJson = JSON.stringify({"grid": res, "name": dashName});
   }
   
   $.ajax({
@@ -287,6 +277,57 @@ function getDash(dash_id){
   .always(function(){console.log("ajax always")});
 
   return resJson.responseJSON.data;
+}
+
+
+function getDashList(){
+  var url = "http://127.0.0.1:9090/data/dashes/";
+  var resJson = $.ajax({
+    url: url,
+    method: "GET",
+    contentType: "application/json",
+    async: false,
+  })
+  .done(function(data){console.log("ajax done");})
+  .fail(function(){console.log("ajax fail")})
+  .success(function(data){
+    console.log("ajax success");
+    console.log(data);
+    return data;})
+  .complete(function(){console.log("ajax complete")})
+  .always(function(){console.log("ajax always")});
+
+  return resJson.responseJSON.data;
+}
+
+
+function initDashList(){
+  var list = getDashList();
+  var tbody = $("#dash_list")[0];
+  var url = "http://127.0.0.1:9090/dash/";
+
+  $.each(list, function(index, obj){
+      var a = genElement("a");
+      var i = genElement("i");
+      var tr = genElement("tr"); 
+      var name = genElement("td");
+      var author = genElement("td");
+      var time = genElement("td");
+      var action = genElement("td");
+      a.innerText = obj.name;
+      a.setAttribute("href", url + obj.id);
+      name.appendChild(a);
+      name.setAttribute("data-field", "name");
+      author.innerText = obj.author;
+      time.innerText = moment(parseInt(obj.time_modified) * 1000).format("YYYY-MM-DD HH:mm:ss");
+      i.className = "fa fa-fw fa-lg fa-cog";
+      action.appendChild(i);
+      tr.appendChild(name);
+      tr.appendChild(author);
+      tr.appendChild(time);
+      tr.appendChild(action);
+      tbody.appendChild(tr);
+  });
 }
 
 
