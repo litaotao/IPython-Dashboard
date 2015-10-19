@@ -28,10 +28,10 @@ def test_create_dataframe():
         key = 'businesses-{}'.format(piece)
         value = data[piece * piece_lenth : piece * piece_lenth + piece_lenth]
         r_kv.set(key, value.to_json())
-
+    
     url_2 = 'https://github.com/litaotao/data-science/raw/master/examples/happy-healthy-hungry/data/SFBusinesses/inspections.csv'
     if os.path.isdir(TMP_DIR) and  'inspections.csv' in os.listdir(TMP_DIR):
-        url = TMP_DIR + '/inspections.csv'
+        url_2 = TMP_DIR + '/inspections.csv'
     data = pd.read_csv(url)
     piece_lenth = 1000
     for piece in range(len(data) / piece_lenth):

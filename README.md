@@ -41,13 +41,28 @@ A stand alone, light-weight web server for building, sharing graphs in created i
 
 # Run tests
 
-just run `nosetests` under this repo
+just run `sudo nosetests --with-coverage --cover-package=dashboard` under this repo
 
 ```
-aaron@aarons-MacBook-Pro:~/Desktop/github/IPython-Dashboard$nosetests
-.
+aaron@aarons-MacBook-Pro:~/Desktop/github/IPython-Dashboard$sudo nosetests --with-coverage --cover-package=dashboard
+...
+Name                                    Stmts   Miss  Cover   Missing
+---------------------------------------------------------------------
+dashboard.py                                9      0   100%
+dashboard/client.py                         1      0   100%
+dashboard/client/sender.py                 11      9    18%   22-34
+dashboard/config.py                        12      0   100%
+dashboard/server.py                         1      0   100%
+dashboard/server/resources.py               0      0   100%
+dashboard/server/resources/dash.py         41     25    39%   25-30, 39, 48-49, 55-71, 76-87
+dashboard/server/resources/home.py          8      1    88%   20
+dashboard/server/resources/storage.py      15      7    53%   20-22, 30-34
+dashboard/server/utils.py                  31      6    81%   18-22, 29, 43
+dashboard/server/views.py                  12      0   100%
+---------------------------------------------------------------------
+TOTAL                                     141     48    66%
 ----------------------------------------------------------------------
-Ran 1 test in 7.798s
+Ran 3 tests in 0.345s
 
 OK
 ```
