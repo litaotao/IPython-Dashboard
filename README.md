@@ -1,7 +1,7 @@
 -----
 
-[![build status](https://api.travis-ci.org/litaotao/IPython-Dashboard.svg?branch=v-0.2-dashboard-server)](https://travis-ci.org/litaotao/IPython-Dashboard)    [![Documentation Status](https://readthedocs.org/projects/ipython-dashboard/badge/?version=latest)](http://ipython-dashboard.readthedocs.org/en/latest/?badge=latest)   [![PyPI Version](http://img.shields.io/pypi/v/IPython-Dashboard.svg)](https://pypi.python.org/pypi/IPython-Dashboard)
-  
+[![build status](https://api.travis-ci.org/litaotao/IPython-Dashboard.svg?branch=v-0.2-dashboard-server)](https://travis-ci.org/litaotao/IPython-Dashboard)  [![coverage](https://coveralls.io/repos/litaotao/IPython-Dashboard/badge.png?branch=v-0.2-dashboard-server)](https://coveralls.io/r/litaotao/IPython-Dashboard)  [![Documentation Status](https://readthedocs.org/projects/ipython-dashboard/badge/?version=latest)](http://ipython-dashboard.readthedocs.org/en/latest/?badge=latest)   [![PyPI Version](http://img.shields.io/pypi/v/IPython-Dashboard.svg)](https://pypi.python.org/pypi/IPython-Dashboard)
+
 
 -----
 
