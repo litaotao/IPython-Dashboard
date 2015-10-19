@@ -80,9 +80,9 @@
     <div class="modal-content">
       <!-- Editor Modal Header -->
       <div class="modal-header" style="padding: 5px;">
-        <button type="button" class="close btn-sm" data-dismiss="modal" aria-hidden="true">
+        <!-- <button type="button" class="close btn-sm" data-dismiss="modal" aria-hidden="true">
           <i class="fa fa-fw fa-lg fa-close"></i>
-        </button>
+        </button> -->
         <h5 class="modal-title" id="myModalLabel">Edit your dash graph</h5>
       </div>
       <!-- Editor Modal Content -->
@@ -96,8 +96,10 @@
                   <option>1</option>
                 </select>
               </td>
-              <td style="padding: 0px; width: 75%; background-color: white;border: none;"><input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Define your graph" style="padding-left: 0px"></td>
-              <td style="padding: 0px; width: 5%; background-color: inherit; border: none;"><button class="btn btn-primary edit-button"><i class="fa fa-fw fa-lg fa-refresh" style="color: black;"></i></button></td>
+              <td style="padding: 0px; width: 70%; background-color: white;border: none;"><input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Define your graph" style="padding-left: 0px"></td>
+              <!-- <td style="padding: 0px; width: 10%; background-color: inherit; border: none;"><button class="btn btn-primary edit-button"><i class="fa fa-fw fa-lg fa-refresh" style="color: black;"></i></button></td> -->
+              <td style="padding: 0px; width: 5%; background-color: inherit; border: none;"><button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-close" style="color: black;"></i></button></td>
+              <td style="padding: 0px; width: 5%; background-color: inherit; border: none;"><button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="saveGraph_v2()"><i class="fa fa-fw fa-lg fa-check" style="color: black;"></i></button></td>
             </tr>
             </tbody>
           </table> 
@@ -107,10 +109,10 @@
         </div>
       </div>
     <!-- Editor Modal Footer -->
-      <div class="modal-footer" style="padding: 5px;">
+      <!-- <div class="modal-footer" style="padding: 5px;">
         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">cancel</button>
         <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="saveGraph_v2()">save</button>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

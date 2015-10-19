@@ -107,14 +107,18 @@ function genElement(type){
 }
 
 
+var th_template = ' \
+<div class="btn-group"> \
+  <button type="button" class="btn btn-xs dropdown-toggle btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 0px 0px;">  \
+    button name <span class="caret"></span>  \
+  </button>  \
+  <ul class="dropdown-menu"> \
+    <li style="width: 50px;"><input type="checkbox" value="" style="margin-left: 15px;">   x</li> \
+    <li style="width: 50px;"><input type="checkbox" value="" style="margin-left: 15px;">   y</li> \
+  </ul> \
+</div>'
+
 function parseTable(data){
-  // function genElement(type){
-  //   var element = document.createElement(type);
-  //   if (type == "td"){
-  //     element.setAttribute("nowrap", "nowrap");
-  //   }
-  //   return element;
-  // }
   var table = genElement("table");
   var thead = genElement("thead");
   var tbody = genElement("tbody");

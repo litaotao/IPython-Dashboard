@@ -8,7 +8,7 @@ from flask import Flask
 from flask.ext.restful import Api
 
 # user-defined package
-import config as cfg
+from . import config as cfg
 
 '''
 dashboard server setup

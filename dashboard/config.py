@@ -11,7 +11,7 @@ redis_db_db   = 1
 
 
 # web server
-app_host  = 'localhost'
+app_host  = '0.0.0.0'
 app_port  = 9090
 app_debug = True
 
