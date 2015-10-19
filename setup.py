@@ -10,7 +10,7 @@ setup(
     version='0.1.0',
     author="Taotao Li",
     author_email="taotao.engineer@gmail.com",
-    url="https://github.com/litaotao/IPython-Dashboard",
+    url="https://github.com/litaotao/IPython-Dashboard/tree/v-0.2-dashboard-server",
     keywords = ('ipython', 'dashboard', 'interactive', 'visualization'),
     license="BSD",
     packages=find_packages(),

@@ -94,6 +94,9 @@ function getValue(){
         // console.log(data);
         parseTable($.parseJSON(data.data));
     })
+
+    // change the btn-chart, table button default as clicked
+    $(".btn-chart")[0].classList.add("active");
   });
 }
 
@@ -110,7 +113,7 @@ function genElement(type){
 var th_template = ' \
 <div class="btn-group"> \
   <button type="button" class="btn btn-xs dropdown-toggle btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 0px 0px;">  \
-    button name <span class="caret"></span>  \
+    {0} <span class="caret"></span>  \
   </button>  \
   <ul class="dropdown-menu"> \
     <li style="width: 50px;"><input type="checkbox" value="" style="margin-left: 15px;">   x</li> \
@@ -131,7 +134,9 @@ function parseTable(data){
   var columns = [];
   $.each(data, function(key, value){
     var th = genElement("th");
-    th.innerText = key;
+    // th.innerText = key;
+    var tmp = strFormat(th_template, "&nbsp " + key + "&nbsp ");
+    th.innerHTML = tmp;
     tr.appendChild(th);
     columns.push(key);        
   })
@@ -343,4 +348,20 @@ function addBox(){
 
 function test(){
   console.log("test");
+}
+
+
+function strFormat(theString){
+    // The string containing the format items (e.g. "{0}")
+    // will and always has to be the first argument.
+    
+    // start with the second argument (i = 1)
+    for (var i = 1; i < arguments.length; i++) {
+        // "gm" = RegEx options for Global search (more than one instance)
+        // and for Multiline search
+        var regEx = new RegExp("\\{" + (i - 1) + "\\}", "gm");
+        theString = theString.replace(regEx, arguments[i]);
+    }
+    
+    return theString;
 }
