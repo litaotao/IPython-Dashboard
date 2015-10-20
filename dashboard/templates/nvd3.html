@@ -43,10 +43,11 @@ var a = null;
             var width = nv.utils.windowSize().width,
                 height = nv.utils.windowSize().height;
 
-            var chart = nv.models.multiBarChart()
-                .width(700)
-                .height(500)
-                .stacked(true)
+            // var chart = nv.models.multiBarChart()
+            var chart = nv.models.lineChart()
+                // .width(700)
+                // .height(500)
+                // .stacked(true)
                 ;
 
             chart.dispatch.on('renderEnd', function(){
@@ -55,7 +56,7 @@ var a = null;
 
             var svg = d3.select('#test1 svg').datum(test_data);
             console.log('calling chart');
-            svg.transition().duration(0).call(chart);
+            svg.transition(100).duration(0).call(chart);
             a = chart;
             return chart;
         },

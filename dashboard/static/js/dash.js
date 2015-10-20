@@ -16,7 +16,7 @@ function initGridstack(){
   $('.grid-stack').gridstack(options);
 }
 
-var box_template = '                                 \
+var box_template = ' \
   <div data-gs-min-height="4" data-gs-min-width="6">   \
     <div class="grid-stack-item-content">              \
       <div class="chart-wrapper">                      \
@@ -116,10 +116,23 @@ var th_template = ' \
     {0} <span class="caret"></span>  \
   </button>  \
   <ul class="dropdown-menu"> \
-    <li style="width: 50px;"><input type="checkbox" value="" style="margin-left: 15px;">   x</li> \
-    <li style="width: 50px;"><input type="checkbox" value="" style="margin-left: 15px;">   y</li> \
+    <li style="width: 50px;"><input type="checkbox" onclick="markXY(this, 0)" style="margin-left: 15px;">   x</li> \
+    <li style="width: 50px;"><input type="checkbox" onclick="markXY(this, 1)" style="margin-left: 15px;">   y</li> \
   </ul> \
 </div>'
+
+function markXY(obj, xy){
+  btn_type = xy ? 'btn-info' : 'btn-warning';
+  if (obj.checked){
+      var node = obj.parentElement.parentElement.parentElement.children[0];
+      node.classList.remove('btn-success');
+      node.classList.add(btn_type);
+  }else{
+      var node = obj.parentElement.parentElement.parentElement.children[0];
+      node.classList.remove(btn_type);
+      node.classList.add('btn-success');
+  }
+}
 
 function parseTable(data){
   var table = genElement("table");
@@ -134,7 +147,6 @@ function parseTable(data){
   var columns = [];
   $.each(data, function(key, value){
     var th = genElement("th");
-    // th.innerText = key;
     var tmp = strFormat(th_template, "&nbsp " + key + "&nbsp ");
     th.innerHTML = tmp;
     tr.appendChild(th);
@@ -356,11 +368,6 @@ function initDashList(){
 function addBox(){
   var grid = $('.grid-stack').data('gridstack');
   grid.add_widget(box_template, 200, 200, 6, 5, true);
-}
-
-
-function test(){
-  console.log("test");
 }
 
 

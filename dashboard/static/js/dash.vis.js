@@ -46,3 +46,20 @@ function build_graph(){
     add_graph("#test_graph", data);
 }
 
+
+function genLineChart(){
+  var chart = nv.models.lineChart();
+  return chart;
+}
+
+function genMultiBarChart(){
+  var chart = nv.models.multiBarChart()
+    .stacked(true)
+    ;
+  return chart;
+}
+
+function renderChart(dom_id, chart, data){
+  var svg = d3.select(dom_id).datum(data);
+  svg.transition().duration(0).call(chart);
+}
