@@ -148,7 +148,7 @@ function parseTable(data){
     indexes.push(index);
   })
 
-  for (var row = 0; row < 20; row++) {
+  for (var row = 0; row < 200; row++) {
     var tr = genElement("tr");
     var th = genElement("th");
     th.innerText = indexes[row];
@@ -309,6 +309,18 @@ function getDashList(){
   return resJson.responseJSON.data;
 }
 
+var setting_template = '       \
+<ul class="nav navbar-nav">    \
+  <li class="dropdown">        \
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 2px 2px;"><span class="fa fa-fw fa-lg fa-cog"></span></a>  \
+    <ul class="dropdown-menu">  \
+      <li><a href="#">share <span class="fa fa-fw fa-sm fa-group"></span></a></li>       \
+      <li class="divider" style="margin: auto;"></li>  \
+      <li><a href="#">delete <span class="fa fa-fw fa-sm fa-times-circle"></span></a></li>           \
+    </ul>  \
+  </li>    \
+</ul>'
+
 
 function initDashList(){
   var list = getDashList();
@@ -330,7 +342,8 @@ function initDashList(){
       author.innerText = obj.author;
       time.innerText = moment(parseInt(obj.time_modified) * 1000).format("YYYY-MM-DD HH:mm:ss");
       i.className = "fa fa-fw fa-lg fa-cog";
-      action.appendChild(i);
+      // action.appendChild(i);
+      action.innerHTML = setting_template;
       tr.appendChild(name);
       tr.appendChild(author);
       tr.appendChild(time);

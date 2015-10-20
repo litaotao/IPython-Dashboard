@@ -14,6 +14,11 @@ from ..utils import build_response
 
 class Home(Resource):
     """home page
+
+    Just render the home template, and then js will fetch data from server
+    to build the list or other things.
+
+    Attributes:
     """
     def get(self):
         # headers = {'Content-Type': 'text/html'}

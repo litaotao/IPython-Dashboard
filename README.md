@@ -6,8 +6,7 @@
 -----
 
 # IPython-Dashboard
-A stand alone, light-weight web server for building, sharing graphs in created in ipython. Let ipython do what it focus, let this do what everyone needs for building an interactive, collaborated and real-time streaming dashboards.
-
+A stand alone, light-weight web server for building, sharing graphs created in ipython. Build for data science, data analysis guys. Building an interactive visualization, collaborated dashboard, and real-time streaming graph. 
 
 
 # Goal 
@@ -89,6 +88,10 @@ OK
 # Change Log
 
 
+- V 0.3.0
+    + import dashboard to ipython notebook, one click [ though I don't think it's necessary]
+
+
 - V 0.2.2
     + front side, databricks style
     + pep 8, code clean up & restructure
@@ -105,7 +108,7 @@ OK
     + readthedoc
 
 
-- V 0.2
+- V 0.2  [current]
     + Interact with server [ CURD ]
     + Simple visualization
     + Rearrange buttons [ add, share ]
