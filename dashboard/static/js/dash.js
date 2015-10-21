@@ -1,3 +1,57 @@
+/************************************
+Dom templates
+*************************************/
+
+// add a gridstack box
+var box_template = ' \
+<div data-gs-min-height="4" data-gs-min-width="6">   \
+  <div class="grid-stack-item-content">              \
+    <div class="chart-wrapper">                      \
+      <div class="chart-title bold">                 \
+        <table class="table input-title-level-2">    \
+          <tr class="active" style="padding-left: 10%;">   \
+            <td style="padding: 0px; width: 90%; padding-left: inherit">   \
+              <input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph">  \
+            </td>                                                                                                       \
+            <td style="padding: 0px; width: 10%">                                                                       \
+              <button class="btn btn-primary edit-button" data-toggle="modal" data-target="#myModal">                   \
+                <i class="fa fa-fw fa-lg fa-edit" style="color: black;" onclick="addClassMark(this)"></i></button>      \
+            </td>   \
+          </tr>     \
+        </table>    \
+      </div>        \
+      <div class="chart-graph" style="width: 100%; overflow-x:auto; overflow-y:auto; color: #444;" type_name="none" key_name="none">   \
+      </div>        \
+    </div>          \
+  </div>            \
+</div>';
+
+// render the head row of a table
+var th_template = ' \
+<div class="btn-group"> \
+  <button type="button" class="btn btn-xs dropdown-toggle btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 0px 0px;">  \
+    {0} <span class="caret"></span>  \
+  </button>  \
+  <ul class="dropdown-menu"> \
+    <li style="width: 50px;"><input type="checkbox" onclick="markXY(this, 0)" style="margin-left: 15px;">   x</li> \
+    <li style="width: 50px;"><input type="checkbox" onclick="markXY(this, 1)" style="margin-left: 15px;">   y</li> \
+  </ul> \
+</div>'
+
+// setting dropdown box in home page
+var setting_template = '       \
+<ul class="nav navbar-nav">    \
+  <li class="dropdown">        \
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 2px 2px;"><span class="fa fa-fw fa-lg fa-cog"></span></a>  \
+    <ul class="dropdown-menu">  \
+      <li><a href="#">share <span class="fa fa-fw fa-sm fa-group"></span></a></li>       \
+      <li class="divider" style="margin: auto;"></li>  \
+      <li><a href="#">delete <span class="fa fa-fw fa-sm fa-times-circle"></span></a></li>           \
+    </ul>  \
+  </li>    \
+</ul>'
+
+
 // re-arrange when mouse hover on the side bar
 function resizeContent(direction) {
   var padding = (direction==1) ? "100px" : "0px";
@@ -16,51 +70,20 @@ function initGridstack(){
   $('.grid-stack').gridstack(options);
 }
 
-var box_template = ' \
-  <div data-gs-min-height="4" data-gs-min-width="6">   \
-    <div class="grid-stack-item-content">              \
-      <div class="chart-wrapper">                      \
-        <div class="chart-title bold">                 \
-          <table class="table input-title-level-2">    \
-            <tr class="active" style="padding-left: 10%;">   \
-              <td style="padding: 0px; width: 90%; padding-left: inherit">   \
-                <input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph">  \
-              </td>                                                                                                       \
-              <td style="padding: 0px; width: 10%">                                                                       \
-                <button class="btn btn-primary edit-button" data-toggle="modal" data-target="#myModal">                   \
-                  <i class="fa fa-fw fa-lg fa-edit" style="color: black;" onclick="addClassMark_v2(this)"></i></button>      \
-              </td>   \
-            </tr>     \
-          </table>    \
-        </div>        \
-        <div id="test_graph" class="chart-graph" style="width: 100%; overflow-x:auto; overflow-y:auto; color: #444;">   \
-        </div>        \
-      </div>          \
-    </div>            \
-  </div>';
 
-// initialze 4 grids
-function createGrids(){
-  grid = $('.grid-stack').data('gridstack');
-  // initialized four boxes
-  grid.add_widget(box_template, 0, 0, 6, 5);
-  grid.add_widget(box_template, 6, 0, 6, 5);
-  grid.add_widget(box_template, 0, 1, 6, 5);
-  grid.add_widget(box_template, 6, 1, 6, 5);
-}
-
-a = null;
+// create gridstack grids according the data from server
 function createGrids_v2(){
-  grid = $('.grid-stack').data('gridstack');
-  // 
+  var grid = $('.grid-stack').data('gridstack');
   var dash_id = $("meta[name=dash_id]")[0].attributes.value.value;
   var dash_content = getDash(dash_id);
   var tmp = null;
   var graph_with_key = {}
   // initialized boxes using data from server & set key_name and type_name attribute
+  $("#dashboard_name")[0].value = dash_content.name;
   $.each(dash_content.grid, function(index, obj){
     tmp = grid.add_widget(box_template, obj.x, obj.y, obj.width, obj.height);  
     tmp[0].setAttribute("graph-id", index);
+    $(tmp).find("input.input-title-level-2")[0].value = obj.graph_name;
     $(tmp).find(".chart-graph")[0].setAttribute("key_name", obj.key);
     $(tmp).find(".chart-graph")[0].setAttribute("type_name", obj.type);
     graph_with_key[obj.id] = obj.key;
@@ -68,6 +91,7 @@ function createGrids_v2(){
 
   // initialized graph data
   $.each(graph_with_key, function(index, key){
+    console.log(key);
     if (key == "none"){
         console.log("no key exist");
     }else{
@@ -81,9 +105,6 @@ function createGrids_v2(){
 }
 
 
-/************************************
-Interact with server
-*************************************/
 // get all the keys from server
 function getKeys(){
   $("[data-target]").on("click", function(){
@@ -128,17 +149,6 @@ function genElement(type){
   return element;
 }
 
-
-var th_template = ' \
-<div class="btn-group"> \
-  <button type="button" class="btn btn-xs dropdown-toggle btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 0px 0px;">  \
-    {0} <span class="caret"></span>  \
-  </button>  \
-  <ul class="dropdown-menu"> \
-    <li style="width: 50px;"><input type="checkbox" onclick="markXY(this, 0)" style="margin-left: 15px;">   x</li> \
-    <li style="width: 50px;"><input type="checkbox" onclick="markXY(this, 1)" style="margin-left: 15px;">   y</li> \
-  </ul> \
-</div>'
 
 function markXY(obj, xy){
   btn_type = xy ? 'btn-info' : 'btn-warning';
@@ -213,32 +223,13 @@ function parseTable(data, selector){
 }
 
 
-function addClassMark(obj){
-  obj.classList.add("edit-graph");
-}
-
-
-function saveGraph(){
-  var data = $("#value")[0].children[0].cloneNode(true);
-  data.removeAttribute("id");
-  data.style.height = "100%";
-  data.style.width = "100%";
-  var obj = $("td > button > i.edit-graph")[0];
-  var res = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1]
-  res.innerHTML = "";
-  res.appendChild(data);
-  a1 = data;
-  a2 = res;
-}
-
-
 var graph_obj = null;
-function addClassMark_v2(obj){
+function addClassMark(obj){
   graph_obj = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1]
 }
 
 
-function saveGraph_v2(){
+function saveGraph(){
   var data = $("#value")[0].children[0].cloneNode(true);
   graph_obj.innerHTML = "";
   graph_obj.appendChild(data);
@@ -251,7 +242,7 @@ function saveGraph_v2(){
 function saveDash(){
   // dash name 
   var dashName = $("#dashboard_name")[0].value; // must need
-  if (100 < dashName.length || dashName.length < 0) {
+  if (100 < dashName.length || dashName.length < 6) {
     alert("dashboard name note valid, digits should between 6 and 100, thanks.")
     return null;
   }
@@ -261,6 +252,7 @@ function saveDash(){
     var node = el.data('_gridstack_node');
     var key = el.find("div.chart-graph")[0].getAttribute("key_name");
     var type = el.find("div.chart-graph")[0].getAttribute("type_name");
+    var name = el.find("input.input-title-level-2")[0].value;
     return {
         id: el.attr("graph-id"),
         x: node.x,
@@ -269,6 +261,7 @@ function saveDash(){
         height: node.height,
         key: (key) ? key : "none",
         type: (type) ? type : "none",
+        graph_name: (name) ? name : "hi, give me a name ^_^",
     };
   });
 
@@ -340,18 +333,6 @@ function getDashList(){
   return resJson.responseJSON.data;
 }
 
-var setting_template = '       \
-<ul class="nav navbar-nav">    \
-  <li class="dropdown">        \
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 2px 2px;"><span class="fa fa-fw fa-lg fa-cog"></span></a>  \
-    <ul class="dropdown-menu">  \
-      <li><a href="#">share <span class="fa fa-fw fa-sm fa-group"></span></a></li>       \
-      <li class="divider" style="margin: auto;"></li>  \
-      <li><a href="#">delete <span class="fa fa-fw fa-sm fa-times-circle"></span></a></li>           \
-    </ul>  \
-  </li>    \
-</ul>'
-
 
 function initDashList(){
   var list = getDashList();
@@ -387,6 +368,7 @@ function initDashList(){
 function addBox(){
   var grid = $('.grid-stack').data('gridstack');
   grid.add_widget(box_template, 200, 200, 6, 5, true);
+  getKeys();
 }
 
 

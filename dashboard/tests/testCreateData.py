@@ -44,17 +44,17 @@ def test_create_dataframe():
 def test_create_dash():
     test_id = range(1, 10)
     test_meta = {'author': 'author-', 'name': 'name-', 'time_modified': ''}
-    test_content = [{"x": 0,"y": 5,"width": 6,"height": 5},
-                    {"x": 6,"y": 5,"width": 6,"height": 5},
-                    {"x": 0,"y": 0,"width": 6,"height": 5},
-                    {"x": 6,"y": 0,"width": 6,"height": 5}]
+    test_content = [{"x": 0, "y": 5, "width": 6, "height": 5, "key": "none", "type": "none", "id": 0},
+                    {"x": 6, "y": 5, "width": 6, "height": 5, "key": "none", "type": "none", "id": 0},
+                    {"x": 0, "y": 0, "width": 6, "height": 5, "key": "none", "type": "none", "id": 0},
+                    {"x": 6, "y": 0, "width": 6, "height": 5, "key": "none", "type": "none", "id": 0}]
     for _id in test_id:
         _id = str(_id)
         tmp_time = int(time.time()) - random.randint(1, 100) * random.randint(1, 100)
         meta = {i: test_meta[i] + _id for i in test_meta}
         meta['time_modified'] = tmp_time
         meta['id'] = _id
-
+        [j.update({"graph_name": "graph-name-" + str(graph_id)}) for j,graph_id in zip(test_content, range(len(test_content)))]
         content = dict(grid=test_content, name=meta['name'])
         r_db.zadd(config.DASH_ID_KEY, _id, tmp_time)
         r_db.hset(config.DASH_META_KEY, _id, json.dumps(meta))
