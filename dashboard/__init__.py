@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import absolute_import
 # built-in package
 
 # third-parth package
@@ -25,4 +25,4 @@ r_db = redis.Redis(host=cfg.redis_db_host, port=cfg.redis_db_port, db=cfg.redis_
 
 
 # import modules
-import client, server
+from . import client, server

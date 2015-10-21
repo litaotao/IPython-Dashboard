@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from dashboard import api
-from resources.storage import Key, KeyList
-from resources.dash import Dash, DashListData, DashData
-from resources.home import Home
-from resources.test import Test
-
+from .. import api
+from .resources.storage import Key, KeyList
+from .resources.dash import Dash, DashListData, DashData
+from .resources.home import Home
+from .resources.test import Test
 
 
 '''

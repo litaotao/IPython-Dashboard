@@ -49,15 +49,34 @@ function createGrids(){
   grid.add_widget(box_template, 6, 1, 6, 5);
 }
 
-
+a = null;
 function createGrids_v2(){
   grid = $('.grid-stack').data('gridstack');
   // 
   var dash_id = $("meta[name=dash_id]")[0].attributes.value.value;
   var dash_content = getDash(dash_id);
-  // initialized boxes using data from server
+  var tmp = null;
+  var graph_with_key = {}
+  // initialized boxes using data from server & set key_name and type_name attribute
   $.each(dash_content.grid, function(index, obj){
-    grid.add_widget(box_template, obj.x, obj.y, obj.width, obj.height);  
+    tmp = grid.add_widget(box_template, obj.x, obj.y, obj.width, obj.height);  
+    tmp[0].setAttribute("graph-id", index);
+    $(tmp).find(".chart-graph")[0].setAttribute("key_name", obj.key);
+    $(tmp).find(".chart-graph")[0].setAttribute("type_name", obj.type);
+    graph_with_key[obj.id] = obj.key;
+  })
+
+  // initialized graph data
+  $.each(graph_with_key, function(index, key){
+    if (key == "none"){
+        console.log("no key exist");
+    }else{
+        $.getJSON("http://127.0.0.1:9090/key/" + key, function(data){
+            console.log($(strFormat("div [graph-id={0}] .chart-graph", index)));
+            parseTable($.parseJSON(data.data), strFormat("div [graph-id={0}] .chart-graph", index));
+            console.log($.parseJSON(data.data));
+        })
+    }
   })
 }
 
@@ -92,7 +111,7 @@ function getValue(){
 
     $.getJSON(url, function(data){
         // console.log(data);
-        parseTable($.parseJSON(data.data));
+        parseTable($.parseJSON(data.data), "#value");
     })
 
     // change the btn-chart, table button default as clicked
@@ -134,7 +153,7 @@ function markXY(obj, xy){
   }
 }
 
-function parseTable(data){
+function parseTable(data, selector){
   var table = genElement("table");
   var thead = genElement("thead");
   var tbody = genElement("tbody");
@@ -180,7 +199,7 @@ function parseTable(data){
   table.style.fontWeight = "400";
 
   // remove table
-  var tableDOM = $("#value")[0]
+  var tableDOM = $(selector)[0]
   currentTable = tableDOM.children
   for (var i = currentTable.length - 1; i >= 0; i--) {
     tableDOM.removeChild(currentTable[0]);
@@ -243,7 +262,7 @@ function saveDash(){
     var key = el.find("div.chart-graph")[0].getAttribute("key_name");
     var type = el.find("div.chart-graph")[0].getAttribute("type_name");
     return {
-        id: el.attr('data-custom-id'),
+        id: el.attr("graph-id"),
         x: node.x,
         y: node.y,
         width: node.width,

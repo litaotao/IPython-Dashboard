@@ -10,7 +10,7 @@ import random
 import pandas as pd
 
 # user-defined package
-from dashboard import r_kv, r_db, config
+from .. import r_kv, r_db, config
 from dashboard.server import utils
 
 
