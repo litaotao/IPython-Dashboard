@@ -31,11 +31,11 @@ A stand alone, light-weight web server for building, sharing graphs created in i
 
 
 
-# Screenshot & [Demo](https://www.youtube.com/watch?v=VqLhzkhjeLU&feature=youtu.be)
+# Screenshot & [Demo](https://youtu.be/Xv0UjKVEttA)
 
-[![demo](docs/template-screenshot-1.jpg)](https://www.youtube.com/watch?v=VqLhzkhjeLU&feature=youtu.be)
-[![demo](docs/template-screenshot-2.jpg)](https://www.youtube.com/watch?v=VqLhzkhjeLU&feature=youtu.be)
-[![demo](docs/template-screenshot-3.jpg)](https://www.youtube.com/watch?v=VqLhzkhjeLU&feature=youtu.be)
+[![demo](docs/template-screenshot-1.jpg)](https://youtu.be/Xv0UjKVEttA)
+[![demo](docs/template-screenshot-2.jpg)](https://youtu.be/Xv0UjKVEttA)
+[![demo](docs/template-screenshot-3.jpg)](https://youtu.be/Xv0UjKVEttA)
 
 
 
