@@ -340,27 +340,27 @@ function initDashList(){
   var url = "http://127.0.0.1:9090/dash/";
 
   $.each(list, function(index, obj){
-      var a = genElement("a");
-      var i = genElement("i");
-      var tr = genElement("tr"); 
-      var name = genElement("td");
-      var author = genElement("td");
-      var time = genElement("td");
-      var action = genElement("td");
-      a.innerText = obj.name;
-      a.setAttribute("href", url + obj.id);
-      name.appendChild(a);
-      name.setAttribute("data-field", "name");
-      author.innerText = obj.author;
-      time.innerText = moment(parseInt(obj.time_modified) * 1000).format("YYYY-MM-DD HH:mm:ss");
-      i.className = "fa fa-fw fa-lg fa-cog";
-      // action.appendChild(i);
-      action.innerHTML = setting_template;
-      tr.appendChild(name);
-      tr.appendChild(author);
-      tr.appendChild(time);
-      tr.appendChild(action);
-      tbody.appendChild(tr);
+    var a = genElement("a");
+    var i = genElement("i");
+    var tr = genElement("tr"); 
+    var name = genElement("td");
+    var author = genElement("td");
+    var time = genElement("td");
+    var action = genElement("td");
+    a.innerText = obj.name;
+    a.setAttribute("href", url + obj.id);
+    name.appendChild(a);
+    name.setAttribute("data-field", "name");
+    author.innerText = obj.author;
+    time.innerText = moment(parseInt(obj.time_modified) * 1000).format("YYYY-MM-DD HH:mm:ss");
+    i.className = "fa fa-fw fa-lg fa-cog";
+    // action.appendChild(i);
+    action.innerHTML = setting_template;
+    tr.appendChild(name);
+    tr.appendChild(author);
+    tr.appendChild(time);
+    tr.appendChild(action);
+    tbody.appendChild(tr);
   });
 }
 

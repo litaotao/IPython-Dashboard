@@ -125,10 +125,12 @@ class DashData(Resource):
         """
         data = request.get_json()
         current_time = time.time()
-        meta = {'author': 'author-' + dash_id, 
-                'name': 'name-' + dash_id, 
-                'time_modified': int(current_time),
-                'id': dash_id}
+
+        meta = json.loads(r_db.hget(config.DASH_META_KEY, dash_id))
+        meta.update({'name': '' + data['name'], 
+                     'time_modified': int(current_time)})
+        content = json.loads(r_db.hget(config.DASH_CONTENT_KEY, dash_id))
+        content.update(data)
 
         r_db.hset(config.DASH_META_KEY, dash_id, json.dumps(meta))
         r_db.hset(config.DASH_CONTENT_KEY, dash_id, json.dumps(data))
