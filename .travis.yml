@@ -1,0 +1,17 @@
+# travis-ci configuration
+language: python
+python:
+  - "2.7"
+  # - "3.3"
+  # - "3.4"
+install:
+  - pip install -e . --use-mirrors
+  - pip install coveralls --use-mirrors
+  - pip install flake8 coverage --use-mirrors
+services:
+  - redis-server
+script:
+  - nosetests --with-coverage --cover-package=dashboard
+  - flake8 --exit-zero dashboard
+after_success:
+  - coveralls
