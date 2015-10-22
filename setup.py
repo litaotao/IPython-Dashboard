@@ -7,7 +7,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="IPython-Dashboard",
-    version='0.1.0',
+    version='0.1.1',
     author="Taotao Li",
     author_email="taotao.engineer@gmail.com",
     url="https://github.com/litaotao/IPython-Dashboard/tree/v-0.2-dashboard-server",

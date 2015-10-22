@@ -35,6 +35,7 @@ A stand alone, light-weight web server for building, sharing graphs created in i
 
 [![demo](docs/template-screenshot-1.jpg)](https://www.youtube.com/watch?v=VqLhzkhjeLU&feature=youtu.be)
 [![demo](docs/template-screenshot-2.jpg)](https://www.youtube.com/watch?v=VqLhzkhjeLU&feature=youtu.be)
+[![demo](docs/template-screenshot-3.jpg)](https://www.youtube.com/watch?v=VqLhzkhjeLU&feature=youtu.be)
 
 
 
@@ -82,6 +83,8 @@ OK
 - [databricks](https://databricks.com/)
 - [nvd3](http://nvd3.org/)
 - [c3js](http://c3js.org/)
+- [periscope](http://periscope.io)
+- [folium](https://github.com/python-visualization/folium)
 
 
 
@@ -97,9 +100,6 @@ OK
     + pep 8, code clean up & restructure
     + hover tips
     + edit modal can be resized
-
-
-- V 0.2.1
     + Share one graph
     + Share one dashboard
     + Presentation mode
@@ -108,7 +108,25 @@ OK
     + readthedoc
 
 
-- V 0.2  [current]
+---------
+
+- ***V 0.2.1 [ currently ]***
+    
+    - Dashboard
+        - dashboard home page
+            + sort by dashboard name / creator / last update time
+
+        - dashboard page
+            + add graph in a dashboard
+            + re-arrange graph
+            + resize graph
+            + get table view in a graph
+
+    - SQL Editor
+
+---------
+
+- V 0.2  
     + Interact with server [ CURD ]
     + Simple visualization
     + Rearrange buttons [ add, share ]

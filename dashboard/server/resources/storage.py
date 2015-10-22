@@ -27,6 +27,7 @@ class KeyList(Resource):
         keys.sort()
         return build_response(dict(data=keys, code=200))
 
+
 class Key(Resource):
     """Get the data of a key.
 
