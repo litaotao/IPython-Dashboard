@@ -71,6 +71,7 @@ OK
 
 # Related Projects & Products 
 
+- [ipydb](https://github.com/jaysw/ipydb)
 - [mpld3](https://github.com/jakevdp/mpld3)
 - [lighting](http://lightning-viz.org/)
 - [bokeh](http://bokeh.pydata.org/en/latest/)
