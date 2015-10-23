@@ -43,7 +43,7 @@ function add_graph(div_id, data){
 
 function build_graph(){
     data = gen_data();
-    add_graph("#test_graph", data);
+    add_graph("[graph-id=0]", data);
 }
 
 
@@ -52,6 +52,7 @@ function genLineChart(){
   return chart;
 }
 
+
 function genMultiBarChart(){
   var chart = nv.models.multiBarChart()
     .stacked(true)
@@ -59,7 +60,21 @@ function genMultiBarChart(){
   return chart;
 }
 
+
 function renderChart(dom_id, chart, data){
   var svg = d3.select(dom_id).datum(data);
   svg.transition().duration(0).call(chart);
+}
+
+
+function checkDataType(type){
+    // talbe
+}
+
+function drawChart(type){
+    console.log(strFormat("###Ready to draw chart : {0}", type));
+    // check data avilablity
+    // use different js lib to do the drawing, nvd3, c3, d3, leafletjs
+    // currently, I just use nvd3 to fullfill the basic graph.
+
 }

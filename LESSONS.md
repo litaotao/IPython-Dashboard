@@ -39,5 +39,6 @@ LINE 1: ...count(*) from metrics where os not in ('ios', 'android', ) ;
     + Unit test can make people feel safe before the download the project or use the app.
     + When write unit tests, use [travis-ci](travis-ci.org) for [Continous Integration](https://en.wikipedia.org/wiki/Continuous_integration) is a wise choice.
 
-
+- ***Define your problems first, as clearly as possible***
+    + Define your problems, breakdown them, focusing on the current problems.
 

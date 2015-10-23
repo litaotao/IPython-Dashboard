@@ -33,8 +33,8 @@ var th_template = ' \
     {0} <span class="caret"></span>  \
   </button>  \
   <ul class="dropdown-menu"> \
-    <li style="width: 50px;"><input type="checkbox" onclick="markXY(this, 0)" style="margin-left: 15px;">   x</li> \
-    <li style="width: 50px;"><input type="checkbox" onclick="markXY(this, 1)" style="margin-left: 15px;">   y</li> \
+    <li style="width: 50px;"><input type="checkbox" onclick="markXy(this, 1)" style="margin-left: 15px;">   x</li> \
+    <li style="width: 50px;"><input type="checkbox" onclick="markXy(this, 0)" style="margin-left: 15px;">   y</li> \
   </ul> \
 </div>'
 
@@ -121,6 +121,7 @@ function getKeys(){
   })
 }
 
+var localKeyValue = {};
 // get the value for a key and parse it as a table by default
 function getValue(){
   $("#keys").on("change", function(){
@@ -132,7 +133,9 @@ function getValue(){
 
     $.getJSON(url, function(data){
         // console.log(data);
-        parseTable($.parseJSON(data.data), "#value");
+        var jsonData = $.parseJSON(data.data)
+        localKeyValue[key] = jsonData;
+        parseTable(jsonData, "#value");
     })
 
     // change the btn-chart, table button default as clicked
@@ -150,17 +153,29 @@ function genElement(type){
 }
 
 
-function markXY(obj, xy){
-  btn_type = xy ? 'btn-info' : 'btn-warning';
+/***************************************
+visualzie table
+***************************************/
+var xyAxes = {"x": [], "y": []};
+
+function markXy(obj, xy){
+  var btn_type = xy ? 'btn-info' : 'btn-warning';
+  var axesName = obj.parentElement.parentElement.parentElement.children[0].innerText.trim();
+  // change hightlight colour
   if (obj.checked){
       var node = obj.parentElement.parentElement.parentElement.children[0];
       node.classList.remove('btn-success');
       node.classList.add(btn_type);
+      // push axes info
+      xyAxes[xy ? "x" : "y"].push(axesName);
   }else{
       var node = obj.parentElement.parentElement.parentElement.children[0];
       node.classList.remove(btn_type);
       node.classList.add('btn-success');
+      // remove axes info
+      xyAxes[xy ? "x" : "y"] = $.grep(xyAxes[xy ? "x" : "y"], function(value){return value != axesName});
   }
+  console.log(xyAxes);
 }
 
 function parseTable(data, selector){

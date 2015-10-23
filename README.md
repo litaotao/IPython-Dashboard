@@ -85,6 +85,7 @@ OK
 - [c3js](http://c3js.org/)
 - [periscope](http://periscope.io)
 - [folium](https://github.com/python-visualization/folium)
+- [metabase](http://www.metabase.com/)
 
 
 
