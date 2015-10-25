@@ -224,6 +224,7 @@ function parseTable(data, selector){
   table.style.fontWeight = "400";
 
   // remove table
+  // $.each($("#value")[0].children, function(index, obj){$("#value")[0].removeChild(obj)}) 
   var tableDOM = $(selector)[0]
   currentTable = tableDOM.children
   for (var i = currentTable.length - 1; i >= 0; i--) {
