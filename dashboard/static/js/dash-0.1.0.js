@@ -133,7 +133,7 @@ function getValue(){
 
     $.getJSON(url, function(data){
         // console.log(data);
-        var jsonData = $.parseJSON(data.data)
+        var jsonData = $.parseJSON(data.data);
         localKeyValue[key] = jsonData;
         parseTable(jsonData, "#value");
     })
@@ -204,7 +204,7 @@ function parseTable(data, selector){
     indexes.push(index);
   })
 
-  for (var row = 0; row < 200; row++) {
+  for (var row = 0; row < 20; row++) {
     var tr = genElement("tr");
     var th = genElement("th");
     th.innerText = indexes[row];
