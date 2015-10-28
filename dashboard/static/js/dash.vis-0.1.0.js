@@ -38,6 +38,17 @@ function gen_test_data_v2(){
   return data;
 }
 
+
+function gen_test_data_v3() {
+    return stream_layers(3,128,.1).map(function(data, i) {
+        return {
+            key: 'Stream' + i,
+            area: i === 1,
+            values: data
+        };
+    });
+}
+
 function add_graph(div_id, data){
     nv.addGraph(function() {
         chart = nv.models.lineChart()
@@ -75,9 +86,27 @@ function build_graph(){
     add_graph("[graph-id='0'] > div .chart-graph", data);
 }
 
+// function genLineChart(){
+//   var chart = nv.models.lineWithFocusChart()
+//     .brushExtent([50,70])
+//     .xAxis.tickFormat(d3.format(',f'))
+//     .x2Axis.tickFormat(d3.format(',f'))
+//     .yAxis.tickFormat(d3.format(',.2f'))
+//     .y2Axis.tickFormat(d3.format(',.2f'))
+//     .useInteractiveGuideline(true);
+
+//   return chart;
+// }
 
 function genLineChart(){
-  var chart = nv.models.lineChart();
+  var chart = nv.models.lineWithFocusChart();
+  chart.brushExtent([50,70]);
+  chart.xAxis.tickFormat(d3.format(',f'));
+  chart.x2Axis.tickFormat(d3.format(',f'));
+  chart.yAxis.tickFormat(d3.format(',.2f'));
+  chart.y2Axis.tickFormat(d3.format(',.2f'));
+  chart.useInteractiveGuideline(true);
+    
   return chart;
 }
 
@@ -131,12 +160,40 @@ function validateGraphData(type, data){
   }
 }
 
+function validateLineData(data){
+    return true;
+}
+
+function validateMultiBarData(data){
+    return true;
+}
+
+function validatePieData(data){
+    return true;
+}
+
+function validateAreaData(data){
+    return true;
+}
+
+var debugChart = null;
 function drawChart(type){
   console.log(strFormat("###Ready to draw chart : {0}", type));
+  // check is table view or chart view
+  if (type == 'table') {
+    var selectDOM = $("#keys")[0];
+    var key = selectDOM.options[selectDOM.selectedIndex].text;
+    parseTable(localKeyValue[key], "#value");
+    xyAxes.x = [];
+    xyAxes.y = [];
+    return true;
+  };
+
   // check data avilablity
   // use different js lib to do the drawing, nvd3, c3, d3, leafletjs
   // currently, I just use nvd3 to fullfill the basic graph.
   var chart = getChart(type);
+  debugChart = chart;
   var selectDOM = $("#keys")[0];
   
   // clear content if exissted for creating new content
@@ -162,7 +219,7 @@ function drawChart(type){
     console.log(strFormat("###data is invalide for draw a {0} graph", type));
     return false;
   }
-
+  // data = gen_test_data_v3()
   // draw graph
   d3.select("#value").append('svg')
     .datum(data)
@@ -171,3 +228,4 @@ function drawChart(type){
   // register a resize event
   nv.utils.windowResize(chart.update);
 }
+

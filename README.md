@@ -19,19 +19,10 @@ A stand alone, light-weight web server for building, sharing graphs created in i
 - In the notebook, can share an object to a dashboard [ that's visualise that object in that dashboard ]
 
 
-# Raw Design
+# Screenshot and Demo
 
-- C/S model 
-- Server can interact with IPython kernel directly or indirectly 
-- Client get data from server internally or server push data to client
-- Client consists of several boxes, each box is an independent front-side object, and is editable and drag to rearrange the place to hold it.
-
-
-![architecture](docs/architecture.jpg)
-
-
-
-# Screenshot & [Demo](https://youtu.be/Xv0UjKVEttA)
+[Demo on Youtube](https://youtu.be/Xv0UjKVEttA)     
+[Demo on Youku](http://v.youku.com/v_show/id_XMTM3MTc5MTAwMA)
 
 [![demo](docs/template-screenshot-1.jpg)](https://youtu.be/Xv0UjKVEttA)
 [![demo](docs/template-screenshot-2.jpg)](https://youtu.be/Xv0UjKVEttA)
@@ -68,6 +59,74 @@ OK
 ```
 
 
+# Change Log
+
+
+
+- future
+    + import dashboard to ipython notebook, one click [ though I don't think it's necessary]
+    + front side, databricks style
+    + pep 8, code clean up & restructure
+    + hover tips
+    + edit modal can be resized
+    + Share one graph
+    + Share one dashboard
+    + Presentation mode
+    + slogan
+    + footer
+    + readthedoc
+    + unified message display center
+    + SQL Editor
+    + login management
+
+
+---------
+
+- ***V 0.1.2 : visualiza-table : [ current develop version ]***
+    
+    - Dashboard
+        + docstring
+        + simple visualize table data
+
+    - SQL Editor
+        + research & preparation
+
+---------
+
+- ***V 0.1.1 : dashboard-server : [ current stable release ]***  
+    - Dashboard
+        - dashboard home page
+            + sort by dashboard name / creator / last update time
+
+        - dashboard page
+            + add graph in a dashboard
+            + re-arrange graph
+            + resize graph
+            + get table view in a graph
+
+    - SQL Editor
+
+---------
+
+- V 0.1 : dashboard-template
+    + Add dashboard client template
+    + Template consists of box, each box is an independent front-side object
+    + Template hierarchy:
+        + box page [add, delete, share one or all]
+        + box graph [add, delete, share one or all]
+        + rename
+
+
+# Raw Design
+
+- C/S model 
+- Server can interact with IPython kernel directly or indirectly 
+- Client get data from server internally or server push data to client
+- Client consists of several boxes, each box is an independent front-side object, and is editable and drag to rearrange the place to hold it.
+
+
+![architecture](docs/architecture.jpg)
+
 
 # Related Projects & Products 
 
@@ -86,64 +145,3 @@ OK
 - [periscope](http://periscope.io)
 - [folium](https://github.com/python-visualization/folium)
 - [metabase](http://www.metabase.com/)
-
-
-
-# Change Log
-
-
-- V 0.3.0
-    + import dashboard to ipython notebook, one click [ though I don't think it's necessary]
-
-
-- V 0.2.2
-    + front side, databricks style
-    + pep 8, code clean up & restructure
-    + hover tips
-    + edit modal can be resized
-    + Share one graph
-    + Share one dashboard
-    + Presentation mode
-    + slogan
-    + footer
-    + readthedoc
-
-
----------
-
-- ***V 0.2.1 [ currently ]***
-    
-    - Dashboard
-        - dashboard home page
-            + sort by dashboard name / creator / last update time
-
-        - dashboard page
-            + add graph in a dashboard
-            + re-arrange graph
-            + resize graph
-            + get table view in a graph
-
-    - SQL Editor
-
----------
-
-- V 0.2  
-    + Interact with server [ CURD ]
-    + Simple visualization
-    + Rearrange buttons [ add, share ]
-    + Dash json format
-        - dash number [list]
-        - content name
-        - content type
-    + docstring
-
-
-- V 0.1
-    + Add dashboard client template
-    + Template consists of box, each box is an independent front-side object
-    + Template hierarchy:
-        + box page [add, delete, share one or all]
-        + box graph [add, delete, share one or all]
-        + rename
-
-

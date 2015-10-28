@@ -41,4 +41,6 @@ LINE 1: ...count(*) from metrics where os not in ('ios', 'android', ) ;
 
 - ***Define your problems first, as clearly as possible***
     + Define your problems, breakdown them, focusing on the current problems.
+    + Split milestone into small tasks, make a small release every week [ depends on your project itself, one small release each week is just my taste]
+
 
