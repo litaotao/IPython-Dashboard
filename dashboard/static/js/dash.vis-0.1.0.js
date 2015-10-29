@@ -98,21 +98,9 @@ function build_graph(){
     add_graph("[graph-id='0'] > div .chart-graph", data);
 }
 
-// function genLineChart(){
-//   var chart = nv.models.lineWithFocusChart()
-//     .brushExtent([50,70])
-//     .xAxis.tickFormat(d3.format(',f'))
-//     .x2Axis.tickFormat(d3.format(',f'))
-//     .yAxis.tickFormat(d3.format(',.2f'))
-//     .y2Axis.tickFormat(d3.format(',.2f'))
-//     .useInteractiveGuideline(true);
-
-//   return chart;
-// }
-
 function genLineChart(){
   var chart = nv.models.lineWithFocusChart();
-  chart.brushExtent([50,70]);
+  chart.brushExtent([10,70]);
   chart.xAxis.tickFormat(d3.format(',f'));
   chart.x2Axis.tickFormat(d3.format(',f'));
   chart.yAxis.tickFormat(d3.format(',.2f'));
@@ -127,15 +115,22 @@ function genPieChart(){
     .x(function(d) { return d.key })
     .y(function(d) { return d.y })
     .growOnHover(true)
+    // .showLegend(false)
     .labelType('value')
     .color(d3.scale.category20().range())
     ;
 
   return chart;
-  }
+}
 
 function genAreaChart(){
-  var chart = nv.models.stackedArea();
+  var chart = nv.models.stackedAreaChart()
+    .useInteractiveGuideline(true)
+    .x(function(d) { return d[0] })
+    .y(function(d) { return d[1] })
+    .controlLabels({stacked: "Stacked"})
+    .duration(300);
+    ;
   return chart;
 }
 
@@ -180,7 +175,7 @@ function validateData(type, data){
 }
 
 function validateLineData(data){
-    return true;
+    return data;
 }
 
 function validateMultiBarData(data){
@@ -197,7 +192,19 @@ function validatePieData(data){
 }
 
 function validateAreaData(data){
-    return true;
+  var formatData = [];
+  $.each(data, function(index, obj){
+    var tmp = {};
+    tmp.key = obj.key;
+    var tmpValue = [];
+    $.each(obj.values, function(index, objValue){
+      tmpValue.push([objValue.x, objValue.y]);
+    });
+    tmp.values = tmpValue;
+    formatData.push(tmp);
+  });
+  data = formatData;
+  return data;
 }
 
 var debugChart = null;
@@ -240,7 +247,7 @@ function drawChart(type){
   });
   
   // validate and transform data before draw it
-  data = validateData("pie", data);
+  data = validateData(type, data);
   debugData = data;
   // data = gen_test_data_pie_v1();
   // draw graph
