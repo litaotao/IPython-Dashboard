@@ -49,6 +49,18 @@ function gen_test_data_v3() {
     });
 }
 
+function gen_test_data_pie_v1(){
+  return [
+        {key: "One", y: 5},
+        {key: "Two", y: 2},
+        {key: "Three", y: 9},
+        {key: "Four", y: 7},
+        {key: "Five", y: 4},
+        {key: "Six", y: 3},
+        {key: "Seven", y: 0.5}
+    ];
+}
+
 function add_graph(div_id, data){
     nv.addGraph(function() {
         chart = nv.models.lineChart()
@@ -111,9 +123,16 @@ function genLineChart(){
 }
 
 function genPieChart(){
-  var chart = nv.models.pieChart();
+  var chart = nv.models.pieChart()
+    .x(function(d) { return d.key })
+    .y(function(d) { return d.y })
+    .growOnHover(true)
+    .labelType('value')
+    .color(d3.scale.category20().range())
+    ;
+
   return chart;
-}
+  }
 
 function genAreaChart(){
   var chart = nv.models.stackedArea();
@@ -151,7 +170,7 @@ function getChart(type){
   }
 }
 
-function validateGraphData(type, data){
+function validateData(type, data){
   switch (type){
     case "line": return validateLineData(data);
     case "bar": return validateMultiBarData(data);
@@ -169,7 +188,12 @@ function validateMultiBarData(data){
 }
 
 function validatePieData(data){
-    return true;
+  var formatData = [];
+  $.each(data[0].values, function(index, obj){
+    formatData.push({key: obj.x, y: obj.y});
+  });
+  data = formatData;
+  return data;
 }
 
 function validateAreaData(data){
@@ -177,6 +201,7 @@ function validateAreaData(data){
 }
 
 var debugChart = null;
+var debugData = null;
 function drawChart(type){
   console.log(strFormat("###Ready to draw chart : {0}", type));
   // check is table view or chart view
@@ -213,13 +238,11 @@ function drawChart(type){
     }
     data.push(tmp);
   });
-
-  // validate data before draw it
-  if (!validateGraphData(type, data)){
-    console.log(strFormat("###data is invalide for draw a {0} graph", type));
-    return false;
-  }
-  // data = gen_test_data_v3()
+  
+  // validate and transform data before draw it
+  data = validateData("pie", data);
+  debugData = data;
+  // data = gen_test_data_pie_v1();
   // draw graph
   d3.select("#value").append('svg')
     .datum(data)
