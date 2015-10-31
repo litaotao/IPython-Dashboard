@@ -28,7 +28,7 @@ def test_create_dataframe():
         key = 'businesses-{}'.format(piece)
         value = data[piece * piece_lenth : piece * piece_lenth + piece_lenth]
         r_kv.set(key, value.to_json())
-    
+
     url_2 = 'https://github.com/litaotao/data-science/raw/master/examples/happy-healthy-hungry/data/SFBusinesses/inspections.csv'
     if os.path.isdir(TMP_DIR) and  'inspections.csv' in os.listdir(TMP_DIR):
         url_2 = TMP_DIR + '/inspections.csv'
@@ -38,7 +38,14 @@ def test_create_dataframe():
         key = 'inspections-{}'.format(piece)
         value = data[piece * piece_lenth : piece * piece_lenth + piece_lenth]
         r_kv.set(key, value.to_json())
-    
+    # import ipdb; ipdb.set_trace()
+    #
+    url_3 = 'https://github.com/litaotao/IPython-Dashboard/raw/v-0.1.2-visualiza-table/docs/people_number_by_province_lateset_10_years.csv'
+    if os.path.isdir(TMP_DIR) and  'people_number_by_province_lateset_10_years.csv' in os.listdir(TMP_DIR):
+        url_3 = TMP_DIR + '/people_number_by_province_lateset_10_years.csv'
+    data = pd.read_csv(url_3)
+    r_kv.set('chinese_population', data.to_json())
+
 
 @utils.print_func_name
 def test_create_dash():
@@ -61,7 +68,3 @@ def test_create_dash():
         r_db.zadd(config.DASH_ID_KEY, _id, tmp_time)
         r_db.hset(config.DASH_META_KEY, _id, json.dumps(test_meta))
         r_db.hset(config.DASH_CONTENT_KEY, _id, json.dumps(content))
-
-
-
-

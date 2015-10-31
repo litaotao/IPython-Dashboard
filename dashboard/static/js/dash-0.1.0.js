@@ -63,7 +63,7 @@ function resizeContent(direction) {
 function initGridstack(){
   var options = {
     width: 12,
-    animate: true, 
+    animate: true,
     vertical_margin: 5,
     resizable: {handles: "e, se, s, sw, w"}
   };
@@ -81,7 +81,7 @@ function createGrids_v2(){
   // initialized boxes using data from server & set key_name and type_name attribute
   $("#dashboard_name")[0].value = dash_content.name;
   $.each(dash_content.grid, function(index, obj){
-    tmp = grid.add_widget(box_template, obj.x, obj.y, obj.width, obj.height);  
+    tmp = grid.add_widget(box_template, obj.x, obj.y, obj.width, obj.height);
     tmp[0].setAttribute("graph-id", index);
     $(tmp).find("input.input-title-level-2")[0].value = obj.graph_name;
     $(tmp).find(".chart-graph")[0].setAttribute("key_name", obj.key);
@@ -187,14 +187,14 @@ function parseTable(data, selector){
   var td = genElement("td");
 
   tr.appendChild(th);
-  
+
   var columns = [];
   $.each(data, function(key, value){
     var th = genElement("th");
     var tmp = strFormat(th_template, "&nbsp " + key + "&nbsp ");
     th.innerHTML = tmp;
     tr.appendChild(th);
-    columns.push(key);        
+    columns.push(key);
   })
   thead.appendChild(tr);
 
@@ -204,7 +204,7 @@ function parseTable(data, selector){
     indexes.push(index);
   })
 
-  for (var row = 0; row < 20; row++) {
+  for (var row = 0; row < indexes.length; row++) {
     var tr = genElement("tr");
     var th = genElement("th");
     th.innerText = indexes[row];
@@ -216,7 +216,7 @@ function parseTable(data, selector){
     })
     tbody.appendChild(tr);
   };
-  
+
   table.setAttribute("id", "table_value");
   table.setAttribute("border", "1px");
   table.className = "table-condensed table-hover";
@@ -224,7 +224,7 @@ function parseTable(data, selector){
   table.style.fontWeight = "400";
 
   // remove table
-  // $.each($("#value")[0].children, function(index, obj){$("#value")[0].removeChild(obj)}) 
+  // $.each($("#value")[0].children, function(index, obj){$("#value")[0].removeChild(obj)})
   var tableDOM = $(selector)[0]
   currentTable = tableDOM.children
   for (var i = currentTable.length - 1; i >= 0; i--) {
@@ -256,7 +256,7 @@ function saveGraph(){
 
 
 function saveDash(){
-  // dash name 
+  // dash name
   var dashName = $("#dashboard_name")[0].value; // must need
   if (100 < dashName.length || dashName.length < 6) {
     alert("dashboard name note valid, digits should between 6 and 100, thanks.")
@@ -291,7 +291,7 @@ function saveDash(){
     var method = "PUT";
     var resJson = JSON.stringify({"grid": res, "name": dashName});
   }
-  
+
   $.ajax({
     url: url,
     data: resJson,
@@ -358,7 +358,7 @@ function initDashList(){
   $.each(list, function(index, obj){
     var a = genElement("a");
     var i = genElement("i");
-    var tr = genElement("tr"); 
+    var tr = genElement("tr");
     var name = genElement("td");
     var author = genElement("td");
     var time = genElement("td");
@@ -391,7 +391,7 @@ function addBox(){
 function strFormat(theString){
     // The string containing the format items (e.g. "{0}")
     // will and always has to be the first argument.
-    
+
     // start with the second argument (i = 1)
     for (var i = 1; i < arguments.length; i++) {
         // "gm" = RegEx options for Global search (more than one instance)
@@ -399,6 +399,6 @@ function strFormat(theString){
         var regEx = new RegExp("\\{" + (i - 1) + "\\}", "gm");
         theString = theString.replace(regEx, arguments[i]);
     }
-    
+
     return theString;
 }
