@@ -3,7 +3,7 @@
 function gen_data(){
     return [
     {
-        values: [{x: 1, y:1}, {x: 2, y:2}],  
+        values: [{x: 1, y:1}, {x: 2, y:2}],
         key: "line 1",
     }
 ];
@@ -12,11 +12,11 @@ function gen_data(){
 function gen_test_data(){
   return [
     {
-        values: [{x: 2, y: 1}, {x: 1.5, y: 1.5}, {x: 2, y: 2}],  
+        values: [{x: 2, y: 1}, {x: 1.5, y: 1.5}, {x: 2, y: 2}],
         key: "line 1",
     },
     {
-        values: [{x: 1, y:1}, {x: 2, y:2}, {x: 3, y:3}],  
+        values: [{x: 1, y:1}, {x: 2, y:2}, {x: 3, y:3}],
         key: "line 2",
     },
   ];
@@ -38,9 +38,8 @@ function gen_test_data_v2(){
   return data;
 }
 
-
-function gen_test_data_v3() {
-    return stream_layers(3,128,.1).map(function(data, i) {
+function gen_test_data_bar_v1() {
+    return stream_layers(1,128,.1).map(function(data, i) {
         return {
             key: 'Stream' + i,
             area: i === 1,
@@ -106,7 +105,7 @@ function genLineChart(){
   chart.yAxis.tickFormat(d3.format(',.2f'));
   chart.y2Axis.tickFormat(d3.format(',.2f'));
   chart.useInteractiveGuideline(true);
-    
+
   return chart;
 }
 
@@ -136,7 +135,9 @@ function genAreaChart(){
 
 function genMultiBarChart(){
   var chart = nv.models.multiBarChart()
-    .barColor(d3.scale.category20().range())
+    .margin({ bottom: 30 })
+    // .focusEnable( true )
+    // .barColor(d3.scale.category20().range())
     .duration(300)
     .rotateLabels(45)
     .groupSpacing(0.1)
@@ -145,15 +146,9 @@ function genMultiBarChart(){
   return chart;
 }
 
-
 function renderChart(dom_id, chart, data){
   var svg = d3.select(dom_id).datum(data);
   svg.transition().duration(0).call(chart);
-}
-
-
-function checkDataType(type){
-  // talbe
 }
 
 function getChart(type){
@@ -179,7 +174,13 @@ function validateLineData(data){
 }
 
 function validateMultiBarData(data){
-    return true;
+  // raw : [{key: , values: [{x: , y: },]}]
+  // [{area: true, disabled: true, key: key, values: [{x: , y: }, ]},]
+  $.each(data, function(index, obj){
+    obj.area = true;
+    obj.disabled = false;
+  });
+  return data;
 }
 
 function validatePieData(data){
@@ -225,12 +226,11 @@ function drawChart(type){
   // use different js lib to do the drawing, nvd3, c3, d3, leafletjs
   // currently, I just use nvd3 to fullfill the basic graph.
   var chart = getChart(type);
-  debugChart = chart;
   var selectDOM = $("#keys")[0];
-  
+
   // clear content if exissted for creating new content
   $.each($("#value")[0].children, function(index, obj){$("#value")[0].removeChild(obj)})
-  
+
   // get data which need draw, axes defined in data-0.1.0.js as xyAxes
   var key = selectDOM.options[selectDOM.selectedIndex].text;
   var xColumn = localKeyValue[key][ xyAxes.x[0] ];
@@ -245,17 +245,17 @@ function drawChart(type){
     }
     data.push(tmp);
   });
-  
+
   // validate and transform data before draw it
   data = validateData(type, data);
-  debugData = data;
-  // data = gen_test_data_pie_v1();
-  // draw graph
   d3.select("#value").append('svg')
     .datum(data)
     .call(chart);
-  
+
   // register a resize event
   nv.utils.windowResize(chart.update);
-}
 
+  // debug data
+  debugChart = chart;
+  debugData = data;
+}

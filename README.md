@@ -6,14 +6,14 @@
 -----
 
 # IPython-Dashboard
-A stand alone, light-weight web server for building, sharing graphs created in ipython. Build for data science, data analysis guys. Building an interactive visualization, collaborated dashboard, and real-time streaming graph. 
+A stand alone, light-weight web server for building, sharing graphs created in ipython. Build for data science, data analysis guys. Building an interactive visualization, collaborated dashboard, and real-time streaming graph.
 
 
-# Goal 
+# Goal
 
 - support raw html visualization
 - support python object visualization
-- Editable 
+- Editable
 - Real-time fresh when rendering a variable python object
 - Can be shared, both public and private [ need password ]
 - In the notebook, can share an object to a dashboard [ that's visualise that object in that dashboard ]
@@ -83,7 +83,7 @@ OK
 ---------
 
 - ***V 0.1.2 : visualiza-table : [ current develop version ]***
-    
+
     - Dashboard
         + docstring
         + simple visualize table data
@@ -119,8 +119,8 @@ OK
 
 # Raw Design
 
-- C/S model 
-- Server can interact with IPython kernel directly or indirectly 
+- C/S model
+- Server can interact with IPython kernel directly or indirectly
 - Client get data from server internally or server push data to client
 - Client consists of several boxes, each box is an independent front-side object, and is editable and drag to rearrange the place to hold it.
 
@@ -128,7 +128,7 @@ OK
 ![architecture](docs/architecture.jpg)
 
 
-# Related Projects & Products 
+# Related Projects & Products
 
 - [mpld3](https://github.com/jakevdp/mpld3)
 - [lighting](http://lightning-viz.org/)
@@ -145,3 +145,5 @@ OK
 - [periscope](http://periscope.io)
 - [folium](https://github.com/python-visualization/folium)
 - [metabase](http://www.metabase.com/)
+- [gridstack](https://github.com/troolee/gridstack.js)
+- [gridster](http://gridster.net/)
