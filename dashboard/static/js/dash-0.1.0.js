@@ -37,14 +37,20 @@ var box_template_v2 = ' \
               <input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph">  \
             </td>                                                                                                       \
             <td style="padding: 0px; width: 10%">                                                                       \
-              <ul class="nav navbar-nav">    \
+              <ul class="nav navbar-nav" style="padding-left: 70%;">    \
                 <li class="dropdown">        \
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 2px 2px;"><span class="fa fa-fw fa-lg fa-cog"></span></a>  \
                   <ul class="dropdown-menu" style="min-width: 30px;">  \
-                    <li><a href="#"><span class="fa fa-fw fa-sm fa-edit"></span></a></li>           \
-                    <li><a href="#"><span class="fa fa-fw fa-sm fa-group"></span></a></li>       \
+                    <button class="btn btn-primary edit-button" data-toggle="modal" data-target="#myModal">                   \
+                      <i class="fa fa-fw fa-sm fa-edit" style="color: black;" onclick="addClassMark(this)"></i>               \
+                    </button>      \
+                    <button class="btn btn-primary edit-button">                   \
+                      <i class="fa fa-fw fa-sm fa-group" style="color: black;"></i>               \
+                    </button>      \
                     <li class="divider" style="margin: auto;"></li>  \
-                    <li><a href="#"><span class="fa fa-fw fa-sm fa-times-circle"></span></a></li>           \
+                    <button class="btn btn-primary edit-button" >                   \
+                      <i class="fa fa-fw fa-sm fa-times-circle" style="color: black;" ></i>               \
+                    </button>      \
                   </ul>  \
                 </li>    \
               </ul>     \
@@ -136,7 +142,6 @@ function createGrids_v2(){
     }
   })
 }
-
 
 // get all the keys from server
 function getKeys(){
@@ -274,7 +279,8 @@ function parseTable(data, selector){
 
 var graph_obj = null;
 function addClassMark(obj){
-  graph_obj = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1]
+  graph_obj = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1];
+  // graph_obj = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1]
 }
 
 
@@ -283,6 +289,7 @@ function saveGraph(){
   graph_obj.innerHTML = "";
   graph_obj.appendChild(data);
   graph_obj.setAttribute("key_name", $("#keys")[0].options[$("#keys")[0].selectedIndex].text);
+  graph_obj.setAttribute("type_name", chartType);
   a1 = data;
   a2 = graph_obj;
 }

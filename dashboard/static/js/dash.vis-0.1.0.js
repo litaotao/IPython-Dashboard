@@ -210,8 +210,10 @@ function validateAreaData(data){
 
 var debugChart = null;
 var debugData = null;
+var chartType = null;
 function drawChart(type){
   console.log(strFormat("###Ready to draw chart : {0}", type));
+  chartType = type;
   // check is table view or chart view
   if (type == 'table') {
     var selectDOM = $("#keys")[0];
