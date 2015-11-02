@@ -26,6 +26,38 @@ var box_template = ' \
   </div>            \
 </div>';
 
+var box_template_v2 = ' \
+<div data-gs-min-height="4" data-gs-min-width="6">   \
+  <div class="grid-stack-item-content">              \
+    <div class="chart-wrapper">                      \
+      <div class="chart-title bold">                 \
+        <table class="table input-title-level-2">    \
+          <tr class="active" style="padding-left: 10%;">   \
+            <td style="padding: 0px; width: 90%; padding-left: inherit">   \
+              <input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph">  \
+            </td>                                                                                                       \
+            <td style="padding: 0px; width: 10%">                                                                       \
+              <ul class="nav navbar-nav">    \
+                <li class="dropdown">        \
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 2px 2px;"><span class="fa fa-fw fa-lg fa-cog"></span></a>  \
+                  <ul class="dropdown-menu" style="min-width: 30px;">  \
+                    <li><a href="#"><span class="fa fa-fw fa-sm fa-edit"></span></a></li>           \
+                    <li><a href="#"><span class="fa fa-fw fa-sm fa-group"></span></a></li>       \
+                    <li class="divider" style="margin: auto;"></li>  \
+                    <li><a href="#"><span class="fa fa-fw fa-sm fa-times-circle"></span></a></li>           \
+                  </ul>  \
+                </li>    \
+              </ul>     \
+            </td>   \
+          </tr>     \
+        </table>    \
+      </div>        \
+      <div class="chart-graph" style="width: 100%; overflow-x:auto; overflow-y:auto; color: #444;" type_name="none" key_name="none">   \
+      </div>        \
+    </div>          \
+  </div>            \
+</div>';
+
 // render the head row of a table
 var th_template = ' \
 <div class="btn-group"> \
@@ -43,13 +75,14 @@ var setting_template = '       \
 <ul class="nav navbar-nav">    \
   <li class="dropdown">        \
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 2px 2px;"><span class="fa fa-fw fa-lg fa-cog"></span></a>  \
-    <ul class="dropdown-menu">  \
-      <li><a href="#">share <span class="fa fa-fw fa-sm fa-group"></span></a></li>       \
+    <ul class="dropdown-menu" style="min-width: 20px;">  \
+      <li><a href="#" ><span class="fa fa-fw fa-sm fa-group"></span></a></li>       \
       <li class="divider" style="margin: auto;"></li>  \
-      <li><a href="#">delete <span class="fa fa-fw fa-sm fa-times-circle"></span></a></li>           \
+      <li><a href="#" ><span class="fa fa-fw fa-sm fa-times-circle"></span></a></li>           \
     </ul>  \
   </li>    \
 </ul>'
+
 
 
 // re-arrange when mouse hover on the side bar
@@ -81,7 +114,7 @@ function createGrids_v2(){
   // initialized boxes using data from server & set key_name and type_name attribute
   $("#dashboard_name")[0].value = dash_content.name;
   $.each(dash_content.grid, function(index, obj){
-    tmp = grid.add_widget(box_template, obj.x, obj.y, obj.width, obj.height);
+    tmp = grid.add_widget(box_template_v2, obj.x, obj.y, obj.width, obj.height);
     tmp[0].setAttribute("graph-id", index);
     $(tmp).find("input.input-title-level-2")[0].value = obj.graph_name;
     $(tmp).find(".chart-graph")[0].setAttribute("key_name", obj.key);
@@ -383,7 +416,7 @@ function initDashList(){
 
 function addBox(){
   var grid = $('.grid-stack').data('gridstack');
-  grid.add_widget(box_template, 200, 200, 6, 5, true);
+  grid.add_widget(box_template_v2, 200, 200, 6, 5, true);
   getKeys();
 }
 
