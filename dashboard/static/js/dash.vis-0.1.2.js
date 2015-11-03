@@ -211,14 +211,15 @@ function validateAreaData(data){
 var debugChart = null;
 var debugData = null;
 var chartType = null;
-function drawChart(type){
+function drawChart(type, selector){
+  selector = selector ? selector : "#value";
   console.log(strFormat("###Ready to draw chart : {0}", type));
   chartType = type;
   // check is table view or chart view
   if (type == 'table') {
     var selectDOM = $("#keys")[0];
     var key = selectDOM.options[selectDOM.selectedIndex].text;
-    parseTable(localKeyValue[key], "#value");
+    parseTable(localKeyValue[key], selector);
     xyAxes.x = [];
     xyAxes.y = [];
     return true;
@@ -231,7 +232,7 @@ function drawChart(type){
   var selectDOM = $("#keys")[0];
 
   // clear content if exissted for creating new content
-  $.each($("#value")[0].children, function(index, obj){$("#value")[0].removeChild(obj)})
+  $.each($(selector)[0].children, function(index, obj){$(selector)[0].removeChild(obj)})
 
   // get data which need draw, axes defined in data-0.1.0.js as xyAxes
   var key = selectDOM.options[selectDOM.selectedIndex].text;
@@ -250,7 +251,7 @@ function drawChart(type){
 
   // validate and transform data before draw it
   data = validateData(type, data);
-  d3.select("#value").append('svg')
+  d3.select(selector).append('svg')
     .datum(data)
     .call(chart);
 
