@@ -115,6 +115,7 @@ function createGrids_v2(){
     $(tmp).find("input.input-title-level-2")[0].value = obj.graph_name;
     $(tmp).find(".chart-graph")[0].setAttribute("key_name", obj.key);
     $(tmp).find(".chart-graph")[0].setAttribute("type_name", obj.type);
+    $(tmp).find(".chart-graph")[0].setAttribute("graph_id", index);
     graph_with_key[obj.id] = obj.key;
   })
 
@@ -272,20 +273,23 @@ function parseTable(data, selector){
 
 
 var graph_obj = null;
+var graph_id = 0;
 function addClassMark(obj){
   graph_obj = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1];
   // graph_obj = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1]
+  graph_id = graph_obj.getAttribute("graph_id");
 }
 
 
 function saveGraph(){
-  var data = $("#value")[0].children[0].cloneNode(true);
-  graph_obj.innerHTML = "";
-  graph_obj.appendChild(data);
-  graph_obj.setAttribute("key_name", $("#keys")[0].options[$("#keys")[0].selectedIndex].text);
-  graph_obj.setAttribute("type_name", chartType);
-  a1 = data;
-  a2 = graph_obj;
+  drawChart(chartType, strFormat("div.chart-graph[graph_id='{0}']", graph_id));
+  // var data = $("#value")[0].children[0].cloneNode(true);
+  // graph_obj.innerHTML = "";
+  // graph_obj.appendChild(data);
+  // graph_obj.setAttribute("key_name", $("#keys")[0].options[$("#keys")[0].selectedIndex].text);
+  // graph_obj.setAttribute("type_name", chartType);
+  // a1 = data;
+  // a2 = graph_obj;
 }
 
 
