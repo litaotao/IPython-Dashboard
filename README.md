@@ -5,9 +5,14 @@
 
 -----
 
+## ***Inspired by [IPython](http://ipython.org/), built for data guy***
+
+-----
+
 # IPython-Dashboard
 A stand alone, light-weight web server for building, sharing graphs created in ipython. Build for data science, data analysis guys. Building an interactive visualization, collaborated dashboard, and real-time streaming graph.
 
+-----
 
 # Goal
 
@@ -18,6 +23,7 @@ A stand alone, light-weight web server for building, sharing graphs created in i
 - Can be shared, both public and private [ need password ]
 - In the notebook, can share an object to a dashboard [ that's visualise that object in that dashboard ]
 
+-----
 
 # Screenshot and Demo
 
@@ -28,6 +34,12 @@ A stand alone, light-weight web server for building, sharing graphs created in i
 [![demo](docs/template-screenshot-2.jpg)](https://youtu.be/Xv0UjKVEttA)
 [![demo](docs/template-screenshot-3.jpg)](https://youtu.be/Xv0UjKVEttA)
 
+-----
+
+
+# Usage
+
+-----
 
 
 # Run tests
@@ -58,6 +70,7 @@ Ran 3 tests in 0.345s
 OK
 ```
 
+-----
 
 # Change Log
 
@@ -80,18 +93,19 @@ OK
     + login management
 
 
----------
+
 
 - ***V 0.1.2 : visualiza-table : [ current develop version ]***
+    - slogan: ***Inspired by IPython, built for data guy***
 
     - Dashboard
-        + docstring
+        + document and doc string
+        + usage
         + simple visualize table data
 
     - SQL Editor
         + research & preparation
 
----------
 
 - ***V 0.1.1 : dashboard-server : [ current stable release ]***  
     - Dashboard
@@ -106,7 +120,7 @@ OK
 
     - SQL Editor
 
----------
+
 
 - V 0.1 : dashboard-template
     + Add dashboard client template
@@ -116,16 +130,7 @@ OK
         + box graph [add, delete, share one or all]
         + rename
 
-
-# Raw Design
-
-- C/S model
-- Server can interact with IPython kernel directly or indirectly
-- Client get data from server internally or server push data to client
-- Client consists of several boxes, each box is an independent front-side object, and is editable and drag to rearrange the place to hold it.
-
-
-![architecture](docs/architecture.jpg)
+-----
 
 
 # Related Projects & Products

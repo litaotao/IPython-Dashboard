@@ -3,29 +3,6 @@ Dom templates
 *************************************/
 
 // add a gridstack box
-var box_template = ' \
-<div data-gs-min-height="4" data-gs-min-width="6">   \
-  <div class="grid-stack-item-content">              \
-    <div class="chart-wrapper">                      \
-      <div class="chart-title bold">                 \
-        <table class="table input-title-level-2">    \
-          <tr class="active" style="padding-left: 10%;">   \
-            <td style="padding: 0px; width: 90%; padding-left: inherit">   \
-              <input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph">  \
-            </td>                                                                                                       \
-            <td style="padding: 0px; width: 10%">                                                                       \
-              <button class="btn btn-primary edit-button" data-toggle="modal" data-target="#myModal">                   \
-                <i class="fa fa-fw fa-lg fa-edit" style="color: black;" onclick="addClassMark(this)"></i></button>      \
-            </td>   \
-          </tr>     \
-        </table>    \
-      </div>        \
-      <div class="chart-graph" style="width: 100%; overflow-x:auto; overflow-y:auto; color: #444;" type_name="none" key_name="none">   \
-      </div>        \
-    </div>          \
-  </div>            \
-</div>';
-
 var box_template_v2 = ' \
 <div data-gs-min-height="4" data-gs-min-width="6">   \
   <div class="grid-stack-item-content">              \
@@ -33,11 +10,14 @@ var box_template_v2 = ' \
       <div class="chart-title bold">                 \
         <table class="table input-title-level-2">    \
           <tr class="active" style="padding-left: 10%;">   \
-            <td style="padding: 0px; width: 90%; padding-left: inherit">   \
+            <td style="padding: 0px; padding-left: 5px;">   \
+              <button class="fa fa-fw fa-sm fa-circle-o-notch" onclick=toggleGridMovable(this) style="background: none;background-color: inherit;border: none; padding: 0px 0px">         \
+              </button></td>   \
+            <td style="padding: 0px; width: 90%; padding-left: 5px">   \
               <input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph">  \
             </td>                                                                                                       \
             <td style="padding: 0px; width: 10%">                                                                       \
-              <ul class="nav navbar-nav" style="padding-left: 70%;">    \
+              <ul class="nav navbar-nav" style="padding-left: 7%;">    \
                 <li class="dropdown">        \
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 2px 2px;"><span class="fa fa-fw fa-lg fa-cog"></span></a>  \
                   <ul class="dropdown-menu" style="min-width: 30px;">  \
@@ -90,6 +70,15 @@ var setting_template = '       \
 </ul>'
 
 
+function toggleGridMovable(obj){
+  $(obj).toggleClass("down");
+  $('.grid-stack').data('gridstack').movable('.grid-stack-item', obj.className.includes("down"));
+  $('.grid-stack').data('gridstack').resizable('.grid-stack-item', obj.className.includes("down"));
+  obj.style.color = obj.className.includes("down") ? "green" : "";
+  obj.className.includes("down") ? obj.classList.add("fa-spin") : obj.classList.remove("fa-spin");
+  console.log("grid stack movable");
+}
+
 
 // re-arrange when mouse hover on the side bar
 function resizeContent(direction) {
@@ -104,7 +93,8 @@ function initGridstack(){
     width: 12,
     animate: true,
     vertical_margin: 5,
-    resizable: {handles: "e, se, s, sw, w"}
+    resizable: {handles: "e, se, s, sw, w"},
+    movable: false,
   };
   $('.grid-stack').gridstack(options);
 }
@@ -141,6 +131,10 @@ function createGrids_v2(){
         })
     }
   })
+
+  // make it unmovable after init
+  $('.grid-stack').data('gridstack').movable('.grid-stack-item', false);
+  $('.grid-stack').data('gridstack').resizable('.grid-stack-item', false);
 }
 
 // get all the keys from server
