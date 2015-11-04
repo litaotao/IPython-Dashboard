@@ -52,10 +52,11 @@ def test_create_dash():
     test_id = range(1, 10)
     test_author = ['sam', 'aaron', 'bee', 'will', 'ryan', 'mike', 'kevin', 'elvis', 'tiyu', 'sophia']
     test_meta = {'author': 'author-', 'name': 'name-', 'time_modified': ''}
-    test_content = [{"x": 0, "y": 5, "width": 6, "height": 5, "key": "none", "type": "none", "id": 0},
-                    {"x": 6, "y": 5, "width": 6, "height": 5, "key": "none", "type": "none", "id": 0},
-                    {"x": 0, "y": 0, "width": 6, "height": 5, "key": "none", "type": "none", "id": 0},
-                    {"x": 6, "y": 0, "width": 6, "height": 5, "key": "none", "type": "none", "id": 0}]
+    test_content = {"0": {"x": 0, "y": 5, "width": 6, "height": 5, "key": "none", "type": "none", "option": {}},
+                    "1": {"x": 6, "y": 5, "width": 6, "height": 5, "key": "none", "type": "none", "option": {}},
+                    "2": {"x": 0, "y": 0, "width": 6, "height": 5, "key": "none", "type": "none", "option": {}},
+                    "3": {"x": 6, "y": 0, "width": 6, "height": 5, "key": "none", "type": "none", "option": {}},
+                    }
     for _id in test_id:
         tmp_time = int(time.time()) - random.randint(1, 100) * random.randint(1, 100)
 
@@ -63,8 +64,9 @@ def test_create_dash():
         test_meta['id'] = _id
         test_meta['author'] = test_author[_id]
         test_meta['name'] = 'dashboard_name_' + str(_id)
-        [j.update({"graph_name": "graph-name-" + str(graph_id)}) for j,graph_id in zip(test_content, range(len(test_content)))]
-        content = dict(grid=test_content, name=test_meta['name'])
+        for i in test_content:
+            test_content[i].update({'graph_name': 'graph name ' + i, 'id': i})
+        content = dict(grid=test_content, name=test_meta['name'], id=_id)
         r_db.zadd(config.DASH_ID_KEY, _id, tmp_time)
         r_db.hset(config.DASH_META_KEY, _id, json.dumps(test_meta))
         r_db.hset(config.DASH_CONTENT_KEY, _id, json.dumps(content))

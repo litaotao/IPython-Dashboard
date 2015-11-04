@@ -69,6 +69,9 @@ var setting_template = '       \
   </li>    \
 </ul>'
 
+// local storage
+var local_storage = {};
+
 
 function toggleGridMovable(obj){
   $(obj).toggleClass("down");
@@ -102,11 +105,18 @@ function initGridstack(){
 
 // create gridstack grids according the data from server
 function createGrids_v2(){
+  // clear local storage
+  store.clear();
+
   var grid = $('.grid-stack').data('gridstack');
   var dash_id = $("meta[name=dash_id]")[0].attributes.value.value;
   var dash_content = getDash(dash_id);
+  store.set(strFormat("dash-{0}", dash_id), dash_content);
+  store.set("current-dash", strFormat("dash-{0}", dash_id));
+
   var tmp = null;
   var graph_with_key = {}
+
   // initialized boxes using data from server & set key_name and type_name attribute
   $("#dashboard_name")[0].value = dash_content.name;
   $.each(dash_content.grid, function(index, obj){
@@ -121,12 +131,12 @@ function createGrids_v2(){
 
   // initialized graph data
   $.each(graph_with_key, function(index, key){
-    console.log(key);
     if (key == "none"){
         console.log("no key exist");
     }else{
         $.getJSON("http://127.0.0.1:9090/key/" + key, function(data){
             console.log($(strFormat("div [graph-id={0}] .chart-graph", index)));
+            // drawChart($.parseJSON(data.data), strFormat("div [graph-id={0}] .chart-graph", index));
             parseTable($.parseJSON(data.data), strFormat("div [graph-id={0}] .chart-graph", index));
             console.log($.parseJSON(data.data));
         })
@@ -168,7 +178,10 @@ function getValue(){
         // console.log(data);
         var jsonData = $.parseJSON(data.data);
         localKeyValue[key] = jsonData;
+        store.set(key, jsonData);
+        store.set("chart-type", "table");
         parseTable(jsonData, "#value");
+        // drawChart()
     })
 
     // change the btn-chart, table button default as clicked
@@ -210,6 +223,7 @@ function markXy(obj, xy){
   }
   console.log(xyAxes);
 }
+
 
 function parseTable(data, selector){
   var table = genElement("table");
@@ -278,34 +292,42 @@ function addClassMark(obj){
   graph_obj = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1];
   // graph_obj = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1]
   graph_id = graph_obj.getAttribute("graph_id");
+  store.set("current-graph", graph_id);
 }
 
 
 function saveGraph(){
-  drawChart(chartType, strFormat("div.chart-graph[graph_id='{0}']", graph_id));
-  // var data = $("#value")[0].children[0].cloneNode(true);
-  // graph_obj.innerHTML = "";
-  // graph_obj.appendChild(data);
-  // graph_obj.setAttribute("key_name", $("#keys")[0].options[$("#keys")[0].selectedIndex].text);
-  // graph_obj.setAttribute("type_name", chartType);
-  // a1 = data;
-  // a2 = graph_obj;
+  var dash = store.get(store.get("current-dash"));
+  dash.grid[store.get("current-graph")].key = $("#keys")[0].options[$("#keys")[0].selectedIndex].text;
+  dash.grid[store.get("current-graph")].type = store.get("chart-type");
+  store.set(store.get("current-dash"), dash);
+
+  graph_obj.setAttribute("key_name", $("#keys")[0].options[$("#keys")[0].selectedIndex].text);
+  graph_obj.setAttribute("type_name", store.get("chart-type"));
+
+  drawChart(store.get("chart-type"), strFormat("div.chart-graph[graph_id='{0}']", graph_id));
 }
 
 
 function saveDash(){
+  var dash = store.get(store.get("current-dash"));
+
   // dash name
   var dashName = $("#dashboard_name")[0].value; // must need
   if (100 < dashName.length || dashName.length < 6) {
     alert("dashboard name note valid, digits should between 6 and 100, thanks.")
     return null;
   }
+  dash.name = dashName;
 
+  // dash data
   var res = _.map($('.grid-stack .grid-stack-item:visible'), function (el) {
     el = $(el);
     var node = el.data('_gridstack_node');
-    var key = el.find("div.chart-graph")[0].getAttribute("key_name");
-    var type = el.find("div.chart-graph")[0].getAttribute("type_name");
+    // var key = el.find("div.chart-graph")[0].getAttribute("key_name");
+    // var type = el.find("div.chart-graph")[0].getAttribute("type_name");
+    var key = dash[el[0].getAttribute("graph-id")].key;
+    var key = dash[el[0].getAttribute("graph-id")].type;
     var name = el.find("input.input-title-level-2")[0].value;
     return {
         id: el.attr("graph-id"),
