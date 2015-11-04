@@ -52,10 +52,11 @@ def test_create_dash():
     test_id = range(1, 10)
     test_author = ['sam', 'aaron', 'bee', 'will', 'ryan', 'mike', 'kevin', 'elvis', 'tiyu', 'sophia']
     test_meta = {'author': 'author-', 'name': 'name-', 'time_modified': ''}
-    test_content = {"0": {"x": 0, "y": 5, "width": 6, "height": 5, "key": "none", "type": "none", "option": {}},
-                    "1": {"x": 6, "y": 5, "width": 6, "height": 5, "key": "none", "type": "none", "option": {}},
-                    "2": {"x": 0, "y": 0, "width": 6, "height": 5, "key": "none", "type": "none", "option": {}},
-                    "3": {"x": 6, "y": 0, "width": 6, "height": 5, "key": "none", "type": "none", "option": {}},
+    default_option = {"x": [], "y": []}
+    test_content = {"0": {"x": 0, "y": 5, "width": 6, "height": 5, "key": "none", "type": "none", "option": default_option},
+                    "1": {"x": 6, "y": 5, "width": 6, "height": 5, "key": "none", "type": "none", "option": default_option},
+                    "2": {"x": 0, "y": 0, "width": 6, "height": 5, "key": "none", "type": "none", "option": default_option},
+                    "3": {"x": 6, "y": 0, "width": 6, "height": 5, "key": "none", "type": "none", "option": default_option},
                     }
     for _id in test_id:
         tmp_time = int(time.time()) - random.randint(1, 100) * random.randint(1, 100)

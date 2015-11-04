@@ -211,15 +211,20 @@ function validateAreaData(data){
 var debugChart = null;
 var debugData = null;
 var chartType = null;
-function drawChart(type, selector){
-  selector = selector ? selector : "#value";
+
+function drawChart(type, graph_id){
+  selector = graph_id ? strFormat("div.chart-graph[graph_id='{0}']", graph_id) : "#value";
   console.log(strFormat("###Ready to draw chart : {0}", type));
-  chartType = type;
+  //
+  var current_dash = store.get(store.get("current-dash"));
   // check is table view or chart view
   if (type == 'table') {
     var selectDOM = $("#keys")[0];
-    var key = selectDOM.options[selectDOM.selectedIndex].text;
-    parseTable(localKeyValue[key], selector);
+    // var key = selectDOM.options[selectDOM.selectedIndex].text;
+    var key = current_dash.grid[graph_id].key;
+    var data = store.get(key);
+    parseTable(data, selector);
+    // parseTable(localKeyValue[key], selector);
     xyAxes.x = [];
     xyAxes.y = [];
     return true;

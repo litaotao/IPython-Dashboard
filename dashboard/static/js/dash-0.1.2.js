@@ -205,6 +205,9 @@ visualzie table
 var xyAxes = {"x": [], "y": []};
 
 function markXy(obj, xy){
+  var current_dash = store.get(store.get("current-dash"));
+  var current_graph = store.get("current-graph");
+
   var btn_type = xy ? 'btn-info' : 'btn-warning';
   var axesName = obj.parentElement.parentElement.parentElement.children[0].innerText.trim();
   // change hightlight colour
@@ -214,13 +217,16 @@ function markXy(obj, xy){
       node.classList.add(btn_type);
       // push axes info
       xyAxes[xy ? "x" : "y"].push(axesName);
+      current_dash.grid[current_graph].option[xy ? "x" : "y"].push(axesName);
   }else{
       var node = obj.parentElement.parentElement.parentElement.children[0];
       node.classList.remove(btn_type);
       node.classList.add('btn-success');
       // remove axes info
       xyAxes[xy ? "x" : "y"] = $.grep(xyAxes[xy ? "x" : "y"], function(value){return value != axesName});
+      current_dash.grid[current_graph].option[xy ? "x" : "y"] = $.grep(xyAxes[xy ? "x" : "y"], function(value){return value != axesName});
   }
+  store.set(store.get("current-dash"), current_dash);
   console.log(xyAxes);
 }
 
@@ -298,14 +304,16 @@ function addClassMark(obj){
 
 function saveGraph(){
   var dash = store.get(store.get("current-dash"));
-  dash.grid[store.get("current-graph")].key = $("#keys")[0].options[$("#keys")[0].selectedIndex].text;
-  dash.grid[store.get("current-graph")].type = store.get("chart-type");
+  var graph_id = store.get("current-graph");
+
+  dash.grid[graph_id].key = $("#keys")[0].options[$("#keys")[0].selectedIndex].text;
+  dash.grid[graph_id].type = store.get("chart-type");
   store.set(store.get("current-dash"), dash);
 
   graph_obj.setAttribute("key_name", $("#keys")[0].options[$("#keys")[0].selectedIndex].text);
   graph_obj.setAttribute("type_name", store.get("chart-type"));
 
-  drawChart(store.get("chart-type"), strFormat("div.chart-graph[graph_id='{0}']", graph_id));
+  drawChart(store.get("chart-type"), graph_id);
 }
 
 
@@ -326,31 +334,43 @@ function saveDash(){
     var node = el.data('_gridstack_node');
     // var key = el.find("div.chart-graph")[0].getAttribute("key_name");
     // var type = el.find("div.chart-graph")[0].getAttribute("type_name");
-    var key = dash[el[0].getAttribute("graph-id")].key;
-    var key = dash[el[0].getAttribute("graph-id")].type;
     var name = el.find("input.input-title-level-2")[0].value;
-    return {
+    var key = dash.grid[el[0].getAttribute("graph-id")].key;
+    var type = dash.grid[el[0].getAttribute("graph-id")].type;
+    var option = dash.grid[el[0].getAttribute("graph-id")].option;
+    // dash.grid[el[0].getAttribute("graph-id")].graph_name = name;
+    // var name = dash.grid[el[0].getAttribute("graph-id")].graph_name;
+    var grid = {
         id: el.attr("graph-id"),
         x: node.x,
         y: node.y,
+        option: option,
         width: node.width,
         height: node.height,
         key: (key) ? key : "none",
         type: (type) ? type : "none",
         graph_name: (name) ? name : "hi, give me a name ^_^",
     };
+    dash.grid[el[0].getAttribute("graph-id")] = grid;
+    return grid;
   });
 
-  var dash_id = $("meta[name=dash_id]")[0].attributes.value.value;
-  if (dash_id.length < 1){
-    var url = "http://127.0.0.1:9090/dash/0";
-    var method = "POST";
-    var resJson = JSON.stringify({"grid": res, "name": dashName});
-  }else{
-    var url = "http://127.0.0.1:9090/data/dash/" + dash_id;
-    var method = "PUT";
-    var resJson = JSON.stringify({"grid": res, "name": dashName});
-  }
+  // var dash_id = $("meta[name=dash_id]")[0].attributes.value.value;
+  // if (dash_id.length < 1){
+  //   var url = "http://127.0.0.1:9090/dash/0";
+  //   var method = "POST";
+    // var resJson = JSON.stringify({"grid": res, "name": dashName});
+  // }else{
+    // var url = "http://127.0.0.1:9090/data/dash/" + dash_id;
+    // var method = "PUT";
+    // var resJson = JSON.stringify({"grid": res, "name": dashName});
+    // var resJson
+  // }
+
+  store.set(store.get("current-dash"), dash);
+  var resJson = JSON.stringify(dash);
+  var url = "http://127.0.0.1:9090/data/dash/" + dash.id;
+  var method = "PUT";
 
   $.ajax({
     url: url,
