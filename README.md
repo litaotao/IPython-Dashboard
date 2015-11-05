@@ -38,6 +38,7 @@ A stand alone, light-weight web server for building, sharing graphs created in i
 
 
 # Usage
+![docs/usage-1.jpg](docs/usage-1.jpg)
 
 -----
 
