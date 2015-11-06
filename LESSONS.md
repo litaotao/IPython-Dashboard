@@ -3,7 +3,7 @@
 
 
 - ***Version control is god***
-    + Your code version control 
+    + Your code version control
     + Explicitly point out the version of packages/libs used by you; In python, put them into requirements.txt and then can use `pip install -r requirements.txt`; for js, I'm not that familiar with it, so I put the version code as a suffix of the source code;
 
 - ***Add a comma after the last element of your list***
@@ -20,7 +20,7 @@
     + start write doc as soon as possible, before release the MVP, doc should be ready.
     + For python, use [google style](https://google-styleguide.googlecode.com/svn/trunk/pyguide.html)
 
-- ***Code re-structure and re-factory*** 
+- ***Code re-structure and re-factory***
     + for starting a new project, there will be some functional or solutional test, which is necessary but will messing up the code base, so before each small release and milestone, you should clean up the code, and re-factory it if needed.
 
 - ***Write compatible code***
@@ -47,4 +47,5 @@
     + You know, some times the docstring of an amazing open source project can not keep pace with the developing. So, just read the source code if it is really a good project or will be used in your project.  
     + e.g: at the very beginning of this project [IPython-Dashboard](https://github.com/litaotao/IPython-Dashboard), the doc of [nvd3](https://github.com/novus/nvd3) is not that good enough, but [zeppelin](zeppelin-project.org) says they use [nvd3](https://github.com/novus/nvd3) for the visulization, and I believe [nvd3](https://github.com/novus/nvd3) also be used in [databricks](https://databricks.com/), so I find that [nvd3](https://github.com/novus/nvd3) is a promising project and will be used in my [IPython-Dashboard](https://github.com/litaotao/IPython-Dashboard), so I really take some time in the source code of [nvd3](https://github.com/novus/nvd3), thank goodness, the source code is very readable though I'm not a js guy, even more than some code wrote by my colleague in our company.
 
-
+- ***Imagine the use case of you product in the target users' shoes***
+    + Yes, your are building an amazing tool or product, which will change the world. But, before you start push it to people out there, it's very import to think about the use case and situation of your target users, and think twice.

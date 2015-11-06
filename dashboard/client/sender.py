@@ -9,7 +9,7 @@ from dashboard import r_kv
 
 
 def sender(obj, key, value="", meta={}):
-    """Send an object to storage[redis]. key is the obj name, 
+    """Send an object to storage[redis]. key is the obj name,
     value is the serialized object[a dict most of the time]
 
     Args:
@@ -27,10 +27,8 @@ def sender(obj, key, value="", meta={}):
 
     value = value if value else obj.to_json()
     res = r_kv.set(key, value)
-    
+
     if meta:
         res = r_kv.set(key + suffix, meta)
 
     return res
-
-

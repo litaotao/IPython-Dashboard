@@ -11,5 +11,5 @@ IPython_Dashboard.egg-info
 # tmp files
 *.rdb
 *.coverage
-
+*.ipynb_checkpoints
 
