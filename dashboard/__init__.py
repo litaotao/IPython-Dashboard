@@ -11,11 +11,14 @@ from flask.ext.restful import Api
 # user-defined package
 from . import config
 
+
 '''
 dashboard server setup
 '''
-app = Flask(__name__, static_folder="./static", template_folder="./templates")
-app.options = dict(debug=config.app_debug, port=config.app_port, host=config.app_host)
+# app = Flask("__name__", static_folder="./static", template_folder="./templates")
+# app = Flask("dashboard", static_folder="./static", template_folder="./templates")
+# app = Flask("dashboard")
+app = Flask(__name__)
 api = Api(app)
 
 

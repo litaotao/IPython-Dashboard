@@ -92,6 +92,7 @@ OK
     + unified message display center
     + SQL Editor
     + login management
+    + unified logger and exception report
 
 
 

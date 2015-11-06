@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 
 import os
 import io
@@ -35,7 +35,7 @@ setup(
     zip_safe=False,
     entry_points={
         'console_scripts': [
+            'dash-server-2 = dashboard.server.start:run',
         ]
     }
 )
-
