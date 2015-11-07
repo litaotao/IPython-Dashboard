@@ -3,7 +3,7 @@ Dom templates
 *************************************/
 
 // add a gridstack box
-var box_template_v2 = ' \
+var box_template = ' \
 <div data-gs-min-height="4" data-gs-min-width="6">   \
   <div class="grid-stack-item-content">              \
     <div class="chart-wrapper">                      \
@@ -22,7 +22,7 @@ var box_template_v2 = ' \
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 2px 2px;"><span class="fa fa-fw fa-lg fa-cog"></span></a>  \
                   <ul class="dropdown-menu" style="min-width: 30px;">  \
                     <button class="btn btn-primary edit-button" data-toggle="modal" data-target="#myModal">                   \
-                      <i class="fa fa-fw fa-sm fa-edit" style="color: black;" onclick="addClassMark(this)"></i>               \
+                      <i class="fa fa-fw fa-sm fa-edit" style="color: black;" graph-id={0} onclick="editModal(this)"></i>               \
                     </button>      \
                     <button class="btn btn-primary edit-button">                   \
                       <i class="fa fa-fw fa-sm fa-group" style="color: black;"></i>               \
@@ -38,7 +38,7 @@ var box_template_v2 = ' \
           </tr>     \
         </table>    \
       </div>        \
-      <div class="chart-graph" style="width: 100%; overflow-x:auto; overflow-y:auto; color: #444;" type_name="none" key_name="none">   \
+      <div class="chart-graph" graph-id={0} style="width: 100%; overflow-x:auto; overflow-y:auto; color: #444;" type_name="none" key_name="none">   \
       </div>        \
     </div>          \
   </div>            \
@@ -51,8 +51,8 @@ var th_template = ' \
     {0} <span class="caret"></span>  \
   </button>  \
   <ul class="dropdown-menu"> \
-    <li style="width: 50px;"><input type="checkbox" onclick="markXy(this, 1)" style="margin-left: 15px;">   x</li> \
-    <li style="width: 50px;"><input type="checkbox" onclick="markXy(this, 0)" style="margin-left: 15px;">   y</li> \
+    <li style="width: 50px;"><input type="checkbox" onclick="markXy_v2(this, 1)" style="margin-left: 15px;">   x</li> \
+    <li style="width: 50px;"><input type="checkbox" onclick="markXy_v2(this, 0)" style="margin-left: 15px;">   y</li> \
   </ul> \
 </div>'
 
@@ -71,6 +71,22 @@ var setting_template = '       \
 
 // local storage
 var local_storage = {};
+
+//
+// var graph_obj = null;
+// var graph_id = 0;
+// function addClassMark(obj){
+//   graph_obj = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1];
+//   // graph_obj = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1]
+//   graph_id = graph_obj.getAttribute("graph_id");
+//   store.set("current-graph", graph_id);
+// }
+
+function editModal(obj){
+  var tmpGraph = {"graph_id": obj.getAttribute("graph-id"), key: "", type: "", option: {"x": [], "y": []}};
+  store.set("modal", tmpGraph);
+  console.log(store.getAll());
+}
 
 
 function toggleGridMovable(obj){
@@ -120,7 +136,7 @@ function createGrids_v2(){
   // initialized boxes using data from server & set key_name and type_name attribute
   $("#dashboard_name")[0].value = dash_content.name;
   $.each(dash_content.grid, function(index, obj){
-    tmp = grid.add_widget(box_template_v2, obj.x, obj.y, obj.width, obj.height);
+    tmp = grid.add_widget(strFormat(box_template, index), obj.x, obj.y, obj.width, obj.height);
     tmp[0].setAttribute("graph-id", index);
     $(tmp).find("input.input-title-level-2")[0].value = obj.graph_name;
     $(tmp).find(".chart-graph")[0].setAttribute("key_name", obj.key);
@@ -130,14 +146,17 @@ function createGrids_v2(){
   })
 
   // initialized graph data
+  current_dash = store.get(store.get("current-dash"));
   $.each(graph_with_key, function(index, key){
     if (key == "none"){
         console.log("no key exist");
     }else{
         $.getJSON("http://127.0.0.1:9090/key/" + key, function(data){
+            store.set(key, $.parseJSON(data.data));
             console.log($(strFormat("div [graph-id={0}] .chart-graph", index)));
+            initChart(current_dash.grid[index].type, index)
             // drawChart($.parseJSON(data.data), strFormat("div [graph-id={0}] .chart-graph", index));
-            parseTable($.parseJSON(data.data), strFormat("div [graph-id={0}] .chart-graph", index));
+            // parseTable($.parseJSON(data.data), strFormat("div [graph-id={0}] .chart-graph", index));
             console.log($.parseJSON(data.data));
         })
     }
@@ -170,18 +189,21 @@ function getValue(){
   $("#keys").on("change", function(){
     var selectDOM = $("#keys")[0];
     var key = selectDOM.options[selectDOM.selectedIndex].text;
-
+    var modal = store.get("modal");
     var url = "http://127.0.0.1:9090/key/" + key;
-      // console.log(url);
 
     $.getJSON(url, function(data){
         // console.log(data);
         var jsonData = $.parseJSON(data.data);
         localKeyValue[key] = jsonData;
         store.set(key, jsonData);
-        store.set("chart-type", "table");
-        parseTable(jsonData, "#value");
+        modal.key = key;
+        modal.type = "table";      // default graph type
+        store.set("modal", modal);
+        // store.set("chart-type", "table");
+        // parseTable(jsonData, "#value");
         // drawChart()
+        drawChartModal("table");
     })
 
     // change the btn-chart, table button default as clicked
@@ -228,6 +250,33 @@ function markXy(obj, xy){
   }
   store.set(store.get("current-dash"), current_dash);
   console.log(xyAxes);
+}
+
+
+function markXy_v2(obj, xy){
+  var btn_type = xy ? 'btn-info' : 'btn-warning';
+  var axesName = obj.parentElement.parentElement.parentElement.children[0].innerText.trim();
+  var modalData = store.get("modal");
+  // change hightlight colour
+  if (obj.checked){
+      var node = obj.parentElement.parentElement.parentElement.children[0];
+      node.classList.remove('btn-success');
+      node.classList.add(btn_type);
+      // push axes info
+      modalData.option[xy ? "x" : "y"].push(axesName);
+  }else{
+      var node = obj.parentElement.parentElement.parentElement.children[0];
+      node.classList.remove(btn_type);
+      node.classList.add('btn-success');
+      // remove axes info
+      modalData.option[xy ? "x" : "y"] = $.grep(modalData.option[xy ? "x" : "y"], function(value){return value != axesName});
+      // xyAxes[xy ? "x" : "y"] = $.grep(xyAxes[xy ? "x" : "y"], function(value){return value != axesName});
+      // current_dash.grid[current_graph].option[xy ? "x" : "y"] = $.grep(xyAxes[xy ? "x" : "y"], function(value){return value != axesName});
+  }
+  // store.set(store.get("current-dash"), current_dash);
+  // console.log(xyAxes);
+  store.set("modal", modalData);
+  console.log(store.get("modal"));
 }
 
 
@@ -279,26 +328,16 @@ function parseTable(data, selector){
   // remove table
   // $.each($("#value")[0].children, function(index, obj){$("#value")[0].removeChild(obj)})
   var tableDOM = $(selector)[0]
-  currentTable = tableDOM.children
-  for (var i = currentTable.length - 1; i >= 0; i--) {
-    tableDOM.removeChild(currentTable[0]);
-  };
+  // currentTable = tableDOM.children
+  // for (var i = currentTable.length - 1; i >= 0; i--) {
+  //   tableDOM.removeChild(currentTable[0]);
+  // };
 
   // add table
   table.appendChild(thead);
   table.appendChild(tbody);
   tableDOM.appendChild(table);
   // console.log(tableDOM.innerHTML);
-}
-
-
-var graph_obj = null;
-var graph_id = 0;
-function addClassMark(obj){
-  graph_obj = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1];
-  // graph_obj = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1]
-  graph_id = graph_obj.getAttribute("graph_id");
-  store.set("current-graph", graph_id);
 }
 
 
@@ -314,6 +353,17 @@ function saveGraph(){
   graph_obj.setAttribute("type_name", store.get("chart-type"));
 
   drawChart(store.get("chart-type"), graph_id);
+}
+
+
+function saveGraph_v2(){
+  var modalData = store.get("modal");
+  var current_dash = store.get(store.get("current-dash"));
+  drawChart_v2(modalData.type, modalData.graph_id);
+  current_dash.grid[modalData.graph_id].key = modalData.key;
+  current_dash.grid[modalData.graph_id].type = modalData.type;
+  current_dash.grid[modalData.graph_id].option = modalData.option;
+  store.set(store.get("current-dash"), current_dash);
 }
 
 
@@ -462,9 +512,36 @@ function initDashList(){
 
 
 function addBox(){
+  /*
+  {
+    graph_name: "graph name 2",
+    height: 5,
+    id: "2",
+    key: "none",
+    option: {},
+    type: "none",
+    width: 6,
+    x: 6,
+    y: 0
+  }
+  */
   var grid = $('.grid-stack').data('gridstack');
-  grid.add_widget(box_template_v2, 200, 200, 6, 5, true);
+  var new_box = grid.add_widget(box_template, 200, 200, 6, 5, true);
   getKeys();
+
+  var current_dash = store.get(store.get("current-dash"));
+  var new_graph_id = Object.keys(current_dash.grid).length;
+  var new_graph_name = strFormat("graph name {0}", new_graph_id);
+  new_box[0].setAttribute("graph-id", new_graph_id);
+  new_box.find("input.input-title-level-2")[0].value = new_graph_name;
+  var new_graph_data = {"id": new_graph_id, "key": "none", "type": "none", "option": {"x": [], "y": []},
+                        "x": new_box[0].getAttribute("data-gs-x"), "y": new_box[0].getAttribute("data-gs-y"),
+                        "width": new_box[0].getAttribute("data-gs-width"), "height": new_box[0].getAttribute("data-gs-height"),
+                        "graph_name": new_graph_name
+  }
+  current_dash.grid[new_graph_id] = new_graph_data;
+  store.set(store.get("current-dash"), current_dash);
+  console.log("add a new grid box : ", new_graph_data);
 }
 
 

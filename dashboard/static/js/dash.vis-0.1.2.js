@@ -267,3 +267,137 @@ function drawChart(type, graph_id){
   debugChart = chart;
   debugData = data;
 }
+
+
+function drawChart_v2(type, graph_id){
+  var selector = graph_id ? strFormat("div.chart-graph[graph_id='{0}']", graph_id) : "#value";
+  console.log(strFormat("###Ready to draw chart : {0}", type));
+  var modalData = store.get("modal");
+  var key = modalData.key;
+  var data = store.get(key);
+  //
+  if (type == 'table') {
+    parseTable(data, selector);
+    return true;
+  };
+
+  // check data avilablity
+  // use different js lib to do the drawing, nvd3, c3, d3, leafletjs
+  // currently, I just use nvd3 to fullfill the basic graph.
+  var chart = getChart(type);
+
+  // clear content if exissted for creating new content
+  $.each($(selector)[0].children, function(index, obj){$(selector)[0].removeChild(obj)})
+
+  // get data which need draw, axes defined in data-0.1.0.js as xyAxes
+  var xColumn = data[ modalData.option.x[0] ];
+  var graphData = [];
+  $.each(modalData.option.y, function(index, obj){
+    var tmp = {};
+    var yColumn = data[obj];
+    tmp["key"] = obj;
+    tmp["values"] = [];
+    for (var index in xColumn){
+      tmp["values"].push({"x": xColumn[index], "y": yColumn[index]});
+    }
+    graphData.push(tmp);
+  });
+
+  // validate and transform data before draw it
+  graphData = validateData(type, graphData);
+  d3.select(selector).append('svg')
+    .datum(graphData)
+    .call(chart);
+
+  // register a resize event
+  nv.utils.windowResize(chart.update);
+}
+
+
+function initChart(type, graph_id){
+  var selector = graph_id ? strFormat("div.chart-graph[graph_id='{0}']", graph_id) : "#value";
+  console.log(strFormat("###Ready to draw chart : {0}", type));
+  // var modalData = store.get("modal");
+  var current_dash = store.get(store.get("current-dash"));
+  var current_graph = current_dash.grid[graph_id];
+  var key = current_graph.key;
+  var data = store.get(key);
+  //
+  if (type == 'table') {
+    parseTable(data, selector);
+    return true;
+  };
+
+  // check data avilablity
+  // use different js lib to do the drawing, nvd3, c3, d3, leafletjs
+  // currently, I just use nvd3 to fullfill the basic graph.
+  var chart = getChart(type);
+
+  // clear content if exissted for creating new content
+  $.each($(selector)[0].children, function(index, obj){$(selector)[0].removeChild(obj)})
+
+  // get data which need draw, axes defined in data-0.1.0.js as xyAxes
+  var xColumn = data[ current_graph.option.x[0] ];
+  var graphData = [];
+  $.each(current_graph.option.y, function(index, obj){
+    var tmp = {};
+    var yColumn = data[obj];
+    tmp["key"] = obj;
+    tmp["values"] = [];
+    for (var index in xColumn){
+      tmp["values"].push({"x": xColumn[index], "y": yColumn[index]});
+    }
+    graphData.push(tmp);
+  });
+
+  // validate and transform data before draw it
+  graphData = validateData(type, graphData);
+  d3.select(selector).append('svg')
+    .datum(graphData)
+    .call(chart);
+
+  // register a resize event
+  nv.utils.windowResize(chart.update);
+}
+
+
+function drawChartModal(type){
+  var modalData = store.get("modal");
+  var key = modalData.key;
+  var data = store.get(key);
+
+  // clear content if exissted for creating new content
+  $.each($("#value")[0].children, function(index, obj){$("#value")[0].removeChild(obj)})
+
+  if (type == 'table') {
+    parseTable(data, "#value");
+    return true;
+  };
+
+  var chart = getChart(type);
+  var xColumn = data[ modalData.option.x[0] ];
+  var graphData = [];
+  $.each(modalData.option.y, function(index, obj){
+    var tmp = {};
+    var yColumn = data[obj];
+    tmp["key"] = obj;
+    tmp["values"] = [];
+    for (var index in xColumn){
+      tmp["values"].push({"x": xColumn[index], "y": yColumn[index]});
+    }
+    graphData.push(tmp);
+  });
+
+  // validate and transform data before draw it
+  graphData = validateData(type, graphData);
+  d3.select("#value").append('svg')
+    .datum(graphData)
+    .call(chart);
+
+  // register a resize event
+  nv.utils.windowResize(chart.update);
+
+  // update modal setting
+  modalData.type = type;
+  store.set("modal", modalData);
+}

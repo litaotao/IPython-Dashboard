@@ -154,3 +154,4 @@ OK
 - [metabase](http://www.metabase.com/)
 - [gridstack](https://github.com/troolee/gridstack.js)
 - [gridster](http://gridster.net/)
+- [dashboards](https://github.com/jupyter-incubator/dashboards)

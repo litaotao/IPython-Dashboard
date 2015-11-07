@@ -35,7 +35,7 @@ setup(
     zip_safe=False,
     entry_points={
         'console_scripts': [
-            'dash-server-2 = dashboard.server.start:run',
+            'dash-server = dashboard.server.start:run',
         ]
     }
 )
