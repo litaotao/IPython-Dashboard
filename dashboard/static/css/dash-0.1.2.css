@@ -212,3 +212,11 @@ body {
   background-color: white;
   top: 10px;
 }
+
+/*
+remove the blue outline when click the button in bootstrap 3
+related questions: http://stackoverflow.com/questions/23333231/bootstrap-button-shows-blue-outline-when-clicked
+*/
+.fa-circle-o-notch:focus,.fa-circle-o-notch:active {
+   outline: none !important;
+}

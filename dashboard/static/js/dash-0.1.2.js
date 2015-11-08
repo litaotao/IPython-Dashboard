@@ -9,51 +9,51 @@ var box_template = ' \
     <div class="chart-wrapper">                      \
       <div class="chart-title bold">                 \
         <table class="table input-title-level-2">    \
-          <tr class="active" style="padding-left: 10%;">   \
-            <td style="padding: 0px; padding-left: 5px;">   \
+          <tr class="active" style="padding-left: 10%;">               \
+            <td style="padding: 0px; padding-left: 5px;">              \
               <button class="fa fa-fw fa-sm fa-circle-o-notch" onclick=toggleGridMovable(this) style="background: none;background-color: inherit;border: none; padding: 0px 0px">         \
-              </button></td>   \
+              </button></td>                                           \
             <td style="padding: 0px; width: 90%; padding-left: 5px">   \
               <input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph">  \
             </td>                                                                                                       \
             <td style="padding: 0px; width: 10%">                                                                       \
               <ul class="nav navbar-nav" style="padding-left: 7%;">    \
-                <li class="dropdown">        \
+                <li class="dropdown">                                  \
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 2px 2px;"><span class="fa fa-fw fa-lg fa-cog"></span></a>  \
                   <ul class="dropdown-menu" style="min-width: 30px;">  \
                     <button class="btn btn-primary edit-button" data-toggle="modal" data-target="#myModal">                   \
-                      <i class="fa fa-fw fa-sm fa-edit" style="color: black;" graph-id={0} onclick="editModal(this)"></i>               \
+                      <i class="fa fa-fw fa-sm fa-edit" style="color: black;" graph-id={0} onclick="editModal(this)"></i>     \
+                    </button>                                                                                                 \
+                    <button class="btn btn-primary edit-button">                                                              \
+                      <i class="fa fa-fw fa-sm fa-group" style="color: black;"></i>                                           \
+                    </button>                                                                                                 \
+                    <li class="divider" style="margin: auto;"></li>                                                           \
+                    <button class="btn btn-primary edit-button" >                                                             \
+                      <i class="fa fa-fw fa-sm fa-times-circle" style="color: black;" ></i>                                   \
                     </button>      \
-                    <button class="btn btn-primary edit-button">                   \
-                      <i class="fa fa-fw fa-sm fa-group" style="color: black;"></i>               \
-                    </button>      \
-                    <li class="divider" style="margin: auto;"></li>  \
-                    <button class="btn btn-primary edit-button" >                   \
-                      <i class="fa fa-fw fa-sm fa-times-circle" style="color: black;" ></i>               \
-                    </button>      \
-                  </ul>  \
-                </li>    \
-              </ul>     \
-            </td>   \
-          </tr>     \
-        </table>    \
-      </div>        \
+                  </ul>            \
+                </li>              \
+              </ul>                \
+            </td>                  \
+          </tr>                    \
+        </table>                   \
+      </div>                       \
       <div class="chart-graph" graph-id={0} style="width: 100%; overflow-x:auto; overflow-y:auto; color: #444;" type_name="none" key_name="none">   \
-      </div>        \
-    </div>          \
-  </div>            \
+      </div>                       \
+    </div>                         \
+  </div>                           \
 </div>';
 
 // render the head row of a table
-var th_template = ' \
-<div class="btn-group"> \
+var th_template = '                  \
+<div class="btn-group">              \
   <button type="button" class="btn btn-xs dropdown-toggle btn-success" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 0px 0px;">  \
     {0} <span class="caret"></span>  \
-  </button>  \
-  <ul class="dropdown-menu"> \
-    <li style="width: 50px;"><input type="checkbox" onclick="markXy_v2(this, 1)" style="margin-left: 15px;">   x</li> \
-    <li style="width: 50px;"><input type="checkbox" onclick="markXy_v2(this, 0)" style="margin-left: 15px;">   y</li> \
-  </ul> \
+  </button>                          \
+  <ul class="dropdown-menu">         \
+    <li style="width: 50px;"><input type="checkbox" onclick="markXy(this, 1)" style="margin-left: 15px;">   x</li> \
+    <li style="width: 50px;"><input type="checkbox" onclick="markXy(this, 0)" style="margin-left: 15px;">   y</li> \
+  </ul>                              \
 </div>'
 
 // setting dropdown box in home page
@@ -61,26 +61,14 @@ var setting_template = '       \
 <ul class="nav navbar-nav">    \
   <li class="dropdown">        \
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 2px 2px;"><span class="fa fa-fw fa-lg fa-cog"></span></a>  \
-    <ul class="dropdown-menu" style="min-width: 20px;">  \
-      <li><a href="#" ><span class="fa fa-fw fa-sm fa-group"></span></a></li>       \
-      <li class="divider" style="margin: auto;"></li>  \
-      <li><a href="#" ><span class="fa fa-fw fa-sm fa-times-circle"></span></a></li>           \
+    <ul class="dropdown-menu" style="min-width: 20px;">                              \
+      <li><a href="#" ><span class="fa fa-fw fa-sm fa-group"></span></a></li>        \
+      <li class="divider" style="margin: auto;"></li>                                \
+      <li><a href="#" ><span class="fa fa-fw fa-sm fa-times-circle"></span></a></li> \
     </ul>  \
   </li>    \
 </ul>'
 
-// local storage
-var local_storage = {};
-
-//
-// var graph_obj = null;
-// var graph_id = 0;
-// function addClassMark(obj){
-//   graph_obj = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1];
-//   // graph_obj = obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1]
-//   graph_id = graph_obj.getAttribute("graph_id");
-//   store.set("current-graph", graph_id);
-// }
 
 function editModal(obj){
   var tmpGraph = {"graph_id": obj.getAttribute("graph-id"), key: "", type: "", option: {"x": [], "y": []}};
@@ -90,11 +78,21 @@ function editModal(obj){
 
 
 function toggleGridMovable(obj){
+  // clear any active button if set before
+  $.each($("button.fa-circle-o-notch"), function(index, btn_obj){
+    if (obj != btn_obj){
+      btn_obj.className.includes("down") ? btn_obj.classList.remove("fa-spin") : null;
+      btn_obj.className.includes("down") ? btn_obj.classList.remove("down") : null;
+      btn_obj.style.color = "";
+    }
+  });
+  // tag a new button
   $(obj).toggleClass("down");
   $('.grid-stack').data('gridstack').movable('.grid-stack-item', obj.className.includes("down"));
   $('.grid-stack').data('gridstack').resizable('.grid-stack-item', obj.className.includes("down"));
   obj.style.color = obj.className.includes("down") ? "green" : "";
   obj.className.includes("down") ? obj.classList.add("fa-spin") : obj.classList.remove("fa-spin");
+
   console.log("grid stack movable");
 }
 
@@ -120,7 +118,7 @@ function initGridstack(){
 
 
 // create gridstack grids according the data from server
-function createGrids_v2(){
+function createGrids(){
   // clear local storage
   store.clear();
 
@@ -155,8 +153,6 @@ function createGrids_v2(){
             store.set(key, $.parseJSON(data.data));
             console.log($(strFormat("div [graph-id={0}] .chart-graph", index)));
             initChart(current_dash.grid[index].type, index)
-            // drawChart($.parseJSON(data.data), strFormat("div [graph-id={0}] .chart-graph", index));
-            // parseTable($.parseJSON(data.data), strFormat("div [graph-id={0}] .chart-graph", index));
             console.log($.parseJSON(data.data));
         })
     }
@@ -168,12 +164,11 @@ function createGrids_v2(){
 }
 
 // get all the keys from server
-function getKeys(){
+function registerKeysFunc(){
   $("[data-target]").on("click", function(){
     var keys_select = $("#keys");
     keys_select.empty();
 
-    // console.log("get_keys");
     var url = "http://127.0.0.1:9090/keys";
     $.getJSON(url, function(data){
       $.each(data.data, function(index, value){
@@ -183,7 +178,6 @@ function getKeys(){
   })
 }
 
-var localKeyValue = {};
 // get the value for a key and parse it as a table by default
 function getValue(){
   $("#keys").on("change", function(){
@@ -193,16 +187,11 @@ function getValue(){
     var url = "http://127.0.0.1:9090/key/" + key;
 
     $.getJSON(url, function(data){
-        // console.log(data);
         var jsonData = $.parseJSON(data.data);
-        localKeyValue[key] = jsonData;
         store.set(key, jsonData);
         modal.key = key;
         modal.type = "table";      // default graph type
         store.set("modal", modal);
-        // store.set("chart-type", "table");
-        // parseTable(jsonData, "#value");
-        // drawChart()
         drawChartModal("table");
     })
 
@@ -221,39 +210,7 @@ function genElement(type){
 }
 
 
-/***************************************
-visualzie table
-***************************************/
-var xyAxes = {"x": [], "y": []};
-
 function markXy(obj, xy){
-  var current_dash = store.get(store.get("current-dash"));
-  var current_graph = store.get("current-graph");
-
-  var btn_type = xy ? 'btn-info' : 'btn-warning';
-  var axesName = obj.parentElement.parentElement.parentElement.children[0].innerText.trim();
-  // change hightlight colour
-  if (obj.checked){
-      var node = obj.parentElement.parentElement.parentElement.children[0];
-      node.classList.remove('btn-success');
-      node.classList.add(btn_type);
-      // push axes info
-      xyAxes[xy ? "x" : "y"].push(axesName);
-      current_dash.grid[current_graph].option[xy ? "x" : "y"].push(axesName);
-  }else{
-      var node = obj.parentElement.parentElement.parentElement.children[0];
-      node.classList.remove(btn_type);
-      node.classList.add('btn-success');
-      // remove axes info
-      xyAxes[xy ? "x" : "y"] = $.grep(xyAxes[xy ? "x" : "y"], function(value){return value != axesName});
-      current_dash.grid[current_graph].option[xy ? "x" : "y"] = $.grep(xyAxes[xy ? "x" : "y"], function(value){return value != axesName});
-  }
-  store.set(store.get("current-dash"), current_dash);
-  console.log(xyAxes);
-}
-
-
-function markXy_v2(obj, xy){
   var btn_type = xy ? 'btn-info' : 'btn-warning';
   var axesName = obj.parentElement.parentElement.parentElement.children[0].innerText.trim();
   var modalData = store.get("modal");
@@ -270,11 +227,7 @@ function markXy_v2(obj, xy){
       node.classList.add('btn-success');
       // remove axes info
       modalData.option[xy ? "x" : "y"] = $.grep(modalData.option[xy ? "x" : "y"], function(value){return value != axesName});
-      // xyAxes[xy ? "x" : "y"] = $.grep(xyAxes[xy ? "x" : "y"], function(value){return value != axesName});
-      // current_dash.grid[current_graph].option[xy ? "x" : "y"] = $.grep(xyAxes[xy ? "x" : "y"], function(value){return value != axesName});
   }
-  // store.set(store.get("current-dash"), current_dash);
-  // console.log(xyAxes);
   store.set("modal", modalData);
   console.log(store.get("modal"));
 }
@@ -325,41 +278,19 @@ function parseTable(data, selector){
   table.style.fontSize = "small";
   table.style.fontWeight = "400";
 
-  // remove table
-  // $.each($("#value")[0].children, function(index, obj){$("#value")[0].removeChild(obj)})
   var tableDOM = $(selector)[0]
-  // currentTable = tableDOM.children
-  // for (var i = currentTable.length - 1; i >= 0; i--) {
-  //   tableDOM.removeChild(currentTable[0]);
-  // };
 
   // add table
   table.appendChild(thead);
   table.appendChild(tbody);
   tableDOM.appendChild(table);
-  // console.log(tableDOM.innerHTML);
 }
 
 
 function saveGraph(){
-  var dash = store.get(store.get("current-dash"));
-  var graph_id = store.get("current-graph");
-
-  dash.grid[graph_id].key = $("#keys")[0].options[$("#keys")[0].selectedIndex].text;
-  dash.grid[graph_id].type = store.get("chart-type");
-  store.set(store.get("current-dash"), dash);
-
-  graph_obj.setAttribute("key_name", $("#keys")[0].options[$("#keys")[0].selectedIndex].text);
-  graph_obj.setAttribute("type_name", store.get("chart-type"));
-
-  drawChart(store.get("chart-type"), graph_id);
-}
-
-
-function saveGraph_v2(){
   var modalData = store.get("modal");
   var current_dash = store.get(store.get("current-dash"));
-  drawChart_v2(modalData.type, modalData.graph_id);
+  drawChartIntoGrid(modalData.type, modalData.graph_id);
   current_dash.grid[modalData.graph_id].key = modalData.key;
   current_dash.grid[modalData.graph_id].type = modalData.type;
   current_dash.grid[modalData.graph_id].option = modalData.option;
@@ -382,14 +313,10 @@ function saveDash(){
   var res = _.map($('.grid-stack .grid-stack-item:visible'), function (el) {
     el = $(el);
     var node = el.data('_gridstack_node');
-    // var key = el.find("div.chart-graph")[0].getAttribute("key_name");
-    // var type = el.find("div.chart-graph")[0].getAttribute("type_name");
     var name = el.find("input.input-title-level-2")[0].value;
     var key = dash.grid[el[0].getAttribute("graph-id")].key;
     var type = dash.grid[el[0].getAttribute("graph-id")].type;
     var option = dash.grid[el[0].getAttribute("graph-id")].option;
-    // dash.grid[el[0].getAttribute("graph-id")].graph_name = name;
-    // var name = dash.grid[el[0].getAttribute("graph-id")].graph_name;
     var grid = {
         id: el.attr("graph-id"),
         x: node.x,
@@ -404,18 +331,6 @@ function saveDash(){
     dash.grid[el[0].getAttribute("graph-id")] = grid;
     return grid;
   });
-
-  // var dash_id = $("meta[name=dash_id]")[0].attributes.value.value;
-  // if (dash_id.length < 1){
-  //   var url = "http://127.0.0.1:9090/dash/0";
-  //   var method = "POST";
-    // var resJson = JSON.stringify({"grid": res, "name": dashName});
-  // }else{
-    // var url = "http://127.0.0.1:9090/data/dash/" + dash_id;
-    // var method = "PUT";
-    // var resJson = JSON.stringify({"grid": res, "name": dashName});
-    // var resJson
-  // }
 
   store.set(store.get("current-dash"), dash);
   var resJson = JSON.stringify(dash);
@@ -500,7 +415,6 @@ function initDashList(){
     author.innerText = obj.author;
     time.innerText = moment(parseInt(obj.time_modified) * 1000).format("YYYY-MM-DD HH:mm:ss");
     i.className = "fa fa-fw fa-lg fa-cog";
-    // action.appendChild(i);
     action.innerHTML = setting_template;
     tr.appendChild(name);
     tr.appendChild(author);
@@ -527,7 +441,7 @@ function addBox(){
   */
   var grid = $('.grid-stack').data('gridstack');
   var new_box = grid.add_widget(box_template, 200, 200, 6, 5, true);
-  getKeys();
+  registerKeysFunc();
 
   var current_dash = store.get(store.get("current-dash"));
   var new_graph_id = Object.keys(current_dash.grid).length;
@@ -546,16 +460,13 @@ function addBox(){
 
 
 function strFormat(theString){
-    // The string containing the format items (e.g. "{0}")
-    // will and always has to be the first argument.
+  // The string containing the format items (e.g. "{0}")
 
-    // start with the second argument (i = 1)
-    for (var i = 1; i < arguments.length; i++) {
-        // "gm" = RegEx options for Global search (more than one instance)
-        // and for Multiline search
-        var regEx = new RegExp("\\{" + (i - 1) + "\\}", "gm");
-        theString = theString.replace(regEx, arguments[i]);
-    }
-
-    return theString;
+  for (var i = 1; i < arguments.length; i++) {
+      // "gm" = RegEx options for Global search (more than one instance)
+      // and for Multiline search
+      var regEx = new RegExp("\\{" + (i - 1) + "\\}", "gm");
+      theString = theString.replace(regEx, arguments[i]);
+  }
+  return theString;
 }
