@@ -38,7 +38,6 @@ def test_create_dataframe():
         key = 'inspections-{}'.format(piece)
         value = data[piece * piece_lenth : piece * piece_lenth + piece_lenth]
         r_kv.set(key, value.to_json())
-    # import ipdb; ipdb.set_trace()
     #
     url_3 = 'https://github.com/litaotao/IPython-Dashboard/raw/v-0.1.2-visualiza-table/docs/people_number_by_province_lateset_10_years.csv'
     if os.path.isdir(TMP_DIR) and  'people_number_by_province_lateset_10_years.csv' in os.listdir(TMP_DIR):

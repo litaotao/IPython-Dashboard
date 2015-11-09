@@ -38,7 +38,8 @@ A stand alone, light-weight web server for building, sharing graphs created in i
 
 
 # Usage
-![docs/usage-1.jpg](docs/usage-1.jpg)
+
+[IPython-Dashboard-Usage.ipynb](http://nbviewer.ipython.org/github/litaotao/IPython-Dashboard/blob/v-0.1.2-visualiza-table/docs/IPython-Dashboard-Usage.ipynb)
 
 -----
 

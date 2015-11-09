@@ -19,7 +19,7 @@ var box_template = ' \
             <td style="padding: 0px; width: 10%">                                                                       \
               <ul class="nav navbar-nav" style="padding-left: 7%;">    \
                 <li class="dropdown">                                  \
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 2px 2px;"><span class="fa fa-fw fa-lg fa-cog"></span></a>  \
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 2px 2px;"><span class="fa fa-fw fa-lg fa-cog" style="color: green"></span></a>  \
                   <ul class="dropdown-menu" style="min-width: 30px;">  \
                     <button class="btn btn-primary edit-button" data-toggle="modal" data-target="#myModal">                   \
                       <i class="fa fa-fw fa-sm fa-edit" style="color: black;" graph-id={0} onclick="editModal(this)"></i>     \
@@ -60,7 +60,7 @@ var th_template = '                  \
 var setting_template = '       \
 <ul class="nav navbar-nav">    \
   <li class="dropdown">        \
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 2px 2px;"><span class="fa fa-fw fa-lg fa-cog"></span></a>  \
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 2px 2px;"><span class="fa fa-fw fa-lg fa-cog" style="color: green"></span></a>  \
     <ul class="dropdown-menu" style="min-width: 20px;">                              \
       <li><a href="#" ><span class="fa fa-fw fa-sm fa-group"></span></a></li>        \
       <li class="divider" style="margin: auto;"></li>                                \
@@ -192,7 +192,7 @@ function getValue(){
         modal.key = key;
         modal.type = "table";      // default graph type
         store.set("modal", modal);
-        drawChartModal("table");
+        drawChartIntoModal("table");
     })
 
     // change the btn-chart, table button default as clicked

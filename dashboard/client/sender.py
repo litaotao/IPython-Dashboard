@@ -8,7 +8,7 @@
 from dashboard import r_kv
 
 
-def sender(obj, key, value="", meta={}):
+def sender(obj, key, value="", meta={}, force=True):
     """Send an object to storage[redis]. key is the obj name,
     value is the serialized object[a dict most of the time]
 
@@ -18,10 +18,11 @@ def sender(obj, key, value="", meta={}):
         key: option, key to store in storage;
         value: option, value to store in storage;
         meta: option, meta info of the key-value in storage;
+        force: option, if true, will over-write the existing key if the key is used.
     """
     suffix = '-meta'
     # persistent key and value
-    if key in r_kv or key + suffix in r_kv:
+    if (key in r_kv or key + suffix in r_kv) and not force:
         print 'Collision: key: {}, or {} exists in storage'.format(key, key + suffix)
         return None
 
