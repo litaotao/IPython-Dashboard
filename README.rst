@@ -153,6 +153,19 @@ Change Log
 
    -  Dashboard
 
+      -  docstring
+      -  simple visualize table data
+
+   -  SQL Editor
+
+      -  research & preparation
+
+--------------
+
+-  ***V 0.1.1 : dashboard-server : [ current stable release ]***
+
+   -  Dashboard
+
       -  dashboard home page
 
          -  sort by dashboard name / creator / last update time

@@ -112,7 +112,6 @@ OK
     - SQL Editor
         + start try using ace to build an online sql editor, but will develop it in the next stage after this version
 
-
 - ***V 0.1.2 : visualiza-table : [ current stable release ]***
     - slogan: ***Inspired by IPython, built with love***
 
@@ -126,6 +125,16 @@ OK
 
 
 - V 0.1.1 : dashboard-server   
+    - Dashboard
+        + docstring
+        + simple visualize table data
+
+    - SQL Editor
+        + research & preparation
+
+---------
+
+- ***V 0.1.1 : dashboard-server : [ current stable release ]***  
     - Dashboard
         - dashboard home page
             + sort by dashboard name / creator / last update time
