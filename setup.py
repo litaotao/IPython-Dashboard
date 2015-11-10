@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 
 import os
 import io
@@ -7,10 +7,10 @@ from setuptools import find_packages, setup
 
 setup(
     name="IPython-Dashboard",
-    version='0.1.1',
+    version='0.1.2',
     author="Taotao Li",
     author_email="taotao.engineer@gmail.com",
-    url="https://github.com/litaotao/IPython-Dashboard/tree/v-0.2-dashboard-server",
+    url="https://github.com/litaotao/IPython-Dashboard",
     keywords = ("ipython", "dashboard", "interactive", "visualization", "data science", "data analysis", "streaming"),
     license="BSD",
     packages=find_packages(),
@@ -35,7 +35,7 @@ setup(
     zip_safe=False,
     entry_points={
         'console_scripts': [
+            'dash-server = dashboard.server.start:run',
         ]
     }
 )
-

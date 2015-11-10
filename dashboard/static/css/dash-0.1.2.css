@@ -78,7 +78,7 @@ body {
   border-radius: 0;
   margin: 0;
   z-index: 999;
-}    
+}
 
 @media(max-width: 768px) {
   .navbar-vertical-left {
@@ -88,7 +88,7 @@ body {
     height: auto;
     width: 100%;
   }
-  
+
   .navbar-vertical-left,
   .navbar-vertical-left ul.navbar-nav {
     -webkit-transition: none;
@@ -98,11 +98,11 @@ body {
     -moz-transform: none;
     transform: none;
   }
-  
+
   .navbar-vertical-left ul.navbar-nav > li {
     display: table-cell;
   }
-  
+
   .navbar-vertical-left ul.navbar-nav > li > a {
     display: inline-block;
     width: 100%;
@@ -110,31 +110,31 @@ body {
     height: 50px;
     line-height: 30px;
   }
-  
+
   .navbar-vertical-left ul.navbar-nav > li > a > i.fa {
     margin: 0;
   }
-  
+
   .navbar-vertical-left ul.navbar-nav > li > a > span {
     display: none;
   }
 }
 
 .input-title-level-1 {
-  background-color: inherit; 
-  text-align: center; 
-  font-size: xx-large; 
-  height: 50px; 
+  background-color: inherit;
+  text-align: center;
+  font-size: xx-large;
+  height: 50px;
   border: none;
   resize: none;
   padding: 0px 0px;
 }
 
 .input-title-level-2 {
-  background-color: inherit; 
-  text-align: center; 
-  font-size: large; 
-  height: 30px; 
+  background-color: inherit;
+  text-align: center;
+  font-size: large;
+  height: 30px;
   border: none;
   resize: none;
   padding: 0px 0px;
@@ -143,9 +143,9 @@ body {
 }
 
 .edit-button {
-  text-align: center; 
-  font-size: large; 
-  height: 30px; 
+  text-align: center;
+  font-size: large;
+  height: 30px;
   border: none;
   resize: none;
   padding: 0px 0px;
@@ -211,4 +211,12 @@ body {
   text-align: center;
   background-color: white;
   top: 10px;
+}
+
+/*
+remove the blue outline when click the button in bootstrap 3
+related questions: http://stackoverflow.com/questions/23333231/bootstrap-button-shows-blue-outline-when-clicked
+*/
+.fa-circle-o-notch:focus,.fa-circle-o-notch:active {
+   outline: none !important;
 }

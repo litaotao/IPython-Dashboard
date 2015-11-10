@@ -1,1 +1,1 @@
-import sender
+from sender import *
