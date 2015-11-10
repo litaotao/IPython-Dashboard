@@ -21,25 +21,26 @@ A stand alone, light-weight web server for building, sharing graphs created in i
 - Editable
 - Real-time fresh when rendering a variable python object
 - Can be shared, both public and private [ need password ]
-- In the notebook, can share an object to a dashboard [ that's visualise that object in that dashboard ]
+- In the notebook, can share an object to a dashboard [ that's visualize that object in that dashboard ]
 
 -----
 
 # Screenshot and Demo
 
-[Demo on Youtube](https://youtu.be/Xv0UjKVEttA)     
+[Demo on Youtube](https://youtu.be/LOWBEYDkn90)     
 [Demo on Youku](http://v.youku.com/v_show/id_XMTM3MTc5MTAwMA)
 
-[![demo](docs/template-screenshot-1.jpg)](https://youtu.be/Xv0UjKVEttA)
-[![demo](docs/template-screenshot-2.jpg)](https://youtu.be/Xv0UjKVEttA)
-[![demo](docs/template-screenshot-3.jpg)](https://youtu.be/Xv0UjKVEttA)
+[![demo](docs/template-screenshot-0.1.2-1.jpg)](https://youtu.be/LOWBEYDkn90)
+[![demo](docs/template-screenshot-0.1.2-2.jpg)](https://youtu.be/LOWBEYDkn90)
+[![demo](docs/template-screenshot-0.1.2-3.jpg)](https://youtu.be/LOWBEYDkn90)
 
 -----
 
 
 # Usage
 
-[IPython-Dashboard-Tutorial.ipynb](http://nbviewer.ipython.org/github/litaotao/IPython-Dashboard/blob/v-0.1.2-visualiza-table/docs/IPython-Dashboard-Tutorial.ipynb)
+IPython-Dashboard-Tutorial.ipynb: [On nbviewer](http://nbviewer.ipython.org/github/litaotao/IPython-Dashboard/blob/v-0.1.2-visualiza-table/docs/IPython-Dashboard-Tutorial.ipynb) or [On githbu](https://github.com/litaotao/IPython-Dashboard/blob/v-0.1.2-visualiza-table/docs/IPython-Dashboard-Tutorial.ipynb)
+
 
 -----
 
