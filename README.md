@@ -5,7 +5,7 @@
 
 -----
 
-## ***Inspired by [IPython](http://ipython.org/), built for data guy***
+## ***Inspired by [IPython](http://ipython.org/), built with love***
 
 -----
 
@@ -30,16 +30,18 @@ A stand alone, light-weight web server for building, sharing graphs created in i
 [Demo on Youtube](https://youtu.be/LOWBEYDkn90)     
 [Demo on Youku](http://v.youku.com/v_show/id_XMTM3MTc5MTAwMA)
 
-[![demo](docs/template-screenshot-0.1.2-1.jpg)](https://youtu.be/LOWBEYDkn90)
-[![demo](docs/template-screenshot-0.1.2-2.jpg)](https://youtu.be/LOWBEYDkn90)
-[![demo](docs/template-screenshot-0.1.2-3.jpg)](https://youtu.be/LOWBEYDkn90)
+![demo](docs/template-screenshot-0.1.2-1.jpg)
+
+![demo](docs/template-screenshot-0.1.2-2.jpg)
+
+![demo](docs/template-screenshot-0.1.2-3.jpg)
 
 -----
 
 
 # Usage
 
-IPython-Dashboard-Tutorial.ipynb: [On nbviewer](http://nbviewer.ipython.org/github/litaotao/IPython-Dashboard/blob/v-0.1.2-visualiza-table/docs/IPython-Dashboard-Tutorial.ipynb) or [On githbu](https://github.com/litaotao/IPython-Dashboard/blob/v-0.1.2-visualiza-table/docs/IPython-Dashboard-Tutorial.ipynb)
+***IPython-Dashboard-Tutorial.ipynb***: [On nbviewer](http://nbviewer.ipython.org/github/litaotao/IPython-Dashboard/blob/v-0.1.2-visualiza-table/docs/IPython-Dashboard-Tutorial.ipynb) or [On githbu](https://github.com/litaotao/IPython-Dashboard/blob/v-0.1.2-visualiza-table/docs/IPython-Dashboard-Tutorial.ipynb)
 
 
 -----
@@ -97,10 +99,22 @@ OK
     + unified logger and exception report
 
 
+- ***V 0.1.3 : basic-curd-docs : [ current develop version ]***
+
+    - Dashboard
+        + restructure code for future develop
+        + more docs and tutorial
+        + basic curd operations
+        + gh-pages done
+        + publish on readthedoc
+        + hover tips
+
+    - SQL Editor
+        + start try using ace to build an online sql editor, but will develop it in the next stage after this version
 
 
-- ***V 0.1.2 : visualiza-table : [ current develop version ]***
-    - slogan: ***Inspired by IPython, built for data guy***
+- ***V 0.1.2 : visualiza-table : [ current stable release ]***
+    - slogan: ***Inspired by IPython, built with love***
 
     - Dashboard
         + document and doc string
@@ -111,7 +125,7 @@ OK
         + research & preparation
 
 
-- ***V 0.1.1 : dashboard-server : [ current stable release ]***  
+- V 0.1.1 : dashboard-server   
     - Dashboard
         - dashboard home page
             + sort by dashboard name / creator / last update time
@@ -123,7 +137,6 @@ OK
             + get table view in a graph
 
     - SQL Editor
-
 
 
 - V 0.1 : dashboard-template
