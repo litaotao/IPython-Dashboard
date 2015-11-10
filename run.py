@@ -1,5 +1,6 @@
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 
-from dashboard import app, config
 
-app.run(debug=config.app_debug, host=config.app_host, port=config.app_port)
+from dashboard import app
+
+app.run(host="0.0.0.0", port=9090, debug=True)

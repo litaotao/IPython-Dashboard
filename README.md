@@ -5,29 +5,46 @@
 
 -----
 
+## ***Inspired by [IPython](http://ipython.org/), built with love***
+
+-----
+
 # IPython-Dashboard
-A stand alone, light-weight web server for building, sharing graphs created in ipython. Build for data science, data analysis guys. Building an interactive visualization, collaborated dashboard, and real-time streaming graph. 
+A stand alone, light-weight web server for building, sharing graphs created in ipython. Build for data science, data analysis guys. Building an interactive visualization, collaborated dashboard, and real-time streaming graph.
 
+-----
 
-# Goal 
+# Goal
 
 - support raw html visualization
 - support python object visualization
-- Editable 
+- Editable
 - Real-time fresh when rendering a variable python object
 - Can be shared, both public and private [ need password ]
-- In the notebook, can share an object to a dashboard [ that's visualise that object in that dashboard ]
+- In the notebook, can share an object to a dashboard [ that's visualize that object in that dashboard ]
 
+-----
 
 # Screenshot and Demo
 
-[Demo on Youtube](https://youtu.be/Xv0UjKVEttA)     
+[Demo on Youtube](https://youtu.be/LOWBEYDkn90)     
 [Demo on Youku](http://v.youku.com/v_show/id_XMTM3MTc5MTAwMA)
 
-[![demo](docs/template-screenshot-1.jpg)](https://youtu.be/Xv0UjKVEttA)
-[![demo](docs/template-screenshot-2.jpg)](https://youtu.be/Xv0UjKVEttA)
-[![demo](docs/template-screenshot-3.jpg)](https://youtu.be/Xv0UjKVEttA)
+![demo](docs/template-screenshot-0.1.2-1.jpg)
 
+![demo](docs/template-screenshot-0.1.2-2.jpg)
+
+![demo](docs/template-screenshot-0.1.2-3.jpg)
+
+-----
+
+
+# Usage
+
+***IPython-Dashboard-Tutorial.ipynb***: [On nbviewer](http://nbviewer.ipython.org/github/litaotao/IPython-Dashboard/blob/v-0.1.2-visualiza-table/docs/IPython-Dashboard-Tutorial.ipynb) or [On github](https://github.com/litaotao/IPython-Dashboard/blob/v-0.1.2-visualiza-table/docs/IPython-Dashboard-Tutorial.ipynb)
+
+
+-----
 
 
 # Run tests
@@ -58,6 +75,7 @@ Ran 3 tests in 0.345s
 OK
 ```
 
+-----
 
 # Change Log
 
@@ -78,12 +96,35 @@ OK
     + unified message display center
     + SQL Editor
     + login management
+    + unified logger and exception report
 
 
----------
+- ***V 0.1.3 : basic-curd-docs : [ current develop version ]***
 
-- ***V 0.1.2 : visualiza-table : [ current develop version ]***
-    
+    - Dashboard
+        + restructure code for future develop
+        + more docs and tutorial
+        + basic curd operations
+        + gh-pages done
+        + publish on readthedoc
+        + hover tips
+
+    - SQL Editor
+        + start try using ace to build an online sql editor, but will develop it in the next stage after this version
+
+- ***V 0.1.2 : visualiza-table : [ current stable release ]***
+    - slogan: ***Inspired by IPython, built with love***
+
+    - Dashboard
+        + document and doc string
+        + usage
+        + simple visualize table data
+
+    - SQL Editor
+        + research & preparation
+
+
+- V 0.1.1 : dashboard-server   
     - Dashboard
         + docstring
         + simple visualize table data
@@ -106,7 +147,6 @@ OK
 
     - SQL Editor
 
----------
 
 - V 0.1 : dashboard-template
     + Add dashboard client template
@@ -116,19 +156,10 @@ OK
         + box graph [add, delete, share one or all]
         + rename
 
-
-# Raw Design
-
-- C/S model 
-- Server can interact with IPython kernel directly or indirectly 
-- Client get data from server internally or server push data to client
-- Client consists of several boxes, each box is an independent front-side object, and is editable and drag to rearrange the place to hold it.
+-----
 
 
-![architecture](docs/architecture.jpg)
-
-
-# Related Projects & Products 
+# Related Projects & Products
 
 - [mpld3](https://github.com/jakevdp/mpld3)
 - [lighting](http://lightning-viz.org/)
@@ -145,3 +176,6 @@ OK
 - [periscope](http://periscope.io)
 - [folium](https://github.com/python-visualization/folium)
 - [metabase](http://www.metabase.com/)
+- [gridstack](https://github.com/troolee/gridstack.js)
+- [gridster](http://gridster.net/)
+- [dashboards](https://github.com/jupyter-incubator/dashboards)
