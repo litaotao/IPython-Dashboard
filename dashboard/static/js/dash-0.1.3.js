@@ -28,7 +28,7 @@ var box_template = ' \
                       <i class="fa fa-fw fa-sm fa-group" style="color: black;"></i>                                           \
                     </button>                                                                                                 \
                     <li class="divider" style="margin: auto;"></li>                                                           \
-                    <button class="btn btn-primary edit-button" >                                                             \
+                    <button class="btn btn-primary edit-button" onclick=deleteGraph(this)>                                                             \
                       <i class="fa fa-fw fa-sm fa-times-circle" style="color: black;" ></i>                                   \
                     </button>      \
                   </ul>            \
@@ -62,12 +62,22 @@ var setting_template = '       \
   <li class="dropdown">        \
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding: 2px 2px;"><span class="fa fa-fw fa-lg fa-cog" style="color: green"></span></a>  \
     <ul class="dropdown-menu" style="min-width: 20px;">                              \
-      <li><a href="#" ><span class="fa fa-fw fa-sm fa-group"></span></a></li>        \
+      <li ><a><span class="fa fa-fw fa-sm fa-group"></span></a></li>        \
       <li class="divider" style="margin: auto;"></li>                                \
-      <li><a href="#" ><span class="fa fa-fw fa-sm fa-times-circle"></span></a></li> \
+      <li onclick=deleteDash({0})><a href="#"><span class="fa fa-fw fa-sm fa-times-circle"></span></a></li> \
     </ul>  \
   </li>    \
 </ul>'
+
+
+function deleteGraph(obj) {
+  var grid = $('.grid-stack').data('gridstack');
+  var current_dash = store.get(store.get("current-dash"));
+  delete current_dash.grid[$(obj).parents(".grid-stack-item")[0].getAttribute("graph-id")];
+  store.set(store.get("current-dash"), current_dash);
+  grid.remove_widget($(obj).parents(".grid-stack-item")[0]);
+  saveDash();
+}
 
 
 function editModal(obj){
@@ -415,13 +425,52 @@ function initDashList(){
     author.innerText = obj.author;
     time.innerText = moment(parseInt(obj.time_modified) * 1000).format("YYYY-MM-DD HH:mm:ss");
     i.className = "fa fa-fw fa-lg fa-cog";
-    action.innerHTML = setting_template;
+    action.innerHTML = strFormat(setting_template, obj.id);
     tr.appendChild(name);
     tr.appendChild(author);
     tr.appendChild(time);
     tr.appendChild(action);
     tbody.appendChild(tr);
   });
+
+  $("#submit").on("click", function submit() {
+    var newDash = {
+      "name": $("#name")[0].value,
+      "author": $("#author")[0].value,
+    };
+    $.ajax({
+      url: "http://127.0.0.1:9090/",
+      method: "POST",
+      data: JSON.stringify(newDash),
+      contentType: "application/json",
+      async: false,
+    })
+    .done(function(data){console.log("ajax done");})
+    .fail(function(){console.log("ajax fail")})
+    .success(function(data){
+      console.log("ajax success");
+      console.log(data);
+      return data;})
+    .complete(function(){console.log("ajax complete")})
+    .always(function(){console.log("ajax always")});
+  });
+}
+
+
+function deleteDash(dash_id) {
+  $.ajax({
+    url: strFormat("http://127.0.0.1:9090/data/dash/{0}", dash_id),
+    method: "DELETE",
+    contentType: "application/json",
+    // async: false,
+  })
+  .done(function(data){console.log("ajax done");})
+  .fail(function(){console.log("ajax fail")})
+  .success(function(){
+    location.reload();
+  })
+  .complete(function(){console.log("ajax complete")})
+  .always(function(){console.log("ajax always")});
 }
 
 

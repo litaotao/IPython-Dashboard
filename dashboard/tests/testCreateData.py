@@ -12,6 +12,7 @@ import pandas as pd
 # user-defined package
 from .. import r_kv, r_db, config
 from dashboard.server import utils
+from dashboard.client import sender
 
 
 TMP_DIR = '/mnt/tmp'
@@ -27,7 +28,8 @@ def test_create_dataframe():
     for piece in range(len(data) / piece_lenth):
         key = 'businesses-{}'.format(piece)
         value = data[piece * piece_lenth : piece * piece_lenth + piece_lenth]
-        r_kv.set(key, value.to_json())
+        # r_kv.set(key, value.to_json())
+        sender(value, key, value.to_json())
 
     url_2 = 'https://github.com/litaotao/data-science/raw/master/examples/happy-healthy-hungry/data/SFBusinesses/inspections.csv'
     if os.path.isdir(TMP_DIR) and  'inspections.csv' in os.listdir(TMP_DIR):
@@ -67,6 +69,7 @@ def test_create_dash():
         for i in test_content:
             test_content[i].update({'graph_name': 'graph name ' + i, 'id': i})
         content = dict(grid=test_content, name=test_meta['name'], id=_id)
+
         r_db.zadd(config.DASH_ID_KEY, _id, tmp_time)
         r_db.hset(config.DASH_META_KEY, _id, json.dumps(test_meta))
         r_db.hset(config.DASH_CONTENT_KEY, _id, json.dumps(content))
