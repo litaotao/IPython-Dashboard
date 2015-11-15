@@ -1,6 +1,5 @@
 
-[![build status](https://api.travis-ci.org/litaotao/IPython-Dashboard.svg?branch=v-0.2-dashboard-server)](https://travis-ci.org/litaotao/IPython-Dashboard)  [![coverage](https://coveralls.io/repos/litaotao/IPython-Dashboard/badge.svg?branch=v-0.2-dashboard-server&service=github)](https://coveralls.io/r/litaotao/IPython-Dashboard)  [![Documentation Status](https://readthedocs.org/projects/ipython-dashboard/badge/?version=latest)](http://ipython-dashboard.readthedocs.org/en/latest/?badge=latest)   [![PyPI Version](http://img.shields.io/pypi/v/IPython-Dashboard.svg)](https://pypi.python.org/pypi/IPython-Dashboard)
-
+[![build status](https://api.travis-ci.org/litaotao/IPython-Dashboard.svg?branch=v-0.2-dashboard-server)](https://travis-ci.org/litaotao/IPython-Dashboard)  [![coverage](https://coveralls.io/repos/litaotao/IPython-Dashboard/badge.svg?branch=v-0.2-dashboard-server&service=github)](https://coveralls.io/r/litaotao/IPython-Dashboard)  [![Documentation Status](https://readthedocs.org/projects/ipython-dashboard/badge/?version=latest)](http://ipython-dashboard.readthedocs.org/en/latest)   [![PyPI Version](http://img.shields.io/pypi/v/IPython-Dashboard.svg)](https://pypi.python.org/pypi/IPython-Dashboard)
 
 
 
@@ -54,7 +53,7 @@ A stand alone, light-weight web server for building, sharing graphs created in i
 
 # Usage
 
-***IPython-Dashboard-Tutorial.ipynb***: [On nbviewer](http://nbviewer.ipython.org/github/litaotao/IPython-Dashboard/blob/v-0.1.2-visualiza-table/docs/IPython-Dashboard-Tutorial.ipynb) or [On github](https://github.com/litaotao/IPython-Dashboard/blob/v-0.1.2-visualiza-table/docs/IPython-Dashboard-Tutorial.ipynb)
+***IPython-Dashboard-Tutorial.ipynb***: [On nbviewer](http://nbviewer.ipython.org/github/litaotao/IPython-Dashboard/blob/v-0.1.3-visualiza-table/docs/IPython-Dashboard-Tutorial.ipynb) or [On github](https://github.com/litaotao/IPython-Dashboard/blob/v-0.1.3-visualiza-table/docs/IPython-Dashboard-Tutorial.ipynb)
 
 
 
