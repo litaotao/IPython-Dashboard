@@ -5,7 +5,7 @@ import json
 import time
 
 # third-party package
-from flask import render_template, make_response, request
+from flask import render_template, make_response, request, redirect
 from flask.ext.restful import Resource
 
 # user-defined package
@@ -22,7 +22,7 @@ class Home(Resource):
     Attributes:
     """
     def get(self):
-        return make_response(render_template('home.html'))
+        return make_response(render_template('home_v_0.1.3.html'))
 
     def post(self):
         post_data = request.json

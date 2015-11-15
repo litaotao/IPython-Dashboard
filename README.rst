@@ -1,5 +1,3 @@
---------------
-
 |build status| |coverage| |Documentation Status| |PyPI Version|
 
 --------------
@@ -39,19 +37,19 @@ Screenshot and Demo
 | `Demo on Youku <http://v.youku.com/v_show/id_XMTM3MTc5MTAwMA>`__
 
 .. figure:: docs/template-screenshot-0.1.2-1.jpg
-   :alt: demo
+   :alt: screenshot
 
-   demo
+   screenshot
 
 .. figure:: docs/template-screenshot-0.1.2-2.jpg
-   :alt: demo
+   :alt: screenshot
 
-   demo
+   screenshot
 
 .. figure:: docs/template-screenshot-0.1.2-3.jpg
-   :alt: demo
+   :alt: screenshot
 
-   demo
+   screenshot
 
 --------------
 
@@ -149,20 +147,9 @@ Change Log
 
       -  research & preparation
 
--  V 0.1.1 : dashboard-server
-
-   -  Dashboard
-
-      -  docstring
-      -  simple visualize table data
-
-   -  SQL Editor
-
-      -  research & preparation
-
 --------------
 
--  ***V 0.1.1 : dashboard-server : [ current stable release ]***
+-  V 0.1.1 : dashboard-server : [ current stable release ]
 
    -  Dashboard
 

@@ -1,0 +1,89 @@
+
+{% extends "layout.html" %}
+
+{% block main_content %}
+<div id="main-content" class="htmleaf-container">
+
+    <!-- dashboard name -->
+    <header class="htmleaf-header" style="padding: 10px 20px;">
+        <input id="dashboard_name" class="form-control input-lg input-title-level-1" maxlength="64" placeholder="Building and Sharing IPython Dashboard">
+    </header>
+
+    <!-- dashboard content -->
+    <div class="htmleaf-content bgcolor-8" style="padding-left: 0px; padding-right: 0px; padding: 0px; background-color: white;">
+        <div style="padding-bottom: 5px; background-color: gray">
+            <button type="button" class="btn btn-primary" onclick="addBox()"><i class="fa fa-fw fa-lg fa-plus"></i> Add
+            </button>
+            <button type="button" class="btn btn-info" onclick="saveDash()"><i class="fa fa-fw fa-lg fa-floppy-o"></i> Save
+            </button>
+        </div>
+        <div id="box-container" class="parent-box">
+            <div class="grid-stack"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block editor_modal %}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 80%; height: 40%;">
+        <div class="modal-content">
+            <!-- Editor Modal Header -->
+            <div class="modal-header" style="padding: 5px;">
+                <h5 class="modal-title" id="myModalLabel">Edit your dash graph</h5>
+            </div>
+            <!-- Editor Modal Content -->
+            <div class="modal-body">
+                <div>
+                    <table class="table input-title-level-2">
+                        <tbody>
+                            <tr class="active">
+                                <td style="padding: 0px 0px; border: none">
+                                    <select id="keys" class="form-control" style="border: none">
+                                        <option>1</option>
+                                    </select>
+                                </td>
+                                <td style="padding: 0px; width: 70%; background-color: white;border: none;">
+                                    <div class="btn-group" id="graph-type">
+                                        <button type="button" class="btn btn-default btn-sm btn-chart" onclick="drawChartIntoModal('table')"><i class="fa fa-fw fa-lg fa-table"></i></button>
+                                        <button type="button" class="btn btn-default btn-sm btn-chart" onclick="drawChartIntoModal('bar')"><i class="fa fa-fw fa-lg fa-bar-chart-o"></i></button>
+                                        <button type="button" class="btn btn-default btn-sm btn-chart" onclick="drawChartIntoModal('line')"><i class="fa fa-fw fa-lg fa-line-chart"></i></button>
+                                        <button type="button" class="btn btn-default btn-sm btn-chart" onclick="drawChartIntoModal('pie')"><i class="fa fa-fw fa-lg fa-pie-chart"></i></button>
+                                        <button type="button" class="btn btn-default btn-sm btn-chart" onclick="drawChartIntoModal('area')"><i class="fa fa-fw fa-lg fa-area-chart"></i></button>
+                                    </div>
+                                </td>
+                                <td style="padding: 0px; width: 5%; background-color: inherit; border: none;"><button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-close" style="color: black;"></i></button></td>
+                                <td style="padding: 0px; width: 5%; background-color: inherit; border: none;"><button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="saveGraph()"><i class="fa fa-fw fa-lg fa-check" style="color: black;"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr style="margin: 5px 0px; color: green;">
+                <div id="value" style="width: 100%; height: 500px; overflow-x:auto; overflow-y:auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+$(document).ready(function() {
+    setTimeout(function(){}, 3000);
+    initGridstack();
+    setTimeout(function(){console.log("hello")}, 3000);
+    createGrids();
+    registerKeysFunc();
+    getValue();
+    $('.grid-stack').on('resizestop', function(){
+        setTimeout(function(){window.dispatchEvent(new Event('resize'));}, 200);
+    });
+});
+
+$('.btn-chart').click(function(e) {
+    $(".btn-chart").removeClass("active");
+    $(this).addClass("active");
+})
+</script>
+{% endblock %}

@@ -1,4 +1,3 @@
------
 
 [![build status](https://api.travis-ci.org/litaotao/IPython-Dashboard.svg?branch=v-0.2-dashboard-server)](https://travis-ci.org/litaotao/IPython-Dashboard)  [![coverage](https://coveralls.io/repos/litaotao/IPython-Dashboard/badge.svg?branch=v-0.2-dashboard-server&service=github)](https://coveralls.io/r/litaotao/IPython-Dashboard)  [![Documentation Status](https://readthedocs.org/projects/ipython-dashboard/badge/?version=latest)](http://ipython-dashboard.readthedocs.org/en/latest/?badge=latest)   [![PyPI Version](http://img.shields.io/pypi/v/IPython-Dashboard.svg)](https://pypi.python.org/pypi/IPython-Dashboard)
 
@@ -30,11 +29,11 @@ A stand alone, light-weight web server for building, sharing graphs created in i
 [Demo on Youtube](https://youtu.be/LOWBEYDkn90)     
 [Demo on Youku](http://v.youku.com/v_show/id_XMTM3MTc5MTAwMA)
 
-![demo](docs/template-screenshot-0.1.2-1.jpg)
+![screenshot](docs/template-screenshot-0.1.2-1.jpg)
 
-![demo](docs/template-screenshot-0.1.2-2.jpg)
+![screenshot](docs/template-screenshot-0.1.2-2.jpg)
 
-![demo](docs/template-screenshot-0.1.2-3.jpg)
+![screenshot](docs/template-screenshot-0.1.2-3.jpg)
 
 -----
 
@@ -123,18 +122,9 @@ OK
     - SQL Editor
         + research & preparation
 
-
-- V 0.1.1 : dashboard-server   
-    - Dashboard
-        + docstring
-        + simple visualize table data
-
-    - SQL Editor
-        + research & preparation
-
 ---------
 
-- ***V 0.1.1 : dashboard-server : [ current stable release ]***  
+- V 0.1.1 : dashboard-server : [ current stable release ]  
     - Dashboard
         - dashboard home page
             + sort by dashboard name / creator / last update time
@@ -179,3 +169,4 @@ OK
 - [gridstack](https://github.com/troolee/gridstack.js)
 - [gridster](http://gridster.net/)
 - [dashboards](https://github.com/jupyter-incubator/dashboards)
+- [js, css, html code style](https://github.com/fex-team/styleguide)

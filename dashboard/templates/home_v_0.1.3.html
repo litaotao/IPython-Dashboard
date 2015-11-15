@@ -1,0 +1,63 @@
+
+{% extends "layout.html" %}
+
+{% block main_content %}
+<div id="main-content" class="htmleaf-container">
+    <div style="padding-left: 93%;">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="fa fa-fw fa-lg fa-plus"></i> Add</button>
+    </div>
+
+    <div class="table-responsive">
+        <table id="my" class="table table-hover" data-toggle="table">
+            <thead>
+                <tr>
+                    <th>name<i class="fa fa-fw fa-sm fa-sort"></i></th>
+                    <th>author<i class="fa fa-fw fa-sm fa-sort"></i></th>
+                    <th>update<i class="fa fa-fw fa-sm fa-sort"></i></th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody id="dash_list">
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block editor_modal %}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Editor Modal Header -->
+            <div class="modal-header" style="padding: 5px;">
+                <h5 class="modal-title" id="myModalLabel">Edit your dash graph</h5>
+            </div>
+            <!-- Editor Modal Content -->
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>dashboard name</label>
+                        <input class="form-control" id="name">
+                    </div>
+                    <div class="form-group">
+                        <label>author</label>
+                        <input class="form-control" id="author">
+                    </div>
+                    <button id="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+initDashList();
+$(document).ready(function(){
+    $(function(){
+        $("#my").tablesorter({ sortList: [[2, 1]] });
+    });
+});
+</script>
+{% endblock %}

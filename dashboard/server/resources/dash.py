@@ -33,7 +33,7 @@ class Dash(Resource):
         Returns:
             rendered html.
         """
-        return make_response(render_template('dashboard.html', dash_id=dash_id))
+        return make_response(render_template('dashboard_v_0.1.3.html', dash_id=dash_id))
 
 
 class DashData(Resource):
