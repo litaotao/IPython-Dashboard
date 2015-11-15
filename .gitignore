@@ -13,3 +13,5 @@ IPython_Dashboard.egg-info
 *.coverage
 *.ipynb_checkpoints
 
+# docs
+docs/build

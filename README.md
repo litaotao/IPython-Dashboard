@@ -2,16 +2,20 @@
 [![build status](https://api.travis-ci.org/litaotao/IPython-Dashboard.svg?branch=v-0.2-dashboard-server)](https://travis-ci.org/litaotao/IPython-Dashboard)  [![coverage](https://coveralls.io/repos/litaotao/IPython-Dashboard/badge.svg?branch=v-0.2-dashboard-server&service=github)](https://coveralls.io/r/litaotao/IPython-Dashboard)  [![Documentation Status](https://readthedocs.org/projects/ipython-dashboard/badge/?version=latest)](http://ipython-dashboard.readthedocs.org/en/latest/?badge=latest)   [![PyPI Version](http://img.shields.io/pypi/v/IPython-Dashboard.svg)](https://pypi.python.org/pypi/IPython-Dashboard)
 
 
------
+
 
 ## ***Inspired by [IPython](http://ipython.org/), built with love***
 
------
+
 
 # IPython-Dashboard
 A stand alone, light-weight web server for building, sharing graphs created in ipython. Build for data science, data analysis guys. Building an interactive visualization, collaborated dashboard, and real-time streaming graph.
 
------
+
+# Requirements
+
+- redis 2.6+, [install guide](http://redis.io/topics/quickstart)
+- pip install -r requirements.txt
 
 # Goal
 
@@ -22,7 +26,17 @@ A stand alone, light-weight web server for building, sharing graphs created in i
 - Can be shared, both public and private [ need password ]
 - In the notebook, can share an object to a dashboard [ that's visualize that object in that dashboard ]
 
------
+# Use Case
+
+- if you do exploring in notebook, but just want to share/send the result/summary to people, leave out the details.
+- if you have a private notebook, but also need share something in that notebook with people, extract and put into another new notebook is ugly.
+- if you are totally disappointed with the complicated code when drawing a graceful/staic graph using matplotlib/seaborn/mpld3 etc.
+- if you want an interactive graph, allow people to zoom in/out, resize, get hover tips, change graph type easily.
+- if you want a real-time graph.
+- if you want an collaborated graph/dashboard.
+
+![wise-choice](docs/wise-choice.jpg)
+
 
 # Screenshot and Demo
 
@@ -35,15 +49,13 @@ A stand alone, light-weight web server for building, sharing graphs created in i
 
 ![screenshot](docs/template-screenshot-0.1.2-3.jpg)
 
------
+
 
 
 # Usage
 
 ***IPython-Dashboard-Tutorial.ipynb***: [On nbviewer](http://nbviewer.ipython.org/github/litaotao/IPython-Dashboard/blob/v-0.1.2-visualiza-table/docs/IPython-Dashboard-Tutorial.ipynb) or [On github](https://github.com/litaotao/IPython-Dashboard/blob/v-0.1.2-visualiza-table/docs/IPython-Dashboard-Tutorial.ipynb)
 
-
------
 
 
 # Run tests
@@ -74,7 +86,6 @@ Ran 3 tests in 0.345s
 OK
 ```
 
------
 
 # Change Log
 
@@ -122,7 +133,6 @@ OK
     - SQL Editor
         + research & preparation
 
----------
 
 - V 0.1.1 : dashboard-server : [ current stable release ]  
     - Dashboard
@@ -146,7 +156,6 @@ OK
         + box graph [add, delete, share one or all]
         + rename
 
------
 
 
 # Related Projects & Products
