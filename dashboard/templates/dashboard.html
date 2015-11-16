@@ -1,136 +1,84 @@
-<!DOCTYPE html>
 
-<html lang="en">
-<head>
-  <title>Ipython Dashboard</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="dash_id" value={{dash_id}}>
-  <script src="../static/js/jquery-2.1.4.min.js"></script>
-  <script src="../static/js/bootstrap-3.3.5.min.js"></script>
-  <script src="../static/js/dash-0.1.2.js"></script>
-  <script src="../static/js/d3-3.5.6.js"></script>
-  <script src="../static/js/nv.d3-1.8.1.js"></script>
-  <script src="../static/js/dash.vis-0.1.2.js"></script>
-  <script src="../static/js/jquery-watch-1.16.js"></script>
-  <script src="../static/js/lodash-3.10.1.min.js"></script>
-  <script src="../static/js/jquery-ui-1.11.4.min.js"></script>
-  <script src="../static/js/gridstack-0.2.4.js"></script>
-  <script src="../static/js/moment-2.10.6.min.js"></script>
-  <script src="../static/js/jquery.tablesorter-2.23.5.min.js"></script>
-  <script src="../static/js/stream_layers.js"></script>
-  <script src="../static/js/store.js"></script>
+{% extends "layout.html" %}
 
-  <link rel="shortcut icon" href="../static/img/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="../static/img/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="../static/css/bootstrap-3.3.5.min.css">
-  <link rel="stylesheet" href="../static/css/bootstrap-vertical-menu.css">
-  <link rel="stylesheet" href="../static/css/font-awesome-4.4.0.min.css">
-  <link rel="stylesheet" href="../static/css/default.css">
-  <link rel="stylesheet" href="../static/css/normalize.css">
-  <link rel="stylesheet" href="../static/css/nv.d3.css">
-  <link rel="stylesheet" href="../static/css/dash-0.1.2.css">
-  <link rel="stylesheet" href="../static/css/gridstack.css">
-</head>
+{% block main_content %}
+<div id="main-content" class="htmleaf-container">
 
-<body>
-
-<!-- Main Content Area -->
-<div class="container container-box">
-  <div class="main clearfix">
-
-    <!-- navigate left side bar -->
-    <nav id="nav" class="navbar navbar-vertical-left" onmousemove="resizeContent(1)" onmouseout="resizeContent(2)">
-      <ul class="nav navbar-nav" style="height: 250px;">
-        <li><a href=""></a></li>
-        <li><a href="/">
-            <i class="fa fa-fw fa-lg fa-tachometer"></i><span>Boards</span></a></li>
-        <li><a href="">
-            <i class="fa fa-fw fa-lg fa-database"></i><span>SQL</span></a></li>
-        <li><a href="">
-            <i class="fa fa-fw fa-lg fa-question-circle"></i><span>Help</span></a></li>
-        <li><a href="https://github.com/litaotao/IPython-Dashboard" target="_blank">
-            <i class="fa fa-fw fa-lg fa-github"></i><span>Github</span></a></li>
-      </ul>
-    </nav>
-
-    <!-- main content container -->
-    <div id="main-content" class="htmleaf-container">
-
-      <!-- dashboard name -->
-      <header class="htmleaf-header" style="padding: 10px 20px;">
+    <!-- dashboard name -->
+    <header class="htmleaf-header" style="padding: 10px 20px;">
         <input id="dashboard_name" class="form-control input-lg input-title-level-1" maxlength="64" placeholder="Building and Sharing IPython Dashboard">
-      </header>
+    </header>
 
-      <!-- dashboard content -->
-      <div class="htmleaf-content bgcolor-8" style="padding-left: 0px; padding-right: 0px; padding: 0px; background-color: white;">
+    <!-- dashboard content -->
+    <div class="htmleaf-content bgcolor-8" style="padding-left: 0px; padding-right: 0px; padding: 0px; background-color: white;">
         <div style="padding-bottom: 5px; background-color: gray">
-          <button type="button" class="btn btn-primary" onclick="addBox()"><i class="fa fa-fw fa-
-            lg fa-plus"></i> Add</button>
-          <button type="button" class="btn btn-info" onclick="saveDash()"><i class="fa fa-fw fa-lg fa-floppy-o"></i> Save</button>
+            <button type="button" class="btn btn-primary" onclick="addBox()"><i class="fa fa-fw fa-lg fa-plus"></i> Add
+            </button>
+            <button type="button" class="btn btn-info" onclick="saveDash()"><i class="fa fa-fw fa-lg fa-floppy-o"></i> Save
+            </button>
         </div>
         <div id="box-container" class="parent-box">
-          <div class="grid-stack"></div>
+            <div class="grid-stack"></div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
+{% endblock %}
 
-<!-- Editor Modal -->
+{% block editor_modal %}
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" style="width: 80%; height: 40%;">
-    <div class="modal-content">
-      <!-- Editor Modal Header -->
-      <div class="modal-header" style="padding: 5px;">
-        <h5 class="modal-title" id="myModalLabel">Edit your dash graph</h5>
-      </div>
-      <!-- Editor Modal Content -->
-      <div class="modal-body">
-        <div>
-          <table class="table input-title-level-2">
-            <tbody>
-            <tr class="active">
-              <td style="padding: 0px 0px; border: none">
-                <select id="keys" class="form-control" style="border: none">
-                  <option>1</option>
-                </select>
-              </td>
-              <td style="padding: 0px; width: 70%; background-color: white;border: none;">
-                  <div class="btn-group" id="graph-type">
-                      <button type="button" class="btn btn-default btn-sm btn-chart" onclick="drawChartIntoModal('table')"><i class="fa fa-fw fa-lg fa-table"></i></button>
-                      <button type="button" class="btn btn-default btn-sm btn-chart" onclick="drawChartIntoModal('bar')"><i class="fa fa-fw fa-lg fa-bar-chart-o"></i></button>
-                      <button type="button" class="btn btn-default btn-sm btn-chart" onclick="drawChartIntoModal('line')"><i class="fa fa-fw fa-lg fa-line-chart"></i></button>
-                      <button type="button" class="btn btn-default btn-sm btn-chart" onclick="drawChartIntoModal('pie')"><i class="fa fa-fw fa-lg fa-pie-chart"></i></button>
-                      <button type="button" class="btn btn-default btn-sm btn-chart" onclick="drawChartIntoModal('area')"><i class="fa fa-fw fa-lg fa-area-chart"></i></button>
-                 </div>
-              </td>
-              <td style="padding: 0px; width: 5%; background-color: inherit; border: none;"><button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-close" style="color: black;"></i></button></td>
-              <td style="padding: 0px; width: 5%; background-color: inherit; border: none;"><button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="saveGraph()"><i class="fa fa-fw fa-lg fa-check" style="color: black;"></i></button></td>
-            </tr>
-            </tbody>
-          </table>
+    <div class="modal-dialog" style="width: 80%; height: 40%;">
+        <div class="modal-content">
+            <!-- Editor Modal Header -->
+            <div class="modal-header" style="padding: 5px;">
+                <h5 class="modal-title" id="myModalLabel">Edit your dash graph</h5>
+            </div>
+            <!-- Editor Modal Content -->
+            <div class="modal-body">
+                <div>
+                    <table class="table input-title-level-2">
+                        <tbody>
+                            <tr class="active">
+                                <td style="padding: 0px 0px; border: none">
+                                    <select id="keys" class="form-control" style="border: none">
+                                        <option>1</option>
+                                    </select>
+                                </td>
+                                <td style="padding: 0px; width: 70%; background-color: white;border: none;">
+                                    <div class="btn-group" id="graph-type">
+                                        <button type="button" class="btn btn-default btn-sm btn-chart" onclick="drawChartIntoModal('table')"><i class="fa fa-fw fa-lg fa-table"></i></button>
+                                        <button type="button" class="btn btn-default btn-sm btn-chart" onclick="drawChartIntoModal('bar')"><i class="fa fa-fw fa-lg fa-bar-chart-o"></i></button>
+                                        <button type="button" class="btn btn-default btn-sm btn-chart" onclick="drawChartIntoModal('line')"><i class="fa fa-fw fa-lg fa-line-chart"></i></button>
+                                        <button type="button" class="btn btn-default btn-sm btn-chart" onclick="drawChartIntoModal('pie')"><i class="fa fa-fw fa-lg fa-pie-chart"></i></button>
+                                        <button type="button" class="btn btn-default btn-sm btn-chart" onclick="drawChartIntoModal('area')"><i class="fa fa-fw fa-lg fa-area-chart"></i></button>
+                                    </div>
+                                </td>
+                                <td style="padding: 0px; width: 5%; background-color: inherit; border: none;"><button type="button" class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-fw fa-lg fa-close" style="color: black;"></i></button></td>
+                                <td style="padding: 0px; width: 5%; background-color: inherit; border: none;"><button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="saveGraph()"><i class="fa fa-fw fa-lg fa-check" style="color: black;"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr style="margin: 5px 0px; color: green;">
+                <div id="value" style="width: 100%; height: 500px; overflow-x:auto; overflow-y:auto;">
+                </div>
+            </div>
         </div>
-        <hr style="margin: 5px 0px; color: green;">
-        <div id="value" style="width: 100%; height: 500px; overflow-x:auto; overflow-y:auto;">
-        </div>
-      </div>
     </div>
-  </div>
 </div>
+{% endblock %}
 
-
+{% block script %}
 <script type="text/javascript">
 $(document).ready(function() {
-  setTimeout(function(){}, 3000);
-  initGridstack();
-  setTimeout(function(){console.log("hello")}, 3000);
-  createGrids();
-  registerKeysFunc();
-  getValue();
-  $('.grid-stack').on('resizestop', function(){
-    setTimeout(function(){window.dispatchEvent(new Event('resize'));}, 200);
-  });
+    setTimeout(function(){}, 3000);
+    initGridstack();
+    setTimeout(function(){console.log("hello")}, 3000);
+    createGrids();
+    registerKeysFunc();
+    getValue();
+    $('.grid-stack').on('resizestop', function(){
+        setTimeout(function(){window.dispatchEvent(new Event('resize'));}, 200);
+    });
 });
 
 $('.btn-chart').click(function(e) {
@@ -138,7 +86,4 @@ $('.btn-chart').click(function(e) {
     $(this).addClass("active");
 })
 </script>
-
-
-</body>
-</html>
+{% endblock %}

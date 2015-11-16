@@ -30,9 +30,9 @@ def color_console(code):
         return "\033[%sm%s\033[0m" % (c, text)
     return inner
 
-color_set = {'red': color_console('31'), 'green': color_console('32'), 
-             'yellow': color_console('33'), 'blue': color_console('34'), 
-             'magenta': color_console('35'), 'cyan': color_console('36'), 
+color_set = {'red': color_console('31'), 'green': color_console('32'),
+             'yellow': color_console('33'), 'blue': color_console('34'),
+             'magenta': color_console('35'), 'cyan': color_console('36'),
              'white': color_console('37')}
 
 def print_info(text, color='white', kill=False):
@@ -54,4 +54,3 @@ def print_func_name(func):
         print '\n###finish run fun:  {} ...'.format(func.__name__)
         return result
     return wrapper
-

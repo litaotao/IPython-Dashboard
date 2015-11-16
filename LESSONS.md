@@ -49,3 +49,8 @@
 
 - ***Imagine the use case of you product in the target users' shoes***
     + Yes, your are building an amazing tool or product, which will change the world. But, before you start push it to people out there, it's very import to think about the use case and situation of your target users, and think twice.
+
+- ***Follow the best code style***
+    + Good code style will make it much more maintainable and easy to scale.
+    + For python: I recommend [google style](https://google.github.io/styleguide/pyguide.html)
+    + For js/css/html, I recommend [fex team of baidu style](https://github.com/fex-team/styleguide)

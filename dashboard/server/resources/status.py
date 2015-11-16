@@ -12,11 +12,8 @@ from dashboard import r_db, config
 from ..utils import build_response
 
 
-class Test(Resource):
+class Status(Resource):
     """just for rest api test use
     """
     def get(self):
         return build_response(dict(data="hello, world", code=200))
-
-
-

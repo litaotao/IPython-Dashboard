@@ -36,38 +36,6 @@ class Dash(Resource):
         return make_response(render_template('dashboard.html', dash_id=dash_id))
 
 
-class DashListData(Resource):
-    """Get dashboard list.
-
-    Get the dashboard list with meta information, which is used for rendering
-    kinds of `current dashboard list` page.
-
-    DB structure: 
-    1. DASH_ID_KEY -> Sorted Set : time_modified -> dash_id
-    2. DASH_META_KEY -> hash : dash_id -> dash meta info
-    3. DASH_CONTENT_KEY -> hash : dash_id -> dash content info [ like ipydb format ]
-    
-    Attributes:
-    """
-    def get(self, page=0, size=10):
-        """Get dashboard meta info from in page `page` and page size is `size`.
-
-        Args:
-            page: page number.
-            size: size number.
-
-        Returns:
-            list of dict containing the dash_id and accordingly meta info.
-            maybe empty list [] when page * size > total dashes in db. that's reasonable.
-        """
-        dash_list = r_db.zrevrange(config.DASH_ID_KEY, 0, -1, True)
-        id_list = dash_list[page * size : page * size + size]
-        dash_meta = r_db.hmget(config.DASH_META_KEY, [i[0] for i in id_list])
-        data = [json.loads(i) for i in dash_meta]
-
-        return build_response(dict(data=data, code=200))
-
-
 class DashData(Resource):
     """Dashboard meta/content CRUD operation.
 
@@ -87,33 +55,6 @@ class DashData(Resource):
         data = json.loads(r_db.hmget(config.DASH_CONTENT_KEY, dash_id)[0])
         return build_response(dict(data=data, code=200))
 
-    def post(self, dash_id):
-        """Create a dash meta and content, return created dash content.
-
-        Args:
-            dash_id: dashboard id.
-
-        Returns:
-            A dict containing the created content of that dashboard, not include the meta info.
-        """
-        data = request.get_json()
-        current_time = time.time()
-        _hash = hashlib.sha256()
-        _hash.update(current_time.__repr__())
-        data['id'] = _hash.hexdigest()
-
-        # store meta and content info
-        test_data = str(random.randint(1, 100))
-        meta = {'author': 'author-' + test_data, 
-                'name': 'name-' + test_data, 
-                'time_modified': int(current_time)}
-        content = data
-
-        r_db.hset(config.DASH_META_KEY, data['id'], json.dumps(meta))
-        r_db.hset(config.DASH_CONTENT_KEY, data['id'], json.dumps(content))
-
-        return build_response(dict(data=data['id'], code=200))
-
     def put(self, dash_id=0):
         """Update a dash meta and content, return updated dash content.
 
@@ -127,7 +68,7 @@ class DashData(Resource):
         current_time = time.time()
 
         meta = json.loads(r_db.hget(config.DASH_META_KEY, dash_id))
-        meta.update({'name': '' + data['name'], 
+        meta.update({'name': '' + data['name'],
                      'time_modified': int(current_time)})
         content = json.loads(r_db.hget(config.DASH_CONTENT_KEY, dash_id))
         content.update(data)
@@ -155,8 +96,5 @@ class DashData(Resource):
         r_db.zrem(config.DASH_ID_KEY, dash_id)
         r_db.hdel(config.DASH_META_KEY, dash_id)
         r_db.hdel(config.DASH_CONTENT_KEY, dash_id)
-
-        return redirect('/')
-
-
-
+        return {'removed_info': removed_info}
+        # return redirect('/')

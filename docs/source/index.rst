@@ -1,13 +1,4 @@
---------------
-
 |build status| |coverage| |Documentation Status| |PyPI Version|
-
---------------
-
-***Inspired by `IPython <http://ipython.org/>`__, built with love***
-====================================================================
-
---------------
 
 IPython-Dashboard
 =================
@@ -17,7 +8,11 @@ created in ipython. Build for data science, data analysis guys. Building
 an interactive visualization, collaborated dashboard, and real-time
 streaming graph.
 
---------------
+Requirements
+============
+
+-  redis 2.6+, `install guide <http://redis.io/topics/quickstart>`__
+-  pip install -r requirements.txt
 
 Goal
 ====
@@ -30,7 +25,24 @@ Goal
 -  In the notebook, can share an object to a dashboard [ that's
    visualize that object in that dashboard ]
 
---------------
+Use Case
+========
+
+-  if you do exploring in notebook, but just want to share/send the
+   result/summary to people, leave out the details.
+-  if you have a private notebook, but also need share something in that
+   notebook with people, extract and put into another new notebook is
+   ugly.
+-  if you are totally disappointed with the complicated code when
+   drawing a graceful/staic graph using matplotlib/seaborn/mpld3 etc.
+-  if you want an interactive graph, allow people to zoom in/out,
+   resize, get hover tips, change graph type easily.
+-  if you want a real-time graph.
+-  if you want an collaborated graph/dashboard.
+
+.. figure:: ../wise-choice.jpg
+   :alt: wise-choice
+
 
 Screenshot and Demo
 ===================
@@ -38,22 +50,20 @@ Screenshot and Demo
 | `Demo on Youtube <https://youtu.be/LOWBEYDkn90>`__
 | `Demo on Youku <http://v.youku.com/v_show/id_XMTM3MTc5MTAwMA>`__
 
-.. figure:: docs/template-screenshot-0.1.2-1.jpg
-   :alt: demo
+.. figure:: ../template-screenshot-0.1.2-1.jpg
+   :alt: screenshot
 
-   demo
+   screenshot
 
-.. figure:: docs/template-screenshot-0.1.2-2.jpg
-   :alt: demo
+.. figure:: ../template-screenshot-0.1.2-2.jpg
+   :alt: screenshot
 
-   demo
+   screenshot
 
-.. figure:: docs/template-screenshot-0.1.2-3.jpg
-   :alt: demo
+.. figure:: ../template-screenshot-0.1.2-3.jpg
+   :alt: screenshot
 
-   demo
-
---------------
+   screenshot
 
 Usage
 =====
@@ -62,8 +72,6 @@ Usage
 nbviewer <http://nbviewer.ipython.org/github/litaotao/IPython-Dashboard/blob/v-0.1.2-visualiza-table/docs/IPython-Dashboard-Tutorial.ipynb>`__
 or `On
 github <https://github.com/litaotao/IPython-Dashboard/blob/v-0.1.2-visualiza-table/docs/IPython-Dashboard-Tutorial.ipynb>`__
-
---------------
 
 Run tests
 =========
@@ -94,8 +102,6 @@ under this repo
     Ran 3 tests in 0.345s
 
     OK
-
---------------
 
 Change Log
 ==========
@@ -149,20 +155,7 @@ Change Log
 
       -  research & preparation
 
--  V 0.1.1 : dashboard-server
-
-   -  Dashboard
-
-      -  docstring
-      -  simple visualize table data
-
-   -  SQL Editor
-
-      -  research & preparation
-
---------------
-
--  ***V 0.1.1 : dashboard-server : [ current stable release ]***
+-  V 0.1.1 : dashboard-server : [ current stable release ]
 
    -  Dashboard
 
@@ -190,8 +183,6 @@ Change Log
       -  box graph [add, delete, share one or all]
       -  rename
 
---------------
-
 Related Projects & Products
 ===========================
 
@@ -213,6 +204,7 @@ Related Projects & Products
 -  `gridstack <https://github.com/troolee/gridstack.js>`__
 -  `gridster <http://gridster.net/>`__
 -  `dashboards <https://github.com/jupyter-incubator/dashboards>`__
+-  `js, css, html code style <https://github.com/fex-team/styleguide>`__
 
 .. |build status| image:: https://api.travis-ci.org/litaotao/IPython-Dashboard.svg?branch=v-0.2-dashboard-server
    :target: https://travis-ci.org/litaotao/IPython-Dashboard

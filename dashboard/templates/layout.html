@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>Ipython Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="dash_id" value={{dash_id}}>
+    <script src="../static/js/jquery-2.1.4.min.js"></script>
+    <script src="../static/js/bootstrap-3.3.5.min.js"></script>
+    <script src="../static/js/dash-0.1.3.js"></script>
+    <script src="../static/js/d3-3.5.6.js"></script>
+    <script src="../static/js/nv.d3-1.8.1.js"></script>
+    <script src="../static/js/dash.vis-0.1.3.js"></script>
+    <script src="../static/js/jquery-watch-1.16.js"></script>
+    <script src="../static/js/lodash-3.10.1.min.js"></script>
+    <script src="../static/js/jquery-ui-1.11.4.min.js"></script>
+    <script src="../static/js/gridstack-0.2.4.js"></script>
+    <script src="../static/js/moment-2.10.6.min.js"></script>
+    <script src="../static/js/jquery.tablesorter-2.23.5.min.js"></script>
+    <script src="../static/js/stream_layers.js"></script>
+    <script src="../static/js/store.js"></script>
+
+    <link rel="shortcut icon" href="../static/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../static/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../static/css/bootstrap-3.3.5.min.css">
+    <link rel="stylesheet" href="../static/css/bootstrap-vertical-menu.css">
+    <link rel="stylesheet" href="../static/css/font-awesome-4.4.0.min.css">
+    <link rel="stylesheet" href="../static/css/default.css">
+    <link rel="stylesheet" href="../static/css/normalize.css">
+    <link rel="stylesheet" href="../static/css/nv.d3.css">
+    <link rel="stylesheet" href="../static/css/dash-0.1.3.css">
+    <link rel="stylesheet" href="../static/css/gridstack.css">
+</head>
+
+<body style="background-color: initial;">
+
+    <!-- Main Content Area -->
+    <div class="container container-box">
+        <div class="main clearfix">
+
+            <!-- navigate left side bar -->
+            <nav id="nav" class="navbar navbar-vertical-left" onmousemove="resizeContent(1)" onmouseout="resizeContent(2)">
+                <ul class="nav navbar-nav" style="height: 200px;">
+                    <li><a href=""></a>
+                    </li>
+                    <li><a href="/">
+                        <i class="fa fa-fw fa-lg fa-tachometer"></i><span>Boards</span></a>
+                    </li>
+                    <li><a href=""><i class="fa fa-fw fa-lg fa-database"></i><span>SQL</span></a>
+                    </li>
+                    <li><a href="https://github.com/litaotao/IPython-Dashboard/issues" target="_blank"><i class="fa fa-fw fa-lg fa-question-circle"></i><span>Help</span></a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- main content container -->
+            {% block main_content %}{% endblock %}
+        </div>
+    </div>
+
+    <!-- Editor Modal -->
+    {% block editor_modal %}{% endblock %}
+
+    <!-- script -->
+    {% block script %}{% endblock %}
+</body>
+</html>
