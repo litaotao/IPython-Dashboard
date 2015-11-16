@@ -33,7 +33,7 @@ class Dash(Resource):
         Returns:
             rendered html.
         """
-        return make_response(render_template('dashboard_v_0.1.3.html', dash_id=dash_id))
+        return make_response(render_template('dashboard.html', dash_id=dash_id))
 
 
 class DashData(Resource):
@@ -54,33 +54,6 @@ class DashData(Resource):
         """
         data = json.loads(r_db.hmget(config.DASH_CONTENT_KEY, dash_id)[0])
         return build_response(dict(data=data, code=200))
-
-    def post(self, dash_id):
-        """Create a dash meta and content, return created dash content.
-
-        Args:
-            dash_id: dashboard id.
-
-        Returns:
-            A dict containing the created content of that dashboard, not include the meta info.
-        """
-        data = request.get_json()
-        current_time = time.time()
-        _hash = hashlib.sha256()
-        _hash.update(current_time.__repr__())
-        data['id'] = _hash.hexdigest()
-
-        # store meta and content info
-        test_data = str(random.randint(1, 100))
-        meta = {'author': 'author-' + test_data,
-                'name': 'name-' + test_data,
-                'time_modified': int(current_time)}
-        content = data
-
-        r_db.hset(config.DASH_META_KEY, data['id'], json.dumps(meta))
-        r_db.hset(config.DASH_CONTENT_KEY, data['id'], json.dumps(content))
-
-        return build_response(dict(data=data['id'], code=200))
 
     def put(self, dash_id=0):
         """Update a dash meta and content, return updated dash content.

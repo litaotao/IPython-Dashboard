@@ -22,7 +22,7 @@ class Home(Resource):
     Attributes:
     """
     def get(self):
-        return make_response(render_template('home_v_0.1.3.html'))
+        return make_response(render_template('home.html'))
 
     def post(self):
         post_data = request.json

@@ -14,7 +14,7 @@ from ..utils import build_response
 class KeyList(Resource):
     """Get the keys in database.
 
-    Return all the keys exist in database which are used to 
+    Return all the keys exist in database which are used to
     store data for build table and visualization. I.E, those
     data shared by users in ipython.
 
@@ -31,7 +31,7 @@ class KeyList(Resource):
 class Key(Resource):
     """Get the data of a key.
 
-    Get all the data of a key. Both Key and KeyList API has much to 
+    Get all the data of a key. Both Key and KeyList API has much to
     implement in future to make it more useable. namely, auto-complete
     for KeyList, and fetch part of data via a key for this API.
 
@@ -45,6 +45,3 @@ class Key(Resource):
         data = json.loads(data) if data else {}
 
         return build_response(dict(data=data, code=200))
-
-
-

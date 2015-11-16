@@ -4,7 +4,7 @@ from .. import api
 from .resources.storage import Key, KeyList
 from .resources.dash import Dash, DashData
 from .resources.home import Home, DashListData
-from .resources.test import Test
+from .resources.status import Status
 
 
 '''
@@ -19,4 +19,4 @@ api.add_resource(KeyList, '/keys/')
 api.add_resource(Key, '/key/<string:key>')
 api.add_resource(Dash, '/dash/<string:dash_id>')
 api.add_resource(DashData, '/data/dash/<string:dash_id>')
-api.add_resource(Test, '/test')
+api.add_resource(Status, '/__info__')

@@ -63,8 +63,9 @@ body {
     background: red!important;
 }
 
-.parent-box {
+.parent-box .grid-stack {
     /*margin: 10px;*/
+    background-color: inherit;
 }
 
 .navbar-vertical-left {
