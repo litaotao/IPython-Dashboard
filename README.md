@@ -42,7 +42,7 @@ A stand alone, light-weight web server for building, sharing graphs created in I
 [Demo on Youtube](https://youtu.be/LOWBEYDkn90)     
 [Demo on Youku](http://v.youku.com/v_show/id_XMTM3MTc5MTAwMA)
 
-![screenshot](docs/template-screenshot-0.1.2-1.jpg)
+![screenshot](docs/template-screenshot-0.1.3-1.jpg)
 
 ![screenshot](docs/template-screenshot-0.1.2-2.jpg)
 
