@@ -1,6 +1,5 @@
 
-[![build status](https://api.travis-ci.org/litaotao/IPython-Dashboard.svg?branch=master)](https://travis-ci.org/litaotao/IPython-Dashboard)  [![coverage](https://coveralls.io/repos/litaotao/IPython-Dashboard/badge.svg?branche=master&service=github)](https://coveralls.io/r/litaotao/IPython-Dashboard)  [![Documentation Status](https://readthedocs.org/projects/ipython-dashboard/badge/?version=latest)](http://ipython-dashboard.readthedocs.org/en/latest)   [![PyPI Version](http://img.shields.io/pypi/v/IPython-Dashboard.svg)](https://pypi.python.org/pypi/IPython-Dashboard)
-
+[![build status](https://api.travis-ci.org/litaotao/IPython-Dashboard.svg?branch=master)](https://travis-ci.org/litaotao/IPython-Dashboard) [![Documentation Status](https://readthedocs.org/projects/ipython-dashboard/badge/?version=latest)](http://ipython-dashboard.readthedocs.org/en/latest)   [![coverage](https://coveralls.io/repos/litaotao/IPython-Dashboard/badge.svg?branche=master&service=github)](https://coveralls.io/r/litaotao/IPython-Dashboard)   [![PyPI Version](http://img.shields.io/pypi/v/IPython-Dashboard.svg)](https://pypi.python.org/pypi/IPython-Dashboard)  [![Downloads](https://img.shields.io/pypi/dm/ipython-dashboard.svg)](https://pypi.python.org/pypi/IPython-Dashboard)
 
 
 ## ***Inspired by [IPython](http://ipython.org/), built with love***
@@ -107,7 +106,7 @@ OK
     + unified logger and exception report
 
 
-- ***V 0.1.4 : basic-curd-docs : [ current develop version ]***
+- ***V 0.1.4 : sql-ui-optimize : [ current develop version ]***
 
     - Dashboard
         + create some examples
