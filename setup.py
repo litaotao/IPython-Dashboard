@@ -5,9 +5,13 @@ import io
 from setuptools import find_packages, setup
 
 
+def load_readme():
+    readme_file = "README.md" if "README.md" in os.listdir(".") else "README.rst"
+    return io.open(readme_file, encoding='utf8').read()
+
 setup(
     name="IPython-Dashboard",
-    version='0.1.2',
+    version='0.1.3',
     author="Taotao Li",
     author_email="taotao.engineer@gmail.com",
     url="https://github.com/litaotao/IPython-Dashboard",
@@ -17,7 +21,7 @@ setup(
     package_dir={"dashboard": "dashboard"},
     include_package_data=True,
     description="An stand alone, light-weight web server for building, sharing graphs in created in ipython. Let ipython do what it focus, let this do what everyone needs for building a interactive, collaborated and real-time streaming dashboards.",
-    long_description=io.open("README.md", encoding='utf8').read(),
+    long_description=load_readme(),
     install_requires=io.open("requirements.txt", encoding='utf8').read(),
     classifiers=['Intended Audience :: Science/Research',
                  'Intended Audience :: Developers',
