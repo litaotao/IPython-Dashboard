@@ -1,0 +1,73 @@
+{
+    "example_chinese_population": {
+        "grid": {
+            "0": {
+                "graph_name": "Chinese Population in 2005 and 2014",
+                "option": {
+                    "y": [
+                        "2014年",
+                        "2005年"
+                    ],
+                    "x": [
+                        "地区"
+                    ]
+                },
+                "height": 8,
+                "width": 6,
+                "key": "chinese_population",
+                "y": 4,
+                "x": 6,
+                "type": "bar",
+                "id": "0"
+            },
+            "1": {
+                "graph_name": "empty box",
+                "option": {
+                    "y": [],
+                    "x": []
+                },
+                "height": 5,
+                "width": 6,
+                "key": "none",
+                "y": 12,
+                "x": 6,
+                "type": "none",
+                "id": "1"
+            },
+            "2": {
+                "graph_name": "table view, Chinese Population across Provinces in the last 10 Years",
+                "option": {
+                    "y": [],
+                    "x": []
+                },
+                "height": 4,
+                "width": 12,
+                "key": "chinese_population",
+                "y": 0,
+                "x": 0,
+                "type": "table",
+                "id": "2"
+            },
+            "3": {
+                "graph_name": "Chinese Population Distribution in 2014",
+                "option": {
+                    "y": [
+                        "2014年"
+                    ],
+                    "x": [
+                        "地区"
+                    ]
+                },
+                "height": 13,
+                "width": 6,
+                "key": "chinese_population",
+                "y": 4,
+                "x": 0,
+                "type": "pie",
+                "id": "3"
+            }
+        },
+        "id": 1,
+        "name": "Dashboard: Chinese Population in the last 10 Years"
+    }
+}

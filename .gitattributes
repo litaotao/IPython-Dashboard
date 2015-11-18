@@ -1,0 +1,6 @@
+dashboard/static/js/*.js linguist-vendored
+dashboard/static/js/dash-0.1.3.js linguist-vendored=false
+dashboard/static/js/dash.vis-0.1.3.js linguist-vendored=false
+
+dashboard/static/css/*.css linguist-vendored
+dashboard/static/css/dash-0.1.3.css linguist-vendored=false

@@ -14,7 +14,7 @@ var box_template = ' \
               <button class="fa fa-fw fa-sm fa-circle-o-notch" onclick=toggleGridMovable(this) style="background: none;background-color: inherit;border: none; padding: 0px 0px">         \
               </button></td>                                           \
             <td style="padding: 0px; width: 90%; padding-left: 5px">   \
-              <input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph">  \
+              <input class="form-control input-lg input-title-level-2" maxlength="128" placeholder="Naming your graph">  \
             </td>                                                                                                       \
             <td style="padding: 0px; width: 10%">                                                                       \
               <ul class="nav navbar-nav" style="padding-left: 7%;">    \
@@ -524,4 +524,13 @@ function strFormat(theString){
         theString = theString.replace(regEx, arguments[i]);
     }
     return theString;
+}
+
+function my_alert(msg, error){
+    var background_color = error ? 'orangered' : 'cadetblue';
+	scrollBy(0, -1000);
+    $("#error")[0].style.backgroundColor = background_color;
+	$("#error").fadeIn(3000);
+	$("#error_msg")[0].innerText = msg;
+	$("#error").fadeOut(3000);
 }

@@ -61,27 +61,26 @@ A stand alone, light-weight web server for building, sharing graphs created in I
 just run `sudo nosetests --with-coverage --cover-package=dashboard` under this repo
 
 ```
-chenshan@mac007:~/Desktop/github/IPython-Dashboard$sudo nosetests --with-coverage --cover-package=dashboard
-Password:
-...
+aaron@aarons-MacBook-Pro:~/Desktop/github/IPython-Dashboard$sudo nosetests --with-coverage --cover-package=dahboard
+....
 Name                                    Stmts   Miss  Cover   Missing
 ---------------------------------------------------------------------
 dashboard.py                               11      0   100%
 dashboard/client.py                         1      0   100%
 dashboard/client/sender.py                 11      3    73%   26-27, 33
-dashboard/config.py                        13      0   100%
+dashboard/config.py                        11      0   100%
 dashboard/server.py                         1      0   100%
 dashboard/server/resources.py               0      0   100%
-dashboard/server/resources/dash.py         31     17    45%   36, 55-56, 67-79, 92-99
-dashboard/server/resources/home.py         40     12    70%   25, 28-30, 82-90
+dashboard/server/resources/dash.py         35     10    71%   55-56, 67-69, 82-89
+dashboard/server/resources/home.py         40     12    70%   25, 28-30, 83-91
 dashboard/server/resources/status.py        8      1    88%   19
-dashboard/server/resources/storage.py      15      7    53%   26-28, 43-47
+dashboard/server/resources/storage.py      15      5    67%   28, 43-47
 dashboard/server/utils.py                  31      6    81%   18-22, 29, 43
 dashboard/server/views.py                  12      0   100%
 ---------------------------------------------------------------------
-TOTAL                                     174     46    74%
+TOTAL                                     176     37    79%
 ----------------------------------------------------------------------
-Ran 3 tests in 1.235s
+Ran 4 tests in 3.120s
 
 OK
 ```
@@ -104,6 +103,8 @@ OK
     + SQL Editor
     + login management
     + unified logger and exception report
+    + server side log
+    + client side log
 
 
 - ***V 0.1.4 : sql-ui-optimize : [ current develop version ]***
@@ -112,6 +113,7 @@ OK
         + create some examples
         + hover tips
         + unified message display
+        + make the redis-server/dash-server configurable
 
     - SQL Editor
         + start try using ace to build an online sql editor, but will develop it in the next stage after this version

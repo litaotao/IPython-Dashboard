@@ -57,4 +57,4 @@ def test_create_dash():
     authors = ['sam', 'aaron', 'bee', 'will', 'ryan', 'mike', 'kevin', 'elvis', 'tiyu', 'sophia']
     name_prefix = 'dashboard name {}'
     for i in range(len(authors)):
-        home_resource.create_dash(name_prefix.format(i), authors[i])
+        home_resource._create_dash(name_prefix.format(i), authors[i])

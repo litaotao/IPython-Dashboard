@@ -33,7 +33,7 @@ class Dash(Resource):
         Returns:
             rendered html.
         """
-        return make_response(render_template('dashboard.html', dash_id=dash_id))
+        return make_response(render_template('dashboard.html', dash_id=dash_id, api_root=config.app_host))
 
 
 class DashData(Resource):
@@ -65,18 +65,8 @@ class DashData(Resource):
             A dict containing the updated content of that dashboard, not include the meta info.
         """
         data = request.get_json()
-        current_time = time.time()
-
-        meta = json.loads(r_db.hget(config.DASH_META_KEY, dash_id))
-        meta.update({'name': '' + data['name'],
-                     'time_modified': int(current_time)})
-        content = json.loads(r_db.hget(config.DASH_CONTENT_KEY, dash_id))
-        content.update(data)
-
-        r_db.hset(config.DASH_META_KEY, dash_id, json.dumps(meta))
-        r_db.hset(config.DASH_CONTENT_KEY, dash_id, json.dumps(data))
-
-        return build_response(dict(data=dash_id, code=200))
+        updated = self._update_dash(dash_id, data)
+        return build_response(dict(data=updated, code=200))
 
     def delete(self, dash_id):
         """Delete a dash meta and content, return updated dash content.
@@ -98,3 +88,22 @@ class DashData(Resource):
         r_db.hdel(config.DASH_CONTENT_KEY, dash_id)
         return {'removed_info': removed_info}
         # return redirect('/')
+
+    def _update_dash(self, dash_id, data):
+        current_time = time.time()
+
+        meta = json.loads(r_db.hget(config.DASH_META_KEY, dash_id))
+        meta.update({'name': '' + data['name'],
+                     'time_modified': int(current_time)})
+        content = json.loads(r_db.hget(config.DASH_CONTENT_KEY, dash_id))
+        content.update(data)
+
+        r_db.hset(config.DASH_META_KEY, dash_id, json.dumps(meta))
+        r_db.hset(config.DASH_CONTENT_KEY, dash_id, json.dumps(data))
+
+        updated = {
+            "meta": r_db.hget(config.DASH_META_KEY, dash_id),
+            "content": r_db.hget(config.DASH_CONTENT_KEY, dash_id),
+        }
+
+        return updated
