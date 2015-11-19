@@ -105,7 +105,18 @@ OK
     + unified logger and exception report
     + server side log
     + client side log
+    + support python3
 
+
+- V 0.1.5 :
+
+    - Dashboard
+        + support python3
+        + server side log
+        + research on real-time dataframe
+
+    - SQL Editor
+        + render sql result as a table view
 
 - ***V 0.1.4 : sql-ui-optimize : [ current develop version ]***
 

@@ -69,7 +69,6 @@ var setting_template = '       \
   </li>    \
 </ul>'
 
-
 function deleteGraph(obj) {
     var grid = $('.grid-stack').data('gridstack');
     var current_dash = store.get(store.get("current-dash"));
@@ -159,12 +158,24 @@ function createGrids(){
         if (key == "none"){
             console.log("no key exist");
         }else{
-            $.getJSON("http://127.0.0.1:9090/key/" + key, function(data){
+            $.getJSON(api_root + "key/" + key, function(data){
                 store.set(key, $.parseJSON(data.data));
                 console.log($(strFormat("div [graph-id={0}] .chart-graph", index)));
                 initChart(current_dash.grid[index].type, index)
                 console.log($.parseJSON(data.data));
             })
+            // $.ajax({
+            //     url: api_root + "key/" + key,
+            //     method: "GET",
+            //     dataType: "JSONP",
+            //     contentType: "application/json",
+            //     async: false,
+            // })
+            // .success(function(data){
+            //     store.set(key, $.parseJSON(data.data));
+            //     initChart(current_dash.grid[index].type, index)
+            //     console.log($.parseJSON(data.data));
+            // })
         }
     })
 
@@ -442,22 +453,34 @@ function initDashList(){
             "name": $("#name")[0].value,
             "author": $("#author")[0].value,
         };
+        console.log(api_root);
         $.ajax({
+            // url: api_root,
+            // url: "http://192.168.1.4:9090/",
             url: "http://127.0.0.1:9090/",
             method: "POST",
+            dataType: "JSONP",
             data: JSON.stringify(newDash),
             contentType: "application/json",
             async: false,
         })
-        .done(function(data){console.log("ajax done");})
-        .fail(function(){console.log("ajax fail")})
+        .done(function(data){
+            console.log("ajax done");
+        })
+        .fail(function(){
+            console.log("ajax fail");
+        })
         .success(function(data){
             console.log("ajax success");
             console.log(data);
             return data;
         })
-        .complete(function(){console.log("ajax complete")})
-        .always(function(){console.log("ajax always")});
+        .complete(function(){
+            console.log("ajax complete");
+        })
+        .always(function(){
+            console.log("ajax always");
+        });
     });
 }
 

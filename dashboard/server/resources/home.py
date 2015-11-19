@@ -25,6 +25,8 @@ class Home(Resource):
         return make_response(render_template('home.html', api_root=config.app_host))
 
     def post(self):
+        import ipdb; ipdb.set_trace()
+        
         post_data = request.json
         self._create_dash(post_data.get('name'), post_data.get('author'))
         return redirect('/')
