@@ -190,7 +190,8 @@ function registerKeysFunc(){
         var keys_select = $("#keys");
         keys_select.empty();
 
-        var url = "http://127.0.0.1:9090/keys";
+        // var url = "http://127.0.0.1:9090/keys";
+        var url = api_root + "keys";
         $.getJSON(url, function(data){
             $.each(data.data, function(index, value){
                 keys_select.append("<option>" + value + "</option>")
@@ -205,7 +206,8 @@ function getValue(){
         var selectDOM = $("#keys")[0];
         var key = selectDOM.options[selectDOM.selectedIndex].text;
         var modal = store.get("modal");
-        var url = "http://127.0.0.1:9090/key/" + key;
+        // var url = "http://127.0.0.1:9090/key/" + key;
+        var url = api_root + "key/" + key;
 
         $.getJSON(url, function(data){
             var jsonData = $.parseJSON(data.data);
@@ -355,7 +357,8 @@ function saveDash(){
 
     store.set(store.get("current-dash"), dash);
     var resJson = JSON.stringify(dash);
-    var url = "http://127.0.0.1:9090/data/dash/" + dash.id;
+    // var url = "http://127.0.0.1:9090/data/dash/" + dash.id;
+    var url = api_root + "data/dash/" + dash.id;
     var method = "PUT";
 
     $.ajax({
@@ -377,7 +380,8 @@ function saveDash(){
 
 
 function getDash(dash_id){
-    var url = "http://127.0.0.1:9090/data/dash/" + dash_id;
+    // var url = "http://127.0.0.1:9090/data/dash/" + dash_id;
+    var url = api_root + "data/dash/" + dash_id;
     var resJson = $.ajax({
         url: url,
         method: "GET",
@@ -399,7 +403,8 @@ function getDash(dash_id){
 
 
 function getDashList(){
-    var url = "http://127.0.0.1:9090/data/dashes/";
+    // var url = "http://127.0.0.1:9090/data/dashes/";
+    var url = api_root + "data/dashes/";
     var resJson = $.ajax({
         url: url,
         method: "GET",
@@ -423,7 +428,8 @@ function getDashList(){
 function initDashList(){
     var list = getDashList();
     var tbody = $("#dash_list")[0];
-    var url = "http://127.0.0.1:9090/dash/";
+    // var url = "http://127.0.0.1:9090/dash/";
+    var url = api_root + "dash/";
 
     $.each(list, function(index, obj){
         var a = genElement("a");
@@ -455,9 +461,12 @@ function initDashList(){
         };
         console.log(api_root);
         $.ajax({
+            // I don't know why set url to api_root will cause an error here,
+            // need to take little time on diving into this. but it as the doc says:
+            // the default value of url is current page, so it works when leave out
+            // the url paramter, will take back to this later.
             // url: api_root,
-            // url: "http://192.168.1.4:9090/",
-            url: "http://127.0.0.1:9090/",
+            // url: "http://127.0.0.1:9090/",
             method: "POST",
             dataType: "JSONP",
             data: JSON.stringify(newDash),
@@ -487,7 +496,8 @@ function initDashList(){
 
 function deleteDash(dash_id) {
     $.ajax({
-        url: strFormat("http://127.0.0.1:9090/data/dash/{0}", dash_id),
+        url: api_root + "data/dash/" + dash_id,
+        // url: strFormat("http://127.0.0.1:9090/data/dash/{0}", dash_id),
         method: "DELETE",
         contentType: "application/json",
         // async: false,
