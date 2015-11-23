@@ -10,10 +10,13 @@
 A stand alone, light-weight web server for building, sharing graphs created in IPython. Build for data science, data analysis guys. Building an interactive visualization, collaborated dashboard, and real-time streaming graph.
 
 
-# Requirements
+# Install & Requirements
 
-- redis 2.6+, [install guide](http://redis.io/topics/quickstart)
-- pip install -r requirements.txt
+- `pip install ipython-dashboard --upgrade`
+- `redis 2.6+`: [install guide](http://redis.io/topics/quickstart)
+- `python packages`:
+    + `cd ~/your path/IPython-Dashboard`
+    + `pip install -r requirements.txt`: can use this command to make sure that the 3-party packages are installed successfully.
 
 # Goal
 
@@ -106,6 +109,7 @@ OK
     + server side log
     + client side log
     + support python3
+    + create examples
 
 
 - V 0.1.5 :
@@ -121,7 +125,7 @@ OK
 - ***V 0.1.4 : sql-ui-optimize : [ current develop version ]***
 
     - Dashboard
-        + create some examples
+        + create 1 example
         + hover tips
         + unified message display
         + make the redis-server/dash-server configurable

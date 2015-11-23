@@ -559,11 +559,12 @@ function strFormat(theString){
     return theString;
 }
 
+
 function my_alert(msg, error){
     var background_color = error ? 'orangered' : 'cadetblue';
 	scrollBy(0, -1000);
     $("#error")[0].style.backgroundColor = background_color;
+    $("#error_msg")[0].innerText = msg;
 	$("#error").fadeIn(3000);
-	$("#error_msg")[0].innerText = msg;
 	$("#error").fadeOut(3000);
 }

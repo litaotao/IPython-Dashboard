@@ -21,6 +21,9 @@
     <script src="../static/js/jquery.tablesorter-2.23.5.min.js"></script>
     <script src="../static/js/stream_layers.js"></script>
     <script src="../static/js/store.js"></script>
+    <script src="../static/js/ace-1.2.0.js"></script>
+    <script src="../static/js/theme-sqlserver.js"></script>
+    <script src="../static/js/mode-mysql.js"></script>
     <link rel="shortcut icon" href="../static/img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../static/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../static/css/bootstrap-3.3.5.min.css">
@@ -36,8 +39,7 @@
 <body style="background-color: initial;">
     <!-- Message Display Bar -->
 	<div class="alert alert-danger error_msg" id="error">
-        <p align="center" id="error_msg" class="error_msg_text">
-        </p>
+        <p align="center" id="error_msg" class="error_msg_text">&nbsp</p>
 	</div>
 
     <div style="margin: 30px 40px;">
@@ -53,7 +55,7 @@
                         <li><a href="/">
                             <i class="fa fa-fw fa-lg fa-tachometer"></i><span>Boards</span></a>
                         </li>
-                        <li><a href=""><i class="fa fa-fw fa-lg fa-database"></i><span>SQL</span></a>
+                        <li><a href="/sql"><i class="fa fa-fw fa-lg fa-database"></i><span>SQL</span></a>
                         </li>
                         <li><a href="https://github.com/litaotao/IPython-Dashboard/issues" target="_blank"><i class="fa fa-fw fa-lg fa-question-circle"></i><span>Help</span></a>
                         </li>

@@ -22,26 +22,21 @@ def build_response(content, code=200):
     return response
 
 
-def color_console(code):
-    def inner(text, bold=False):
-        c = code
-        if bold:
-            c = "1;%s" % c
-        return "\033[%sm%s\033[0m" % (c, text)
-    return inner
+color_set = {
+    "red": u"\033[1;31m{}\033[0m", "green": u"\033[1;32m{}\033[0m",
+    "yellow":u"\033[1;33m{}\033[0m", "blue": u"\033[1;34m{}\033[0m",
+    "magenta": u"\033[1;35m{}\033[0m", "cyan": u"\033[1;36m{}\033[0m",
+    "white": u"\033[1;37m{}\033[0m",
+}
 
-color_set = {'red': color_console('31'), 'green': color_console('32'),
-             'yellow': color_console('33'), 'blue': color_console('34'),
-             'magenta': color_console('35'), 'cyan': color_console('36'),
-             'white': color_console('37')}
 
 def print_info(text, color='white', kill=False):
     global color_set
     print 'color:', color  # for debug from logfile
-    print color_set.get(color)(text)
+    template = color_set.get(color)
+    print template.format(text)
     if kill:
         exit(-1)
-
 
 '''
 # A simple wrapper, print func name when been executed.

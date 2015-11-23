@@ -226,12 +226,24 @@ related questions: http://stackoverflow.com/questions/23333231/bootstrap-button-
     margin-bottom: 5px;
     padding-bottom: 5px;
     padding-top: 5px;
-    display: none;
+    border: none;
+    /*display: none;*/
     color: white;
-    /*background-color: rgb(174, 0, 0);*/
+    background-color: inherit;
 }
 
 .error_msg_text{
     font-weight: bold;
     font-style: italic;
+}
+
+#editor {
+    width: inherit;
+    height: inherit;
+}
+
+.editor {
+    position: absolute;
+    width: 93%;
+    height: 300px;
 }
