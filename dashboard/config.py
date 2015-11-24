@@ -12,7 +12,7 @@ redis_db_db   = 1
 
 
 # web server
-app_host  = '192.168.33.10:9090'
+app_host  = '192.168.1.4:9090'
 
 
 # redis key

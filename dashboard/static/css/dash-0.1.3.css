@@ -243,7 +243,7 @@ related questions: http://stackoverflow.com/questions/23333231/bootstrap-button-
 }
 
 .editor {
-    position: absolute;
-    width: 93%;
-    height: 300px;
+    /*position: absolute;*/
+    width: inherit;
+    height: inherit;
 }

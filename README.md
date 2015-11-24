@@ -110,6 +110,8 @@ OK
     + client side log
     + support python3
     + create examples
+    + logo
+    + support x-axis as date format
 
 
 - V 0.1.5 :
