@@ -29,5 +29,29 @@ r_kv = redis.Redis(host=config.redis_kv_host, port=config.redis_kv_port, db=conf
 r_db = redis.Redis(host=config.redis_db_host, port=config.redis_db_port, db=config.redis_db_db)
 
 
+'''
+build sql connector
+'''
+# build_sql_connector()
+
+
 # import modules
 from . import client, server
+
+
+
+
+
+'''
+Details here
+'''
+
+def build_sql_connector():
+    if config.db_type == 'mysql':
+        import MySQLdb
+        connector = MySQLdb.connect(host=config.sql_host, port=config.sql_port,
+                                    db=config.sql_db, user=config.sql_user,
+                                    password=config.sql_password)
+        return connector
+    else:
+        pass

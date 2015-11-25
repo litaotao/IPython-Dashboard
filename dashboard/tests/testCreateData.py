@@ -43,14 +43,14 @@ def test_create_dataframe():
         # r_kv.set(key, value.to_json())
         sender(value, key, value.to_json())
     #
-    url_3 = 'https://github.com/litaotao/IPython-Dashboard/raw/master/docs/people_number_by_province_lateset_10_years.csv'
+    url_3 = 'https://github.com/litaotao/IPython-Dashboard/raw/v-0.1.4-sql-ui-optimize/docs/people_number_by_province_lateset_10_years.csv'
     if os.path.isdir(TMP_DIR) and  'people_number_by_province_lateset_10_years.csv' in os.listdir(TMP_DIR):
         url_3 = TMP_DIR + '/people_number_by_province_lateset_10_years.csv'
     value = pd.read_csv(url_3)
     # r_kv.set('chinese_population', value.to_json())
     sender(value, 'chinese_population', value.to_json())
 
-    url_4 = 'https://github.com/litaotao/IPython-Dashboard/raw/master/docs/da_zong_jiao_yi_index.csv'
+    url_4 = 'https://github.com/litaotao/IPython-Dashboard/raw/v-0.1.4-sql-ui-optimize/docs/da_zong_jiao_yi_index.csv'
     if os.path.isdir(TMP_DIR) and  'da_zong_jiao_yi_index.csv' in os.listdir(TMP_DIR):
         url_4 = TMP_DIR + '/da_zong_jiao_yi_index.csv'
     value = pd.read_csv(url_4)

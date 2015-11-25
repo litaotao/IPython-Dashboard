@@ -3,24 +3,23 @@
 
 {% block main_content %}
     <div id="main-content">
+        <!-- sql editor -->
         <div>
-            <!-- <textarea> -->
             <div class="btn-group" id="graph-type">
-                <button type="button" class="btn btn-default btn-sm btn-chart" onclick=""><i class="fa fa-fw fa-lg fa-sort-amount-asc"></i>run all</button>
-                <button type="button" class="btn btn-default btn-sm btn-chart" onclick=""><i class="fa fa-fw fa-lg fa-shield"></i>run selected</button>
-                <button type="button" class="btn btn-default btn-sm btn-chart" onclick=""><i class="fa fa-fw fa-lg fa-level-up"></i>run first</button>
-                <button type="button" class="btn btn-default btn-sm btn-chart" onclick=""><i class="fa fa-fw fa-lg fa-level-down"></i>run last</button>
-                <button type="button" class="btn btn-default btn-sm btn-chart" onclick=""><i class="fa fa-fw fa-lg fa-outdent"></i> format</button>
+                <button type="button" class="btn btn-default btn-sm btn-chart" onclick="runSql('all')"><i class="fa fa-fw fa-lg fa-sort-amount-asc"></i>run all</button>
+                <button type="button" class="btn btn-default btn-sm btn-chart" onclick="runSql('selected')"><i class="fa fa-fw fa-lg fa-shield"></i>run selected</button>
+                <button type="button" class="btn btn-default btn-sm btn-chart" onclick="runSql('first')"><i class="fa fa-fw fa-lg fa-level-up"></i>run first</button>
+                <button type="button" class="btn btn-default btn-sm btn-chart" onclick="runSql('last')"><i class="fa fa-fw fa-lg fa-level-down"></i>run last</button>
+                <button type="button" class="btn btn-default btn-sm btn-chart" onclick="runSql('format')"><i class="fa fa-fw fa-lg fa-outdent"></i> format</button>
             </div>
             <div style="width: 100%; height: 300px">
                 <div class="editor" type=textarea>
                    <div id="editor">select * from ;</div>
                 </div>
             </div>
-
-            <!-- </textarea> -->
        </div>
 
+       <!-- sql result viewer -->
         <div>
             <div>
                 <table class="table" style="margin-top: 20px; margin-bottom: 0px">
@@ -67,5 +66,10 @@
     editor.setTheme("ace/theme/sqlserver");
     var sqlMode = ace.require("ace/mode/mysql").Mode;
     editor.session.setMode(new sqlMode());
+
+    $('.btn-chart').click(function(e) {
+        $(".btn-chart").removeClass("active");
+        $(this).addClass("active");
+    })
 </script>
 {% endblock %}
