@@ -1,4 +1,14 @@
 
+- V 0.1.3 : basic-curd-docs
+
+    - Dashboard
+        + restructure code for future develop
+        + more docs and tutorial
+        + basic curd operations
+        + gh-pages done
+        + publish on readthedoc
+
+
 - V 0.1.2 : visualiza-table
     - slogan: ***Inspired by IPython, built with love***
 

@@ -12,7 +12,7 @@ A stand alone, light-weight web server for building, sharing graphs created in I
 
 # Usage
 
-- Install prerequisite
+- *Install prerequisite*
     + install the latest stable IPython-Dashboard: `pip install ipython-dashboard --upgrade`
     + install redis 2.6+ : [install guide](http://redis.io/topics/quickstart)
     + install IPython-Dashboard requirements [unneeded sometimes]:
@@ -20,11 +20,11 @@ A stand alone, light-weight web server for building, sharing graphs created in I
         - `pip install -r requirements.txt`
 
 
-- Config IPython-Dashboard server : `IPython-Dashboard/dashboard/config.py`
+- *Config IPython-Dashboard server : `IPython-Dashboard/dashboard/config.py`*
     + `app_host='ip_address:port'`
 
 
-- Start redis and IPython-Dashboard server
+- *Start redis and IPython-Dashboard server*
 
 ```
 chenshan@mac007:~/Desktop/github/IPython-Dashboard$redis-server &
@@ -48,7 +48,7 @@ Namespace(debug=True, host='0.0.0.0', port=9090)
 Namespace(debug=True, host='0.0.0.0', port=9090)
 ```
 
-- Do your exploring
+- *Do your exploring*
     + ***IPython-Dashboard-Tutorial.ipynb*** : [On nbviewer](http://nbviewer.ipython.org/github/litaotao/IPython-Dashboard/blob/master/docs/IPython-Dashboard-Tutorial.ipynb) or [On github](https://github.com/litaotao/IPython-Dashboard/blob/master/docs/IPython-Dashboard-Tutorial.ipynb)
 
 
@@ -70,7 +70,7 @@ Namespace(debug=True, host='0.0.0.0', port=9090)
 - want a real-time graph.
 - want an collaborated graph/dashboard.
 
-![wise-choice](https://raw.githubusercontent.com/litaotao/IPython-Dashboard/master/docs/wise-choice.jpg)
+![wise-choice](docs/wise-choice.jpg)
 
 
 # Screenshot and Demo
@@ -78,9 +78,9 @@ Namespace(debug=True, host='0.0.0.0', port=9090)
 [Demo on Youtube](https://youtu.be/LOWBEYDkn90)     
 [Demo on Youku](http://v.youku.com/v_show/id_XMTM3MTc5MTAwMA)
 
-![screenshot](https://raw.githubusercontent.com/litaotao/IPython-Dashboard/master/docs/template-screenshot-0.1.3-1.jpg)
+![screenshot](docs/template-screenshot-0.1.3-1.jpg)
 
-![screenshot](https://raw.githubusercontent.com/litaotao/IPython-Dashboard/master/docs/template-screenshot-0.1.2-2-small.jpg)
+![screenshot](docs/template-screenshot-0.1.2-2-small.jpg)
 
 ![screenshot](docs/template-screenshot-0.1.4-1.jpg)
 
@@ -121,7 +121,6 @@ OK
 # [Change Log](./CHANGES.md)
 
 - future
-    + import dashboard to ipython notebook, one click [ though I don't think it's necessary]
     + front side, databricks style
     + pep 8, code clean up & restructure
     + hover tips
@@ -130,7 +129,6 @@ OK
     + Share one dashboard
     + Presentation mode
     + footer
-    + readthedoc
     + unified message display center
     + SQL Editor
     + login management
@@ -139,22 +137,21 @@ OK
     + client side log
     + support python3
     + create examples
-    + logo
-    + support x-axis as date format
 
 
-- V 0.1.5 :
+- ***V 0.1.5 : sql-server-log [ current develop version ]***
 
     - Dashboard
-        + support python3
+        + create 1 example
         + server side log
-        + research on real-time dataframe
+        + support x-axis as date format
+        + research on real-time updated dataframe
 
     - SQL Editor
-        + render sql result as a table view
+        + sql server develop : render sql result as table view
 
 
-- ***V 0.1.4 : sql-ui-optimize : [ current develop version ]***
+- ***V 0.1.4 : sql-ui-optimize : [ current stable release ]***
 
     - Dashboard
         + create 1 example
@@ -164,17 +161,6 @@ OK
 
     - SQL Editor
         + sql editor web UI.
-
-
-- ***V 0.1.3 : basic-curd-docs : [ current stable release ]***
-
-    - Dashboard
-        + restructure code for future develop
-        + more docs and tutorial
-        + basic curd operations
-        + gh-pages done
-        + publish on readthedoc
-
 
 # Related Projects & Products
 
