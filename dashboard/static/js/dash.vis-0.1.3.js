@@ -3,14 +3,22 @@
 function genLineChart(){
     var chart = nv.models.lineWithFocusChart();
     chart.brushExtent([10,70]);
-    chart.xAxis.tickFormat(d3.format(',f'));
-    chart.x2Axis.tickFormat(d3.format(',f'));
+    // chart.xAxis.tickFormat(d3.format(',f'));
+    // chart.x2Axis.tickFormat(d3.format(',f'));
+
+    // chart.xScale = d3.time.scale();
+    // chart.xAxis.tickFormat(function(d) { return d3.time.format('%Y-%m-%d')(d); });
+    // chart.x2Axis.tickFormat(function(d) {
+    //     console.log(d);
+    //     return d3.time.format("%Y-%m-%d")(new Date(d));
+    // });
     chart.yAxis.tickFormat(d3.format(',.2f'));
     chart.y2Axis.tickFormat(d3.format(',.2f'));
     chart.useInteractiveGuideline(true);
 
     return chart;
 }
+
 
 function genPieChart(){
     var chart = nv.models.pieChart()
@@ -24,6 +32,7 @@ function genPieChart(){
     return chart;
 }
 
+
 function genAreaChart(){
     var chart = nv.models.stackedAreaChart()
     .useInteractiveGuideline(true)
@@ -34,6 +43,7 @@ function genAreaChart(){
     ;
     return chart;
 }
+
 
 function genMultiBarChart(){
     var chart = nv.models.multiBarChart()
@@ -46,10 +56,12 @@ function genMultiBarChart(){
     return chart;
 }
 
+
 function renderChart(dom_id, chart, data){
     var svg = d3.select(dom_id).datum(data);
     svg.transition().duration(0).call(chart);
 }
+
 
 function getChart(type){
     switch (type){
@@ -60,6 +72,7 @@ function getChart(type){
     }
 }
 
+
 function validateData(type, data){
     switch (type){
         case "line": return validateLineData(data);
@@ -69,9 +82,11 @@ function validateData(type, data){
     }
 }
 
+
 function validateLineData(data){
     return data;
 }
+
 
 function validateMultiBarData(data){
     // pattern:  [{area: true, disabled: true, key: key, values: [{x: , y: }, ]},]
@@ -82,6 +97,7 @@ function validateMultiBarData(data){
     return data;
 }
 
+
 function validatePieData(data){
     var formatData = [];
     $.each(data[0].values, function(index, obj){
@@ -90,6 +106,7 @@ function validatePieData(data){
     data = formatData;
     return data;
 }
+
 
 function validateAreaData(data){
     var formatData = [];

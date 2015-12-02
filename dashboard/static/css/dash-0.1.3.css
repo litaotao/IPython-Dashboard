@@ -15,7 +15,7 @@ body {
     font-size: 16px;
     font-family: 'Helvetica Neue', Arial, sans-serif;
     color: #444;
-    margin: 30px 40px;
+    /*margin: 30px 40px;*/
 }
 
 .controls {
@@ -220,4 +220,30 @@ related questions: http://stackoverflow.com/questions/23333231/bootstrap-button-
 */
 .fa-circle-o-notch:focus,.fa-circle-o-notch:active {
     outline: none !important;
+}
+
+.error_msg{
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border: none;
+    /*display: none;*/
+    color: white;
+    background-color: inherit;
+}
+
+.error_msg_text{
+    font-weight: bold;
+    font-style: italic;
+}
+
+#editor {
+    width: inherit;
+    height: inherit;
+}
+
+.editor {
+    /*position: absolute;*/
+    width: inherit;
+    height: inherit;
 }

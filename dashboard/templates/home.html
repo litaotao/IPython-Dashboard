@@ -52,12 +52,19 @@
 {% endblock %}
 
 {% block script %}
+
+<script type"text/javascript">
+    store.set("api_root", "http://" + $("meta[name=api_root]")[0].attributes.value.value + "/");
+    api_root = store.get("api_root");
+</script>
+
 <script type="text/javascript">
-initDashList();
-$(document).ready(function(){
-    $(function(){
-        $("#my").tablesorter({ sortList: [[2, 1]] });
+    initDashList();
+    $(document).ready(function(){
+        $(function(){
+            $("#my").tablesorter({ sortList: [[2, 1]] });
+        });
     });
-});
+    // my_alert("welcome to the dashboard");
 </script>
 {% endblock %}

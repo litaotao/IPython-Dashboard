@@ -1,0 +1,75 @@
+
+{% extends "layout.html" %}
+
+{% block main_content %}
+    <div id="main-content">
+        <!-- sql editor -->
+        <div>
+            <div class="btn-group" id="graph-type">
+                <button type="button" class="btn btn-default btn-sm btn-chart" onclick="runSql('all')"><i class="fa fa-fw fa-lg fa-sort-amount-asc"></i>run all</button>
+                <button type="button" class="btn btn-default btn-sm btn-chart" onclick="runSql('selected')"><i class="fa fa-fw fa-lg fa-shield"></i>run selected</button>
+                <button type="button" class="btn btn-default btn-sm btn-chart" onclick="runSql('first')"><i class="fa fa-fw fa-lg fa-level-up"></i>run first</button>
+                <button type="button" class="btn btn-default btn-sm btn-chart" onclick="runSql('last')"><i class="fa fa-fw fa-lg fa-level-down"></i>run last</button>
+                <button type="button" class="btn btn-default btn-sm btn-chart" onclick="runSql('format')"><i class="fa fa-fw fa-lg fa-outdent"></i> format</button>
+            </div>
+            <div style="width: 100%; height: 300px">
+                <div class="editor" type=textarea>
+                   <div id="editor">select * from ;</div>
+                </div>
+            </div>
+       </div>
+
+       <!-- sql result viewer -->
+        <div>
+            <div>
+                <table class="table" style="margin-top: 20px; margin-bottom: 0px">
+                    <tbody>
+                        <tr class="active">
+                            <td style="padding: 0px; width: 70%; background-color: white;border: none;">
+                                <div class="btn-group" id="graph-type" style="padding-left: 0px;">
+                                    <button type="button" class="btn btn-default btn-sm btn-chart" onclick=""><i class="fa fa-fw fa-lg fa-table"></i></button>
+                                    <button type="button" class="btn btn-default btn-sm btn-chart" onclick=""><i class="fa fa-fw fa-lg fa-bar-chart-o"></i></button>
+                                    <button type="button" class="btn btn-default btn-sm btn-chart" onclick=""><i class="fa fa-fw fa-lg fa-line-chart"></i></button>
+                                    <button type="button" class="btn btn-default btn-sm btn-chart" onclick=""><i class="fa fa-fw fa-lg fa-pie-chart"></i></button>
+                                    <button type="button" class="btn btn-default btn-sm btn-chart" onclick=""><i class="fa fa-fw fa-lg fa-area-chart"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr style="margin: 5px 0px; color: green;">
+            <div id="value" style="width: 100%; height: 500px; overflow-x:auto; overflow-y:auto;">
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block editor_modal %}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Editor Modal Header -->
+            <div class="modal-header" style="padding: 5px;">
+            </div>
+            <!-- Editor Modal Content -->
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    editor = ace.edit("editor");
+    editor.setTheme("ace/theme/sqlserver");
+    var sqlMode = ace.require("ace/mode/mysql").Mode;
+    editor.session.setMode(new sqlMode());
+
+    $('.btn-chart').click(function(e) {
+        $(".btn-chart").removeClass("active");
+        $(this).addClass("active");
+    })
+</script>
+{% endblock %}

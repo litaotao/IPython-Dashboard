@@ -22,22 +22,23 @@ class Home(Resource):
     Attributes:
     """
     def get(self):
-        return make_response(render_template('home.html'))
+        return make_response(render_template('home.html', api_root=config.app_host))
 
     def post(self):
         post_data = request.json
-        self.create_dash(post_data.get('name'), post_data.get('author'))
+        self._create_dash(post_data.get('name'), post_data.get('author'))
         return redirect('/')
 
-    def create_dash(self, name, author):
+    def _create_dash(self, name, author):
         tmp_time = time.time()
         meta = {'author': author, 'name': name, 'time_modified': tmp_time}
         default_option = {"x": [], "y": []}
-        content = {"0": {"x": 0, "y": 5, "width": 6, "height": 5, "key": "none", "type": "none", "option": default_option},
-                   "1": {"x": 6, "y": 5, "width": 6, "height": 5, "key": "none", "type": "none", "option": default_option},
-                   "2": {"x": 0, "y": 0, "width": 6, "height": 5, "key": "none", "type": "none", "option": default_option},
-                   "3": {"x": 6, "y": 0, "width": 6, "height": 5, "key": "none", "type": "none", "option": default_option},
-                  }
+        content = {
+            "0": {"x": 0, "y": 5, "width": 6, "height": 5, "key": "none", "type": "none", "option": default_option},
+            "1": {"x": 6, "y": 5, "width": 6, "height": 5, "key": "none", "type": "none", "option": default_option},
+            "2": {"x": 0, "y": 0, "width": 6, "height": 5, "key": "none", "type": "none", "option": default_option},
+            "3": {"x": 6, "y": 0, "width": 6, "height": 5, "key": "none", "type": "none", "option": default_option},
+        }
 
         dash_id = r_db.zcount(config.DASH_ID_KEY, '-inf', '+inf') + 1
         meta['time_modified'] = tmp_time
@@ -52,7 +53,7 @@ class Home(Resource):
         r_db.hset(config.DASH_META_KEY, dash_id, json.dumps(meta))
         r_db.hset(config.DASH_CONTENT_KEY, dash_id, json.dumps(content))
 
-        return meta
+        return (dash_id, meta, content)
 
 
 class DashListData(Resource):

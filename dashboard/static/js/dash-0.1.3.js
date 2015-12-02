@@ -14,7 +14,7 @@ var box_template = ' \
               <button class="fa fa-fw fa-sm fa-circle-o-notch" onclick=toggleGridMovable(this) style="background: none;background-color: inherit;border: none; padding: 0px 0px">         \
               </button></td>                                           \
             <td style="padding: 0px; width: 90%; padding-left: 5px">   \
-              <input class="form-control input-lg input-title-level-2" maxlength="32" placeholder="Naming your graph">  \
+              <input class="form-control input-lg input-title-level-2" maxlength="128" placeholder="Naming your graph">  \
             </td>                                                                                                       \
             <td style="padding: 0px; width: 10%">                                                                       \
               <ul class="nav navbar-nav" style="padding-left: 7%;">    \
@@ -68,7 +68,6 @@ var setting_template = '       \
     </ul>  \
   </li>    \
 </ul>'
-
 
 function deleteGraph(obj) {
     var grid = $('.grid-stack').data('gridstack');
@@ -159,12 +158,24 @@ function createGrids(){
         if (key == "none"){
             console.log("no key exist");
         }else{
-            $.getJSON("http://127.0.0.1:9090/key/" + key, function(data){
+            $.getJSON(api_root + "key/" + key, function(data){
                 store.set(key, $.parseJSON(data.data));
                 console.log($(strFormat("div [graph-id={0}] .chart-graph", index)));
                 initChart(current_dash.grid[index].type, index)
                 console.log($.parseJSON(data.data));
             })
+            // $.ajax({
+            //     url: api_root + "key/" + key,
+            //     method: "GET",
+            //     dataType: "JSONP",
+            //     contentType: "application/json",
+            //     async: false,
+            // })
+            // .success(function(data){
+            //     store.set(key, $.parseJSON(data.data));
+            //     initChart(current_dash.grid[index].type, index)
+            //     console.log($.parseJSON(data.data));
+            // })
         }
     })
 
@@ -179,7 +190,8 @@ function registerKeysFunc(){
         var keys_select = $("#keys");
         keys_select.empty();
 
-        var url = "http://127.0.0.1:9090/keys";
+        // var url = "http://127.0.0.1:9090/keys";
+        var url = api_root + "keys";
         $.getJSON(url, function(data){
             $.each(data.data, function(index, value){
                 keys_select.append("<option>" + value + "</option>")
@@ -194,7 +206,8 @@ function getValue(){
         var selectDOM = $("#keys")[0];
         var key = selectDOM.options[selectDOM.selectedIndex].text;
         var modal = store.get("modal");
-        var url = "http://127.0.0.1:9090/key/" + key;
+        // var url = "http://127.0.0.1:9090/key/" + key;
+        var url = api_root + "key/" + key;
 
         $.getJSON(url, function(data){
             var jsonData = $.parseJSON(data.data);
@@ -344,7 +357,8 @@ function saveDash(){
 
     store.set(store.get("current-dash"), dash);
     var resJson = JSON.stringify(dash);
-    var url = "http://127.0.0.1:9090/data/dash/" + dash.id;
+    // var url = "http://127.0.0.1:9090/data/dash/" + dash.id;
+    var url = api_root + "data/dash/" + dash.id;
     var method = "PUT";
 
     $.ajax({
@@ -366,7 +380,8 @@ function saveDash(){
 
 
 function getDash(dash_id){
-    var url = "http://127.0.0.1:9090/data/dash/" + dash_id;
+    // var url = "http://127.0.0.1:9090/data/dash/" + dash_id;
+    var url = api_root + "data/dash/" + dash_id;
     var resJson = $.ajax({
         url: url,
         method: "GET",
@@ -388,7 +403,8 @@ function getDash(dash_id){
 
 
 function getDashList(){
-    var url = "http://127.0.0.1:9090/data/dashes/";
+    // var url = "http://127.0.0.1:9090/data/dashes/";
+    var url = api_root + "data/dashes/";
     var resJson = $.ajax({
         url: url,
         method: "GET",
@@ -412,7 +428,8 @@ function getDashList(){
 function initDashList(){
     var list = getDashList();
     var tbody = $("#dash_list")[0];
-    var url = "http://127.0.0.1:9090/dash/";
+    // var url = "http://127.0.0.1:9090/dash/";
+    var url = api_root + "dash/";
 
     $.each(list, function(index, obj){
         var a = genElement("a");
@@ -442,29 +459,45 @@ function initDashList(){
             "name": $("#name")[0].value,
             "author": $("#author")[0].value,
         };
+        console.log(api_root);
         $.ajax({
-            url: "http://127.0.0.1:9090/",
+            // I don't know why set url to api_root will cause an error here,
+            // need to take little time on diving into this. but it as the doc says:
+            // the default value of url is current page, so it works when leave out
+            // the url paramter, will take back to this later.
+            // url: api_root,
+            // url: "http://127.0.0.1:9090/",
             method: "POST",
+            dataType: "JSONP",
             data: JSON.stringify(newDash),
             contentType: "application/json",
             async: false,
         })
-        .done(function(data){console.log("ajax done");})
-        .fail(function(){console.log("ajax fail")})
+        .done(function(data){
+            console.log("ajax done");
+        })
+        .fail(function(){
+            console.log("ajax fail");
+        })
         .success(function(data){
             console.log("ajax success");
             console.log(data);
             return data;
         })
-        .complete(function(){console.log("ajax complete")})
-        .always(function(){console.log("ajax always")});
+        .complete(function(){
+            console.log("ajax complete");
+        })
+        .always(function(){
+            console.log("ajax always");
+        });
     });
 }
 
 
 function deleteDash(dash_id) {
     $.ajax({
-        url: strFormat("http://127.0.0.1:9090/data/dash/{0}", dash_id),
+        url: api_root + "data/dash/" + dash_id,
+        // url: strFormat("http://127.0.0.1:9090/data/dash/{0}", dash_id),
         method: "DELETE",
         contentType: "application/json",
         // async: false,
@@ -524,4 +557,14 @@ function strFormat(theString){
         theString = theString.replace(regEx, arguments[i]);
     }
     return theString;
+}
+
+
+function my_alert(msg, error){
+    var background_color = error ? 'orangered' : 'cadetblue';
+	scrollBy(0, -1000);
+    $("#error")[0].style.backgroundColor = background_color;
+    $("#error_msg")[0].innerText = msg;
+	$("#error").fadeIn(3000);
+	$("#error").fadeOut(3000);
 }

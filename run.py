@@ -3,4 +3,4 @@
 
 from dashboard import app
 
-app.run(host="0.0.0.0", port=9090, debug=True)
+app.run(host="192.168.1.104", port=9090, debug=True)
