@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
+
 # built-in package
 import copy
+import logging
+import logging.config
 
 # third-parth package
 import redis
@@ -9,8 +12,8 @@ from flask import Flask
 from flask.ext.restful import Api
 
 # user-defined package
-from . import config
-
+from .conf import config
+from .server.utils import Map
 
 '''
 dashboard server setup
@@ -35,11 +38,19 @@ build sql connector
 # build_sql_connector()
 
 
+'''
+logging init
+'''
+log = Map()
+logging.config.fileConfig('dashboard/conf/logging.conf')
+access_log = logging.getLogger('access')
+error_log = logging.getLogger('error')
+log.access = access_log
+log.error = error_log
+
+
 # import modules
 from . import client, server
-
-
-
 
 
 '''
