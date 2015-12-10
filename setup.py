@@ -11,7 +11,7 @@ def load_readme():
 
 setup(
     name="IPython-Dashboard",
-    version='0.1.3',
+    version='0.1.5',
     author="Taotao Li",
     author_email="taotao.engineer@gmail.com",
     url="https://github.com/litaotao/IPython-Dashboard",
