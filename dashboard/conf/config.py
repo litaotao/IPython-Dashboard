@@ -10,10 +10,8 @@ redis_db_host = 'localhost'
 redis_db_port = 6379
 redis_db_db   = 1
 
-
 # web server
-app_host  = '192.168.1.104:9090'
-
+app_host  = '127.0.0.1:9090'
 
 # redis key
 DASH_ID_KEY = "dash_id"
@@ -28,6 +26,23 @@ sql_port = 3306
 sql_db   = 'test'
 sql_user = 'root'
 sql_password = None
+
+# logging
+def config_log():
+    import logging
+    import logging.config
+    from ..server.utils import Map
+    logging.config.fileConfig('dashboard/conf/logging.conf')
+    access_log = logging.getLogger('access')
+    error_log = logging.getLogger('error')
+
+    logger = Map()
+    logger.access = access_log
+    logger.error = error_log
+
+    return logger
+logger = config_log()
+
 
 # env config
 # 'dev' will use raw js/css files for debug use
