@@ -19,6 +19,10 @@ A stand alone, light-weight web server for building, sharing graphs created in I
         - `cd ~/your python package path/IPython-Dashboard`
         - `pip install -r requirements.txt`
 
+- *Config mysql*
+    + create a user and grant privileges;
+    + create tables;
+
 
 - *Config IPython-Dashboard server : `IPython-Dashboard/dashboard/config.py`*
     + `app_host='ip_address:port'`

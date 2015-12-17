@@ -23,9 +23,9 @@ DASH_DELETED_KEY = "dash_deleted"
 sql_type = 'mysql'   # currently just support mysql
 sql_host = 'localhost'
 sql_port = 3306
-sql_db   = 'test'
-sql_user = 'root'
-sql_password = None
+sql_user = 'ipd'
+sql_pwd  = 'thanks'
+sql_db   = 'IPD_data'
 
 # logging
 def config_log():
@@ -42,7 +42,6 @@ def config_log():
 
     return logger
 logger = config_log()
-
 
 # env config
 # 'dev' will use raw js/css files for debug use

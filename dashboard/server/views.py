@@ -36,8 +36,8 @@ api.add_resource(Dash, '/dash/<string:dash_id>')
 api.add_resource(DashData, '/data/dash/<string:dash_id>')
 
 # sql page
-# api.add_resource(Sql, '/sql/')
-# api.add_resource(SqlData, '/data/sql/')
+api.add_resource(Sql, '/sql/')
+api.add_resource(SqlData, '/data/sql/')
 
 # server info
 api.add_resource(Status, '/__info__')

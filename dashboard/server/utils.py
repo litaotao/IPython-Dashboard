@@ -8,6 +8,7 @@ import random
 from functools import wraps
 
 # third-party package
+import MySQLdb
 from flask import make_response, jsonify
 
 # user-defined package
@@ -96,3 +97,38 @@ class Map(dict):
     def __delitem__(self, key):
         super(Map, self).__delitem__(key)
         del self.__dict__[key]
+
+
+class SQL(object):
+    """docstring for SQL"""
+    def __init__(self, host, port, user, passwd, db):
+        super(SQL, self).__init__()
+        self.conn = MySQLdb.connect(host=host, port=port, user=user, passwd=passwd,
+                                    db=db)
+
+    def get_conn(self):
+        try:
+            self.conn.stat()
+        except:
+            self.conn = MySQLdb.connect(host=host, port=port, user=user, passwd=passwd,
+                                        db=db)
+
+        return self.conn
+
+    def run(self, sql):
+        self.get_conn()
+        cursor = self.conn.cursor()
+        cursor.execute(sql)
+        result = cursor.fetchall()
+        cursor.close()
+
+        return result
+
+
+
+
+
+
+
+
+#

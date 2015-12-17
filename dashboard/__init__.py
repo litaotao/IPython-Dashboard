@@ -31,12 +31,6 @@ r_db = redis.Redis(host=config.redis_db_host, port=config.redis_db_port, db=conf
 
 
 '''
-build sql connector
-'''
-# build_sql_connector()
-
-
-'''
 logging init
 '''
 log = config.logger
@@ -45,18 +39,3 @@ log = config.logger
 # import modules
 from . import client
 from .server import views
-
-
-'''
-Details here
-'''
-
-def build_sql_connector():
-    if config.db_type == 'mysql':
-        import MySQLdb
-        connector = MySQLdb.connect(host=config.sql_host, port=config.sql_port,
-                                    db=config.sql_db, user=config.sql_user,
-                                    password=config.sql_password)
-        return connector
-    else:
-        pass
