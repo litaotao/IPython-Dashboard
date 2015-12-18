@@ -23,6 +23,8 @@ A stand alone, light-weight web server for building, sharing graphs created in I
     + create a user and grant privileges;
     + create tables;
 
+- *Create logging path*
+    + `/mnt/ipython-dashboard/logs`
 
 - *Config IPython-Dashboard server : `IPython-Dashboard/dashboard/config.py`*
     + `app_host='ip_address:port'`
@@ -142,6 +144,14 @@ OK
     + support python3
     + create examples
 
+
+- ***V 0.1.6 :  [  ]***
+
+    - Dashboard
+        + re-structure code, follow pep8 style
+
+    - SQL Editor
+        + optimize page
 
 - ***V 0.1.5 : sql-server-log [ current develop version ]***
 

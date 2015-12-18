@@ -9,6 +9,7 @@ from functools import wraps
 
 # third-party package
 import MySQLdb
+import pandas as pd
 from flask import make_response, jsonify
 
 # user-defined package
@@ -99,7 +100,20 @@ class Map(dict):
         del self.__dict__[key]
 
 
+class Singleton(type):
+    def __init__(cls, name, bases, dict):
+        super(Singleton, cls).__init__(name, bases, dict)
+        cls.instance = None
+
+    def __call__(cls,*args,**kw):
+        if cls.instance is None:
+            cls.instance = super(Singleton, cls).__call__(*args, **kw)
+        return cls.instance
+
+
 class SQL(object):
+    __metaclass__ = Singleton
+
     """docstring for SQL"""
     def __init__(self, host, port, user, passwd, db):
         super(SQL, self).__init__()
@@ -122,7 +136,11 @@ class SQL(object):
         result = cursor.fetchall()
         cursor.close()
 
-        return result
+        columns = [i[0] for i in cursor.description]
+        frame = pd.DataFrame.from_records(list(result), columns=columns)
+
+
+        return frame.to_dict()
 
 
 

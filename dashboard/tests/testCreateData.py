@@ -65,7 +65,7 @@ def test_create_mysql_data():
     def test_create_database():
         conn = MySQLdb.connect(host=config.sql_host, port=config.sql_port,
             user=config.sql_user, passwd=config.sql_pwd)
-        print conn.cursor().execute('CREATE DATABASE IF NOT EXISTS {};'.format(config.sql_db))
+        conn.cursor().execute('CREATE DATABASE IF NOT EXISTS {};'.format(config.sql_db))
         conn.close()
 
     test_create_database()
@@ -81,7 +81,7 @@ def test_create_mysql_data():
         # create table then
         '''CREATE TABLE businesses (
             business_id     INT,
-            name            text,
+            name            VARCHAR(64) CHARACTER SET utf8 COLLATE utf8_bin,
             address         VARCHAR(256),
             city            CHAR(64),
             state           CHAR(64),
@@ -92,13 +92,16 @@ def test_create_mysql_data():
         )''',
     ]
     for i in sql:
-        print conn.run(i)
+        conn.run(i)
 
     # load data into table
     url = 'https://github.com/litaotao/data-science/raw/master/examples/happy-healthy-hungry/data/SFBusinesses/businesses.csv'
     if os.path.isdir(TMP_DIR) and 'businesses.csv' in os.listdir(TMP_DIR):
         url = TMP_DIR + '/businesses.csv'
     data = pd.read_csv(url)
+    data.name = [i.replace('\xc9', '') for i in data.name]
+    data.name = [i.replace('\xc8', '') for i in data.name]
+    data.name = [i.replace('\xca', '') for i in data.name]
 
     data.to_sql('businesses', conn.conn, if_exists='append', flavor='mysql', index=False)
 
