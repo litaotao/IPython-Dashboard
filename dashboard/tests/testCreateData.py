@@ -91,8 +91,9 @@ def test_create_mysql_data():
             phone_number    CHAR(32)
         )''',
     ]
-    for i in sql:
-        conn.run(i)
+    for query in sql:
+        query = query.strip()
+        conn.run(query)
 
     # load data into table
     url = 'https://github.com/litaotao/data-science/raw/master/examples/happy-healthy-hungry/data/SFBusinesses/businesses.csv'

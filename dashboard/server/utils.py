@@ -136,17 +136,9 @@ class SQL(object):
         result = cursor.fetchall()
         cursor.close()
 
-        columns = [i[0] for i in cursor.description]
-        frame = pd.DataFrame.from_records(list(result), columns=columns)
+        if cursor.description:
+            columns = [i[0] for i in cursor.description]
+            frame = pd.DataFrame.from_records(list(result), columns=columns)
+            return frame.to_dict()
 
-
-        return frame.to_dict()
-
-
-
-
-
-
-
-
-#
+        return None

@@ -24,35 +24,40 @@ A stand alone, light-weight web server for building, sharing graphs created in I
     + create tables;
 
 - *Create logging path*
-    + `/mnt/ipython-dashboard/logs`
-
+    + create a folder to store log files. I put it under `mnt` currently: `/mnt/ipython-dashboard/logs`
+    + make sure the log folder is write-able, using `chmod` and `ls -l` to confirm.
+    ```
+    chenshan@mac007:/mnt/ipython-dashboard$ls -l
+    total 0
+    drwxrwxrwx  9 root  wheel  306 Dec 15 22:09 logs
+    ```
 - *Config IPython-Dashboard server : `IPython-Dashboard/dashboard/config.py`*
     + `app_host='ip_address:port'`
 
 
 - *Start redis and IPython-Dashboard server*
 
-```
-chenshan@mac007:~/Desktop/github/IPython-Dashboard$redis-server &
+    ```
+    chenshan@mac007:~/Desktop/github/IPython-Dashboard$redis-server &
 
-chenshan@mac007:~/Desktop/github/IPython-Dashboard$dash-server --help
-usage: dash-server [-h] [-H HOST] [-p PORT] [-d DEBUG]
+    chenshan@mac007:~/Desktop/github/IPython-Dashboard$dash-server --help
+    usage: dash-server [-h] [-H HOST] [-p PORT] [-d DEBUG]
 
-Start your IPython-Dashboard server ...
+    Start your IPython-Dashboard server ...
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -H HOST, --host HOST  server host, default localhost
-  -p PORT, --port PORT  server port, default 9090
-  -d DEBUG, --debug DEBUG
-                        server port, default true
+    optional arguments:
+      -h, --help            show this help message and exit
+      -H HOST, --host HOST  server host, default localhost
+      -p PORT, --port PORT  server port, default 9090
+      -d DEBUG, --debug DEBUG
+                            server port, default true
 
-chenshan@mac007:~/Desktop/github/IPython-Dashboard$dash-server
-Namespace(debug=True, host='0.0.0.0', port=9090)
- * Running on http://0.0.0.0:9090/
- * Restarting with reloader
-Namespace(debug=True, host='0.0.0.0', port=9090)
-```
+    chenshan@mac007:~/Desktop/github/IPython-Dashboard$dash-server
+    Namespace(debug=True, host='0.0.0.0', port=9090)
+     * Running on http://0.0.0.0:9090/
+     * Restarting with reloader
+    Namespace(debug=True, host='0.0.0.0', port=9090)
+    ```
 
 - *Do your exploring*
     + ***IPython-Dashboard-Tutorial.ipynb*** : [On nbviewer](http://nbviewer.ipython.org/github/litaotao/IPython-Dashboard/blob/master/docs/IPython-Dashboard-Tutorial.ipynb) or [On github](https://github.com/litaotao/IPython-Dashboard/blob/master/docs/IPython-Dashboard-Tutorial.ipynb)
