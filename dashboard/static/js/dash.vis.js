@@ -12,6 +12,11 @@ function genLineChart(){
     //     console.log(d);
     //     return d3.time.format("%Y-%m-%d")(new Date(d));
     // });
+    chart.x(function(d){return new Date(d.x);} );
+    // var chart = nv.models.lineChart().x( function(d){ return new Date(d.x);} );
+    chart.xScale = d3.time.scale();
+    chart.xAxis.tickFormat(function(d) { return d3.time.format("%d-%m-%Y")(new Date(d)) });
+    // chart.xAxis.tickFormat(function(d) { return d3.time.format('%x')(new Date(d)); });
     chart.yAxis.tickFormat(d3.format(',.2f'));
     chart.y2Axis.tickFormat(d3.format(',.2f'));
     chart.useInteractiveGuideline(true);
@@ -49,7 +54,7 @@ function genMultiBarChart(){
     var chart = nv.models.multiBarChart()
     .margin({ bottom: 30 })
     .duration(300)
-    .rotateLabels(45)
+    // .rotateLabels(45)
     .groupSpacing(0.1)
     .stacked(true)
     ;

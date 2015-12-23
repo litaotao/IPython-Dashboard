@@ -12,14 +12,13 @@ from .resources.sql import Sql, SqlData
 
 @app.after_request
 def after(response):
-    log.access.info('end :{} {}\n'.format(request.remote_addr, request.url))
+    log.access.info(u'end :{} {}\n'.format(request.remote_addr, request.url))
     return response
 
 
 @app.before_request
 def before():
-    log.access.info('start :{} {}'.format(request.remote_addr, request.url))
-    pass
+    log.access.info(u'start :{} {}'.format(request.remote_addr, request.url))
 
 
 '''
