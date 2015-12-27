@@ -1,25 +1,20 @@
 
 
-function genLineChart(){
+function genLineChart(timeFormat){
     var chart = nv.models.lineWithFocusChart();
-    chart.brushExtent([10,70]);
-    // chart.xAxis.tickFormat(d3.format(',f'));
-    // chart.x2Axis.tickFormat(d3.format(',f'));
-
-    // chart.xScale = d3.time.scale();
-    // chart.xAxis.tickFormat(function(d) { return d3.time.format('%Y-%m-%d')(d); });
-    // chart.x2Axis.tickFormat(function(d) {
-    //     console.log(d);
-    //     return d3.time.format("%Y-%m-%d")(new Date(d));
-    // });
-    chart.x(function(d){return new Date(d.x);} );
-    // var chart = nv.models.lineChart().x( function(d){ return new Date(d.x);} );
-    chart.xScale = d3.time.scale();
-    chart.xAxis.tickFormat(function(d) { return d3.time.format("%d-%m-%Y")(new Date(d)) });
-    // chart.xAxis.tickFormat(function(d) { return d3.time.format('%x')(new Date(d)); });
+    if (timeFormat == 1) {
+        chart.x(function(d){
+            return new Date(d.x);
+        });
+        chart.xScale = d3.time.scale;
+        chart.xAxis.tickFormat(function(d) {
+            return d3.time.format("%Y-%m-%d")(new Date(d))
+        });
+    }
     chart.yAxis.tickFormat(d3.format(',.2f'));
     chart.y2Axis.tickFormat(d3.format(',.2f'));
     chart.useInteractiveGuideline(true);
+    // chart.brushExtent([-Infinity, Infinity]);
 
     return chart;
 }
@@ -130,6 +125,16 @@ function validateAreaData(data){
 }
 
 
+function xAxisTimeformat(chart){
+    chart.x(function(d){
+        return new Date(d.x);
+    });
+    chart.xScale = d3.time.scale;
+    chart.xAxis.tickFormat(function(d) {
+        return d3.time.format("%Y-%m-%d")(new Date(d))
+    });
+}
+
 function drawChartIntoGrid(type, graph_id){
     var selector = strFormat("div.chart-graph[graph_id='{0}']", graph_id);
     console.log(strFormat("###Ready to draw chart : {0}", type));
@@ -235,8 +240,11 @@ function drawChartIntoModal(type){
         return true;
     };
 
-    var chart = getChart(type);
     var xColumn = data[ modalData.option.x[0] ];
+    var chart = getChart(type);
+    if (xColumn[0][4] == '-'){
+        xAxisTimeformat(chart);
+    }
     var graphData = [];
     $.each(modalData.option.y, function(index, obj){
         var tmp = {};

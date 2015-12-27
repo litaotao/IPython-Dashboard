@@ -21,7 +21,52 @@ A stand alone, light-weight web server for building, sharing graphs created in I
 
 - *Config mysql*
     + create a user and grant privileges;
+        - take a look at current database user
+        ```
+        mysql> SELECT User,Host FROM mysql.user;
+        +------+-----------+
+        | User | Host      |
+        +------+-----------+
+        | root | 127.0.0.1 |
+        | root | ::1       |
+        |      | localhost |
+        | root | localhost |
+        |      | mac007    |
+        | root | mac007    |
+        +------+-----------+
+        6 rows in set (0.00 sec)
+        ```
+
+        - create a user for IPython-Dashboard  
+
+        ```
+        mysql> create user 'ipd'@'localhost' identified by 'thanks';
+        Query OK, 0 rows affected (0.00 sec)
+
+        mysql> grant all privileges on *.* to ipd@localhost;
+        Query OK, 0 rows affected (0.00 sec)
+
+        mysql> SELECT User,Host FROM mysql.user;
+        +------+-----------+
+        | User | Host      |
+        +------+-----------+
+        | root | 127.0.0.1 |
+        | root | ::1       |
+        |      | localhost |
+        | ipd  | localhost |
+        | root | localhost |
+        |      | mac007    |
+        | root | mac007    |
+        +------+-----------+
+        7 rows in set (0.00 sec)
+
+        mysql> flush privileges;
+        Query OK, 0 rows affected (0.00 sec)
+        ```
     + create tables;
+        ```
+        nosetests -s dashboard.tests.testCreateData:test_create_mysql_data
+        ```
 
 - *Create logging path*
     + create a folder to store log files. I put it under `mnt` currently: `/mnt/ipython-dashboard/logs`
@@ -31,6 +76,7 @@ A stand alone, light-weight web server for building, sharing graphs created in I
     total 0
     drwxrwxrwx  9 root  wheel  306 Dec 15 22:09 logs
     ```
+
 - *Config IPython-Dashboard server : `IPython-Dashboard/dashboard/config.py`*
     + `app_host='ip_address:port'`
 

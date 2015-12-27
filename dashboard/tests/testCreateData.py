@@ -65,6 +65,7 @@ def test_create_mysql_data():
     def test_create_database():
         conn = MySQLdb.connect(host=config.sql_host, port=config.sql_port,
             user=config.sql_user, passwd=config.sql_pwd)
+
         conn.cursor().execute('CREATE DATABASE IF NOT EXISTS {};'.format(config.sql_db))
         conn.close()
 
