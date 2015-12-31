@@ -18,9 +18,9 @@ services:
 before_script:
 # make logs template
   - cd /mnt
-  - mkdir ipython-dashboard
+  - sudo mkdir ipython-dashboard
   - cd ipython-dashboard
-  - mkdir logs
+  - sudo mkdir logs
 
 # mysql create user
   - mysql -e 'create user 'ipd'@'localhost' identified by 'thanks';'

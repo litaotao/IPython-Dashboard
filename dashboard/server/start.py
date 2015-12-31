@@ -5,7 +5,7 @@ from __future__ import print_function
 import argparse
 
 # third-party package
-from .. import app
+from .. import app, config
 # from dashboard import app
 
 # user-defined package
@@ -21,6 +21,7 @@ print(args)
 
 
 def run():
+    config.app_host = '{}:{}'.format(args.host, args.port)
     app.run(host=args.host, port=args.port, debug=args.debug)
 
 
