@@ -27,6 +27,8 @@ before_script:
   - echo "grant all privileges on *.* to ipd@localhost;" | mysql -u root
 
 script:
+  - cd $TRAVIS_BUILD_DIR
+  - cd IPython-Dashboard
   - nosetests --with-coverage --cover-package=dashboard
   - flake8 --exit-zero dashboard
 
