@@ -23,8 +23,8 @@ before_script:
   - sudo mkdir logs
 
 # mysql create user
-  - mysql -e 'create user 'ipd'@'localhost' identified by 'thanks';'
-  - mysql -e 'grant all privileges on *.* to ipd@localhost;'
+  - echo "create user 'ipd'@'localhost' identified by 'thanks';" | mysql -u root
+  - echo "grant all privileges on *.* to ipd@localhost;" | mysql -u root
 
 script:
   - nosetests --with-coverage --cover-package=dashboard
