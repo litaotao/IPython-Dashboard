@@ -19,8 +19,10 @@ before_script:
 # make logs template
   - cd /mnt
   - sudo mkdir ipython-dashboard
+  - sudo chmod 777 ipython-dashboard
   - cd ipython-dashboard
   - sudo mkdir logs
+  - sudo chmod 777 logs
 
 # mysql create user
   - echo "create user 'ipd'@'localhost' identified by 'thanks';" | mysql -u root
@@ -28,7 +30,7 @@ before_script:
 
 script:
   - cd $TRAVIS_BUILD_DIR
-  - cd IPython-Dashboard
+  - ls -ltr .
   - nosetests --with-coverage --cover-package=dashboard
   - flake8 --exit-zero dashboard
 
