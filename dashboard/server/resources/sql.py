@@ -51,14 +51,14 @@ class SqlData(Resource):
 
         data = request.get_json()
         options, sql_raw = data.get('options'), data.get('sql_raw')
-        conn = SQL(config.sql_host, config.sql_port, config.sql_user,
-                   config.sql_pwd, config.sql_db)
 
         if options == 'format':
             sql_formmated = sqlparse.format(sql_raw, keyword_case='upper', reindent=True)
             return build_response(dict(data=sql_formmated, code=200))
 
         elif options in ('all', 'selected'):
+            conn = SQL(config.sql_host, config.sql_port, config.sql_user,
+                       config.sql_pwd, config.sql_db)
 
             result = conn.run(sql_raw)
             return build_response(dict(data=result, code=200))

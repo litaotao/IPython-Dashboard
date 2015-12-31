@@ -1,4 +1,15 @@
 
+- V 0.1.4 : sql-ui-optimize
+
+    - Dashboard
+        + create 1 example
+        + hover tips
+        + unified message display
+        + make the redis-server/dash-server configurable
+
+    - SQL Editor
+        + sql editor web UI.
+
 - V 0.1.3 : basic-curd-docs
 
     - Dashboard

@@ -150,13 +150,18 @@ function drawChartIntoGrid(type, graph_id){
     // check data avilablity
     // use different js lib to do the drawing, nvd3, c3, d3, leafletjs
     // currently, I just use nvd3 to fullfill the basic graph.
-    var chart = getChart(type);
+    // var chart = getChart(type);
 
     // clear content if exissted for creating new content
     $.each($(selector)[0].children, function(index, obj){$(selector)[0].removeChild(obj)})
 
     // get data which need draw, axes defined in data-0.1.0.js as xyAxes
     var xColumn = data[ modalData.option.x[0] ];
+    var chart = getChart(type);
+    if (xColumn[0][4] == '-' && type=='line'){
+        console.log('change x-axis time format');
+        xAxisTimeformat(chart);
+    }
     var graphData = [];
     $.each(modalData.option.y, function(index, obj){
         var tmp = {};
@@ -197,13 +202,18 @@ function initChart(type, graph_id){
     // check data avilablity
     // use different js lib to do the drawing, nvd3, c3, d3, leafletjs
     // currently, I just use nvd3 to fullfill the basic graph.
-    var chart = getChart(type);
+    // var chart = getChart(type);
 
     // clear content if exissted for creating new content
     $.each($(selector)[0].children, function(index, obj){$(selector)[0].removeChild(obj)})
 
     // get data which need draw, axes defined in data-0.1.0.js as xyAxes
     var xColumn = data[ current_graph.option.x[0] ];
+    var chart = getChart(type);
+    if (xColumn[0][4] == '-' && type=='line'){
+        console.log('change x-axis time format');
+        xAxisTimeformat(chart);
+    }
     var graphData = [];
     $.each(current_graph.option.y, function(index, obj){
         var tmp = {};
@@ -242,7 +252,8 @@ function drawChartIntoModal(type){
 
     var xColumn = data[ modalData.option.x[0] ];
     var chart = getChart(type);
-    if (xColumn[0][4] == '-'){
+    if (xColumn[0][4] == '-' && type=='line'){
+        console.log('change x-axis time format');
         xAxisTimeformat(chart);
     }
     var graphData = [];

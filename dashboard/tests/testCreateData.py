@@ -69,6 +69,8 @@ def test_create_mysql_data():
         conn.cursor().execute('CREATE DATABASE IF NOT EXISTS {};'.format(config.sql_db))
         conn.close()
 
+        return None
+
     test_create_database()
 
     # create table
