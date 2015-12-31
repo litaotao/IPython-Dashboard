@@ -21,6 +21,15 @@ TMP_DIR = '/mnt/tmp'
 
 
 @utils.print_func_name
+def test_clear_redis():
+    for key in r_kv.keys():
+        r_kv.delete(key)
+
+    for key in r_db.keys():
+        r_db.delete(key)
+
+
+@utils.print_func_name
 def test_create_dataframe():
     url = 'https://github.com/litaotao/data-science/raw/master/examples/happy-healthy-hungry/data/SFBusinesses/businesses.csv'
     if os.path.isdir(TMP_DIR) and 'businesses.csv' in os.listdir(TMP_DIR):
