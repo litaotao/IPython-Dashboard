@@ -31,8 +31,8 @@ before_script:
 script:
   - cd $TRAVIS_BUILD_DIR
   - ls -ltr .
-  - nosetests --with-coverage --cover-package=dashboard
-  - flake8 --exit-zero dashboard
+  - sudo nosetests --with-coverage --cover-package=dashboard
+  - sudo flake8 --exit-zero dashboard
 
 after_success:
   - coveralls
