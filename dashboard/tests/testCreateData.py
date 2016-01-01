@@ -7,6 +7,7 @@ import json
 import random
 
 # third-party package
+import MySQLdb
 import pandas as pd
 
 # user-defined package
@@ -17,6 +18,15 @@ from dashboard.server.resources import home
 
 
 TMP_DIR = '/mnt/tmp'
+
+
+@utils.print_func_name
+def test_clear_redis():
+    for key in r_kv.keys():
+        r_kv.delete(key)
+
+    for key in r_db.keys():
+        r_db.delete(key)
 
 
 @utils.print_func_name
@@ -56,6 +66,57 @@ def test_create_dataframe():
     value = pd.read_csv(url_4)
     # r_kv.set('chinese_population', value.to_json())
     sender(value, u'大宗交易', value.to_json())
+
+
+@utils.print_func_name
+def test_create_mysql_data():
+    # create database
+    def test_create_database():
+        conn = MySQLdb.connect(host=config.sql_host, port=config.sql_port,
+            user=config.sql_user, passwd=config.sql_pwd)
+
+        conn.cursor().execute('CREATE DATABASE IF NOT EXISTS {};'.format(config.sql_db))
+        conn.close()
+
+        return None
+
+    test_create_database()
+
+    # create table
+    conn = utils.SQL(host=config.sql_host, port=config.sql_port,
+        user=config.sql_user, passwd=config.sql_pwd, db=config.sql_db)
+    sql = [
+        # drop table first
+        '''
+        DROP TABLE IF EXISTS businesses;
+        ''',
+        # create table then
+        '''CREATE TABLE businesses (
+            business_id     INT,
+            name            VARCHAR(64) CHARACTER SET utf8 COLLATE utf8_bin,
+            address         VARCHAR(256),
+            city            CHAR(64),
+            state           CHAR(64),
+            postal_code     CHAR(32),
+            latitude        FLOAT(32),
+            longitude       FLOAT(32),
+            phone_number    CHAR(32)
+        )''',
+    ]
+    for query in sql:
+        query = query.strip()
+        conn.run(query)
+
+    # load data into table
+    url = 'https://github.com/litaotao/data-science/raw/master/examples/happy-healthy-hungry/data/SFBusinesses/businesses.csv'
+    if os.path.isdir(TMP_DIR) and 'businesses.csv' in os.listdir(TMP_DIR):
+        url = TMP_DIR + '/businesses.csv'
+    data = pd.read_csv(url)
+    data.name = [i.replace('\xc9', '') for i in data.name]
+    data.name = [i.replace('\xc8', '') for i in data.name]
+    data.name = [i.replace('\xca', '') for i in data.name]
+
+    data.to_sql('businesses', conn.conn, if_exists='append', flavor='mysql', index=False)
 
 
 @utils.print_func_name

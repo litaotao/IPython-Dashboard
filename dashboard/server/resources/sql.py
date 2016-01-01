@@ -16,7 +16,7 @@ from flask import request, make_response, render_template, redirect
 
 # user-defined package
 from dashboard import r_db, config
-from ..utils import build_response, print_info
+from ..utils import build_response, print_info, SQL
 
 
 class Sql(Resource):
@@ -27,7 +27,7 @@ class Sql(Resource):
     Attributes:
     """
     def get(self):
-        return make_response(render_template('sql.html'))
+        return make_response(render_template('sql.html', api_root=config.app_host))
 
 
 class SqlData(Resource):
@@ -48,12 +48,24 @@ class SqlData(Resource):
             sql result.
         '''
         ## format sql
+
         data = request.get_json()
         options, sql_raw = data.get('options'), data.get('sql_raw')
 
         if options == 'format':
-            sql_formmated = self._formmat(sql_raw)
+            sql_formmated = sqlparse.format(sql_raw, keyword_case='upper', reindent=True)
             return build_response(dict(data=sql_formmated, code=200))
+
+        elif options in ('all', 'selected'):
+            conn = SQL(config.sql_host, config.sql_port, config.sql_user,
+                       config.sql_pwd, config.sql_db)
+
+            result = conn.run(sql_raw)
+            return build_response(dict(data=result, code=200))
+        else:
+
+            pass
+
 
 
 
@@ -62,7 +74,8 @@ class SqlData(Resource):
 
         pass
 
-    def _formmat(self, sql_raw):
-        sql_tmp = sqlparse.format(sql_raw, reindent=True)
-        sql_highlight = highlight(sql_tmp, SqlLexer(), HtmlFormatter())
-        return sql_highlight
+
+
+
+
+##

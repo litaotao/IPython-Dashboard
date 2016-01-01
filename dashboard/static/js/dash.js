@@ -326,8 +326,8 @@ function saveDash(){
 
     // dash name
     var dashName = $("#dashboard_name")[0].value; // must need
-    if (100 < dashName.length || dashName.length < 6) {
-        alert("dashboard name note valid, digits should between 6 and 100, thanks.")
+    if (100 < dashName.length || dashName.length < 4) {
+        alert("dashboard name note valid, digits should between 4 and 100, thanks.")
         return null;
     }
     dash.name = dashName;

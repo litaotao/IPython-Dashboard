@@ -1,20 +1,20 @@
 
 
-function genLineChart(){
+function genLineChart(timeFormat){
     var chart = nv.models.lineWithFocusChart();
-    chart.brushExtent([10,70]);
-    // chart.xAxis.tickFormat(d3.format(',f'));
-    // chart.x2Axis.tickFormat(d3.format(',f'));
-
-    // chart.xScale = d3.time.scale();
-    // chart.xAxis.tickFormat(function(d) { return d3.time.format('%Y-%m-%d')(d); });
-    // chart.x2Axis.tickFormat(function(d) {
-    //     console.log(d);
-    //     return d3.time.format("%Y-%m-%d")(new Date(d));
-    // });
+    if (timeFormat == 1) {
+        chart.x(function(d){
+            return new Date(d.x);
+        });
+        chart.xScale = d3.time.scale;
+        chart.xAxis.tickFormat(function(d) {
+            return d3.time.format("%Y-%m-%d")(new Date(d))
+        });
+    }
     chart.yAxis.tickFormat(d3.format(',.2f'));
     chart.y2Axis.tickFormat(d3.format(',.2f'));
     chart.useInteractiveGuideline(true);
+    // chart.brushExtent([-Infinity, Infinity]);
 
     return chart;
 }
@@ -49,7 +49,7 @@ function genMultiBarChart(){
     var chart = nv.models.multiBarChart()
     .margin({ bottom: 30 })
     .duration(300)
-    .rotateLabels(45)
+    // .rotateLabels(45)
     .groupSpacing(0.1)
     .stacked(true)
     ;
@@ -125,6 +125,16 @@ function validateAreaData(data){
 }
 
 
+function xAxisTimeformat(chart){
+    chart.x(function(d){
+        return new Date(d.x);
+    });
+    chart.xScale = d3.time.scale;
+    chart.xAxis.tickFormat(function(d) {
+        return d3.time.format("%Y-%m-%d")(new Date(d))
+    });
+}
+
 function drawChartIntoGrid(type, graph_id){
     var selector = strFormat("div.chart-graph[graph_id='{0}']", graph_id);
     console.log(strFormat("###Ready to draw chart : {0}", type));
@@ -140,13 +150,18 @@ function drawChartIntoGrid(type, graph_id){
     // check data avilablity
     // use different js lib to do the drawing, nvd3, c3, d3, leafletjs
     // currently, I just use nvd3 to fullfill the basic graph.
-    var chart = getChart(type);
+    // var chart = getChart(type);
 
     // clear content if exissted for creating new content
     $.each($(selector)[0].children, function(index, obj){$(selector)[0].removeChild(obj)})
 
     // get data which need draw, axes defined in data-0.1.0.js as xyAxes
     var xColumn = data[ modalData.option.x[0] ];
+    var chart = getChart(type);
+    if (xColumn[0][4] == '-' && type=='line'){
+        console.log('change x-axis time format');
+        xAxisTimeformat(chart);
+    }
     var graphData = [];
     $.each(modalData.option.y, function(index, obj){
         var tmp = {};
@@ -187,13 +202,18 @@ function initChart(type, graph_id){
     // check data avilablity
     // use different js lib to do the drawing, nvd3, c3, d3, leafletjs
     // currently, I just use nvd3 to fullfill the basic graph.
-    var chart = getChart(type);
+    // var chart = getChart(type);
 
     // clear content if exissted for creating new content
     $.each($(selector)[0].children, function(index, obj){$(selector)[0].removeChild(obj)})
 
     // get data which need draw, axes defined in data-0.1.0.js as xyAxes
     var xColumn = data[ current_graph.option.x[0] ];
+    var chart = getChart(type);
+    if (xColumn[0][4] == '-' && type=='line'){
+        console.log('change x-axis time format');
+        xAxisTimeformat(chart);
+    }
     var graphData = [];
     $.each(current_graph.option.y, function(index, obj){
         var tmp = {};
@@ -230,8 +250,12 @@ function drawChartIntoModal(type){
         return true;
     };
 
-    var chart = getChart(type);
     var xColumn = data[ modalData.option.x[0] ];
+    var chart = getChart(type);
+    if (xColumn[0][4] == '-' && type=='line'){
+        console.log('change x-axis time format');
+        xAxisTimeformat(chart);
+    }
     var graphData = [];
     $.each(modalData.option.y, function(index, obj){
         var tmp = {};

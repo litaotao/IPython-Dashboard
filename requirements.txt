@@ -7,3 +7,4 @@ flask-restful==0.3.4
 coverage==4.0.1
 sqlparse==0.1.17
 pygments==2.0.2
+mysql-python==1.2.5

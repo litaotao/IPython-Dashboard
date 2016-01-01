@@ -14,7 +14,8 @@
             </div>
             <div style="width: 100%; height: 300px">
                 <div class="editor" type=textarea>
-                   <div id="editor">select * from ;</div>
+                   <div id="editor">select * from businesses where business_id >= 100 and business_id <= 10000 and name like '%COFFEE%' and state='CA' and phone_number is not null limit 10;
+                    </div>
                 </div>
             </div>
        </div>
@@ -61,6 +62,12 @@
 {% endblock %}
 
 {% block script %}
+
+<script type"text/javascript">
+    store.set("api_root", "http://" + $("meta[name=api_root]")[0].attributes.value.value + "/");
+    api_root = store.get("api_root");
+</script>
+
 <script>
     editor = ace.edit("editor");
     editor.setTheme("ace/theme/sqlserver");

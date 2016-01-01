@@ -10,10 +10,8 @@ redis_db_host = 'localhost'
 redis_db_port = 6379
 redis_db_db   = 1
 
-
 # web server
-app_host  = '192.168.1.104:9090'
-
+app_host  = '127.0.0.1:9090'
 
 # redis key
 DASH_ID_KEY = "dash_id"
@@ -25,9 +23,25 @@ DASH_DELETED_KEY = "dash_deleted"
 sql_type = 'mysql'   # currently just support mysql
 sql_host = 'localhost'
 sql_port = 3306
-sql_db   = 'test'
-sql_user = 'root'
-sql_password = None
+sql_user = 'ipd'
+sql_pwd  = 'thanks'
+sql_db   = 'IPD_data'
+
+# logging
+def config_log():
+    import logging
+    import logging.config
+    from ..server.utils import Map
+    logging.config.fileConfig('dashboard/conf/logging.conf')
+    access_log = logging.getLogger('access')
+    error_log = logging.getLogger('error')
+
+    logger = Map()
+    logger.access = access_log
+    logger.error = error_log
+
+    return logger
+logger = config_log()
 
 # env config
 # 'dev' will use raw js/css files for debug use

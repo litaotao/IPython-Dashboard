@@ -1,17 +1,39 @@
 # travis-ci configuration
 language: python
+
 python:
   - "2.7"
   # - "3.3"
   # - "3.4"
+
 install:
   - pip install -e . --use-mirrors
   - pip install coveralls --use-mirrors
   - pip install flake8 coverage --use-mirrors
+
 services:
   - redis-server
+  - mysql
+
+before_script:
+# make logs template
+  - cd /mnt
+  - sudo mkdir ipython-dashboard
+  - sudo chmod 777 ipython-dashboard
+  - cd ipython-dashboard
+  - sudo mkdir logs
+  - sudo chmod 777 logs
+
+# mysql create user
+  - echo "create user 'ipd'@'localhost' identified by 'thanks';" | mysql -u root
+  - echo "grant all privileges on *.* to ipd@localhost;" | mysql -u root
+
 script:
+  - sudo service mysql restart
+  - cd $TRAVIS_BUILD_DIR
+  - ls -ltr .
   - nosetests --with-coverage --cover-package=dashboard
   - flake8 --exit-zero dashboard
+
 after_success:
   - coveralls
