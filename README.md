@@ -130,21 +130,21 @@ A stand alone, light-weight web server for building, sharing graphs created in I
 - want a real-time graph.
 - want an collaborated graph/dashboard.
 
-![wise-choice](docs/wise-choice.jpg)
+![wise-choice](https://raw.githubusercontent.com/litaotao/IPython-Dashboard/v-0.1.5-sql-server-log/docs/wise-choice.jpg)
 
 
 # Screenshot and Demo
 
-[Demo on Youtube](https://youtu.be/LOWBEYDkn90)     
+[Demo on Youtube](https://www.youtube.com/watch?v=Sy_Kmi6FFUg&feature=youtu.be)     
 [Demo on Youku](http://v.youku.com/v_show/id_XMTM3MTc5MTAwMA)
 
-![screenshot](docs/template-screenshot-0.1.3-1.jpg)
+![screenshot](https://raw.githubusercontent.com/litaotao/IPython-Dashboard/v-0.1.5-sql-server-log/docs/template-screenshot-0.1.3-1.jpg)
 
-![screenshot](docs/template-dashboard-0.1.5-2.jpg)
+![screenshot](https://raw.githubusercontent.com/litaotao/IPython-Dashboard/v-0.1.5-sql-server-log/docs/template-dashboard-0.1.5-2.jpg)
 
-![screenshot](docs/template-screenshot-0.1.4-1.jpg)
+![screenshot](https://raw.githubusercontent.com/litaotao/IPython-Dashboard/v-0.1.5-sql-server-log/docs/template-screenshot-0.1.4-1.jpg)
 
-![screenshot](docs/template-screenshot-0.1.5-1.jpg)
+![screenshot](https://raw.githubusercontent.com/litaotao/IPython-Dashboard/v-0.1.5-sql-server-log/docs/template-screenshot-0.1.5-1.jpg)
 
 
 
