@@ -256,3 +256,5 @@ taotao@mac007:~/Desktop/github/IPython-Dashboard$
 - [gridster](http://gridster.net/)
 - [dashboards](https://github.com/jupyter-incubator/dashboards)
 - [js, css, html code style](https://github.com/fex-team/styleguide)
+- [www.creative-tim.com](http://www.creative-tim.com/products)
+- [creative-tim dashboard](http://www.creative-tim.com/product/light-bootstrap-dashboard)
