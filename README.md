@@ -32,7 +32,7 @@ A stand alone, light-weight web server for building, sharing graphs created in I
 - *Install prerequisite*
     + install the latest stable IPython-Dashboard: `pip install ipython-dashboard --upgrade`
     + install redis 2.6+ : [install guide](http://redis.io/topics/quickstart)
-    + [`option`, if you need run sql]install mysql : `brew install mysql` or `apt-get install mysql`
+    + install mysql : `brew install mysql` or on Ubuntu `apt-get install mysql-server libmysqlclient-dev`
     + install IPython-Dashboard requirements [unneeded sometimes]:
         - `cd ~/your python package path/IPython-Dashboard`
         - `pip install -r requirements.txt`
