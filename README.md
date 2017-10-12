@@ -1,6 +1,8 @@
 -----
 
-Hi, there, I'm so glad that this repo still draws you guys' attention until today. but actually I won't spend any time on it and I've got a much better way to draw dynamic plots in ipython notebook, and I've just post a blog about how to make it in notebooks (including source code and demo notebook).
+# `Hi, there`
+
+I'm so glad that this repo still draws you guys' attention until today. but actually I won't spend any time on it and I've got a much better way to draw dynamic plots in ipython notebook, and I've just post a blog about how to make it in notebooks (including source code and demo notebook).
 
 which looks like bellow:
 
