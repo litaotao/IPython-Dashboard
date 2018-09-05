@@ -32,7 +32,9 @@ def config_log():
     import logging
     import logging.config
     from ..server.utils import Map
-    logging.config.fileConfig('dashboard/conf/logging.conf')
+    import os
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    logging.config.fileConfig(os.path.join(base_dir, 'conf', 'logging.conf'))
     access_log = logging.getLogger('access')
     error_log = logging.getLogger('error')
 
